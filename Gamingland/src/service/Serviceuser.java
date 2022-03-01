@@ -5,6 +5,7 @@
  */
 package service;
 
+import entity.Role;
 import entity.User;
 
 
@@ -67,7 +68,7 @@ cnx=Projectbd.getInstance().getCnx();
             u.setNom(rs.getString(3));
             u.setPrenom(rs.getString(4));
             u.setEmail(rs.getString(5));
-            u.setRole(rs.getString(6));
+            u.setRole(Role.valueOf(rs.getString("role")));
             u.setAdresse_user(rs.getString(7));
             u.setNumtel_user((rs.getInt(8)));
             
@@ -104,7 +105,7 @@ cnx=Projectbd.getInstance().getCnx();
     @Override
     public void modiferuser(User u) {
            try {
-           String req = "UPDATE `user` SET  `mdp`='" + u.getMdp()+ "', `nom`='" + u.getNom()+  "', `prenom`='" + u.getPrenom()+     "', `email`='" + u.getEmail()+  "', `role`='" + u.getRole()+  "', `numtel_user`='" + u.getNumtel_user()+ "', `adresse_user`='" + u.getAdresse_user() +                "' WHERE id_user=" + u.getId_user();
+           String req = "UPDATE `user` SET  `mdp`='" + u.getMdp()+    "', `email`='" + u.getEmail()+  "', `role`='" + u.getRole()+           "' WHERE id_user=" + u.getId_user();
             
           
             Statement st = cnx.createStatement();
@@ -116,35 +117,35 @@ cnx=Projectbd.getInstance().getCnx();
         
     }
 
-    @Override
-    public void login(User u) {
-
-        String req = "SELECT * FROM  `user` WHERE email='" + u.getEmail() +   "' and mdp ='"+ u.getMdp()+ "'" ;
-    try {
-        //
-//        PreparedStatement st = cnx.preparedStatement(req);
-     PreparedStatement ps = cnx.prepareStatement(req);
-     ResultSet rs = ps.executeQuery();
-     if(rs.next()){        
-         System.out.println("Authentification validee pour l'utilisateur "+u.getEmail());
-     }else
-         System.err.println("l'utilisateur n'existe pas");
-    } catch (SQLException ex) {
-        System.out.println(ex.getMessage());
-    }
-           
-           
     
-         
-    
-    }
+//    public boolean login(String email,String mdp) {
+//
+//        String req = "SELECT * FROM  `user` WHERE email='" + email +   "' and mdp ='"+ mdp+ "'" ;
+//    try {
+//        //
+////        PreparedStatement st = cnx.preparedStatement(req);
+//     PreparedStatement ps = cnx.prepareStatement(req);
+//     ResultSet rs = ps.executeQuery();
+//     if(rs.next()){        
+//         System.out.println("Authentification validee pour l'utilisateur "+email);
+//     }else
+//         System.err.println("l'utilisateur n'existe pas");
+//    } catch (SQLException ex) {
+//        System.out.println(ex.getMessage());
+//    }
+//           
+//           
+//    
+//         
+//    
+//    }
 
     @Override
-    public List<User> findByName(int id) {
+    public List<User> findByEmail(int email) {
      List<User> users1 = new ArrayList<>();
         try {
 
-            String req = "SELECT * FROM `user` WHERE id_user = " + id ;
+            String req = "SELECT * FROM `user` WHERE email = " + email ;
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             while(rs.next()){
@@ -154,7 +155,8 @@ cnx=Projectbd.getInstance().getCnx();
             m.setNom(rs.getString(3));
             m.setPrenom(rs.getString(4));
            m.setEmail(rs.getString(5));
-           m.setRole(rs.getString(6));
+           m.setRole(Role.valueOf(rs.getString("role")));
+
             m.setAdresse_user(rs.getString(7));
             m.setNumtel_user((rs.getInt(8)));
             
@@ -176,8 +178,58 @@ cnx=Projectbd.getInstance().getCnx();
          List<User> resultat=users.stream().sorted(Comparator.comparing(User::getEmail)).collect(Collectors.toList());
          return resultat;
      } 
+
+//    public boolean login(User u) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
    
-    
+    public String checkRole(String email) {
+        String default_return = "ND";
+        try {
+            String req;
+            req = "select role from user where email=?";
+            PreparedStatement st = cnx.prepareStatement(req);
+            st.setString(1, email);
+
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+
+                if (rs.getString(1).equals("ADMIN")) {
+
+                    return "Admin";
+                }  else if (rs.getString(1).equals("CLIENT")) {
+                    return "Client";
+              }
+
+            }
+
+        } catch (SQLException ex) {
+        }
+        return default_return;
+    }
+
+    @Override
+    public boolean login(String email, String mdp) {
+        boolean login = true ;
+        String req = "SELECT * FROM  `user` WHERE email='" + email +   "' and mdp ='"+ mdp+ "'" ;
+    try {
+        //
+//        PreparedStatement st = cnx.preparedStatement(req);
+     PreparedStatement ps = cnx.prepareStatement(req);
+     ResultSet rs = ps.executeQuery();
+     if(rs.next()){        
+         System.out.println("Authentification validee pour l'utilisateur "+email);
+     }else{
+         System.err.println("l'utilisateur n'existe pas");
+         login = false ;
+     }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+        login = false ;
+    }
+    return login;
+    }
     
  
     

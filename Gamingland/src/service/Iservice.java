@@ -23,9 +23,9 @@ public interface Iservice<T> {
      public List<T> afficheruser();
      public void  modiferuser(T u);
     public boolean supprimeruser(T u);
-public void login (User u ) ;
-public List<T> findByName(int id);
-
+public boolean login(String email,String mdp) ;
+public List<T> findByEmail(int id);
+ public String checkRole(String email) ;
 
 }
 

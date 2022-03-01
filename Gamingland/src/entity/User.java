@@ -11,13 +11,14 @@ package entity;
  */
 public class User {
     int   id_user; 
-    String    mdp,nom,prenom, email, role,adresse_user ; 
+    String    mdp,nom,prenom, email, adresse_user ; 
+    private Role role  ; 
     int numtel_user ;
 
     public User() {
     }
 
-    public User(int id_user, String mdp, String nom, String prenom, String email, String role,  int numtel_user,String adresse_user) {
+    public User(int id_user, String mdp, String nom, String prenom, String email, Role role,  int numtel_user,String adresse_user) {
         this.id_user = id_user;
         this.mdp = mdp;
         this.nom = nom;
@@ -74,11 +75,11 @@ public class User {
         this.email = email;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
@@ -100,10 +101,10 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id_user=" + id_user + ", mdp=" + mdp + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", role=" + role + ", adresse_user=" + adresse_user + ", numtel_user=" + numtel_user + '}';
+        return "User{" + "id_user=" + id_user + ", mdp=" + mdp + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", adresse_user=" + adresse_user + ", role=" + role + ", numtel_user=" + numtel_user + '}';
     }
-   
 
+   
 
 
 
