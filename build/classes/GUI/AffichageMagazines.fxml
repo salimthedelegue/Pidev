@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="580.0" prefWidth="820.0" styleClass="rightbar" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AffichageMagazinesController">
+    <stylesheets>
+        <URL value="@affichagemagazines.css" />
+    </stylesheets>
+   <children>
+      <AnchorPane prefHeight="580.0" prefWidth="200.0" styleClass="sidebar" stylesheets="@affichagemagazines.css">
+         <children>
+            <ImageView fitHeight="129.0" fitWidth="147.0" layoutX="27.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/272750578_977821313144051_7040848613990936832_n.png" />
+               </image>
+            </ImageView>
+            <ButtonBar layoutX="2.0" layoutY="217.0" />
+            <Button fx:id="btnAcceuil" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="-9.0" layoutY="215.0" mnemonicParsing="false" onAction="#AffichageMagazines" prefHeight="42.0" prefWidth="228.0" stylesheets="@style.css" text="Overview" textFill="#e7e5e5">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_Home_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnIntAjouter" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="-9.0" layoutY="275.0" mnemonicParsing="false" onAction="#IntAjouter" prefHeight="42.0" prefWidth="228.0" stylesheets="@style.css" text="Ajouter/Modifier" textFill="#e7e5e5">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_Xbox_Menu_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnDeconnexion" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="-8.0" layoutY="337.0" mnemonicParsing="false" onAction="#Deconnecter" prefHeight="42.0" prefWidth="228.0" stylesheets="@style.css" text="Se deconnecter" textFill="#e7e5e5">
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_Sign_Out_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Label layoutX="282.0" layoutY="37.0" prefHeight="24.0" prefWidth="140.0" text="Magazines" textFill="#acaaaf">
+         <font>
+            <Font name="Cambria Bold" size="24.0" />
+         </font>
+      </Label>
+      <TabPane fx:id="tabPane" cache="true" layoutX="222.0" layoutY="99.0" prefHeight="474.0" prefWidth="645.0" side="RIGHT" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="tab" style="-fx-background-color: transparent;" text="Untitled Tab 1">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="474.0" prefWidth="596.0">
+                     <children>
+                        <TableView fx:id="tabMagazine" editable="true" layoutX="63.0" layoutY="75.0" prefHeight="291.0" prefWidth="447.0">
+                          <columns>
+                                <TableColumn fx:id="colonne_image" prefWidth="75.0" text="Image" />
+                            <TableColumn fx:id="colonne_titre" prefWidth="75.0" text="Titre" />
+                            <TableColumn fx:id="colonne_genre" prefWidth="75.0" text="Genre" />
+                             <TableColumn fx:id="colonne_description" prefWidth="100.0" text="Descripton" />
+                          
+                            
+                          </columns>
+                        </TableView>
+                        <TextField fx:id="rech" layoutX="229.0" layoutY="34.0" onKeyTyped="#RechercheMagazine" prefHeight="30.0" prefWidth="183.0" promptText="Search..." style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                        <ImageView fitHeight="27.0" fitWidth="21.0" layoutX="381.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8_Search_52px.png" />
+                           </image>
+                        </ImageView>
+                        <ComboBox fx:id="combotri" layoutX="63.0" layoutY="37.0" prefWidth="150.0" promptText="Titre_magazine" />
+                        <Button fx:id="buttonTri" layoutX="430.0" layoutY="37.0" mnemonicParsing="false" onAction="#TrierMagazines" prefHeight="25.0" prefWidth="79.0" text="Trier" />
+                        <Button fx:id="btnSupprimer" layoutX="63.0" layoutY="378.0" mnemonicParsing="false" onAction="#supprimerMagazine" prefHeight="25.0" prefWidth="74.0" text="Supprimer" />
+                        <Button fx:id="btnRecuperer" layoutX="436.0" layoutY="378.0" mnemonicParsing="false" onAction="#recupererMagazine" prefHeight="25.0" prefWidth="74.0" text="Modifier" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Untitled Tab">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="titre_magazine" layoutX="211.0" layoutY="118.0" />
+                        <TextField fx:id="genre_magazine" layoutX="211.0" layoutY="171.0" />
+                        <TextField fx:id="image_magazine" layoutX="211.0" layoutY="225.0" />
+                        <TextField fx:id="description_magazine" layoutX="211.0" layoutY="278.0" />
+                        <Label layoutX="83.0" layoutY="122.0" text="Titre" textFill="WHITE" />
+                        <Label layoutX="83.0" layoutY="175.0" text="Genre" textFill="WHITE" />
+                        <Label layoutX="83.0" layoutY="229.0" text="Image" textFill="WHITE" />
+                        <Label layoutX="83.0" layoutY="282.0" text="Description" textFill="#f8f4f4" />
+                        <Button fx:id="btn_ajouter" layoutX="373.0" layoutY="348.0" mnemonicParsing="false" onAction="#addMagazine" prefHeight="30.0" prefWidth="70.0" text="Ajouter" />
+                        <Button fx:id="btnModifier" layoutX="453.0" layoutY="348.0" mnemonicParsing="false" onAction="#modifierMagazine" prefHeight="30.0" prefWidth="71.0" text="Modifier" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Untitled Tab">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ListView fx:id="listCol1" editable="true" layoutX="83.0" layoutY="140.0" prefHeight="200.0" prefWidth="94.0" stylesheets="@affichagemagazines.css" />
+                        <ListView fx:id="listCol2" layoutX="178.0" layoutY="140.0" prefHeight="200.0" prefWidth="94.0" />
+                        <ListView fx:id="listCol3" layoutX="273.0" layoutY="140.0" prefHeight="200.0" prefWidth="94.0" />
+                        <ListView fx:id="listCol4" layoutX="368.0" layoutY="140.0" prefHeight="200.0" prefWidth="94.0" />
+                        <ListView fx:id="listCol5" layoutX="415.0" layoutY="99.0" prefHeight="200.0" prefWidth="94.0" visible="false" />
+                        <Button fx:id="btnSupprimerMag" layoutX="390.0" layoutY="369.0" mnemonicParsing="false" onAction="#supprimerMag" text="Supprimer" />
+                        <Label layoutX="115.0" layoutY="115.0" text="Titre" textFill="WHITE" />
+                        <Label layoutX="207.0" layoutY="117.0" text="Genre" textFill="WHITE" />
+                        <Label layoutX="303.0" layoutY="117.0" text="Image" textFill="WHITE" />
+                        <Label layoutX="385.0" layoutY="117.0" text="Description" textFill="WHITE" />
+                        <TextField fx:id="rech1" layoutX="320.0" layoutY="50.0" onKeyTyped="#RechercheMagazine1" prefHeight="30.0" prefWidth="140.0" promptText="Search..." style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                        <ImageView fitHeight="27.0" fitWidth="21.0" layoutX="434.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8_Search_52px.png" />
+                           </image>
+                        </ImageView>
+                        <ComboBox fx:id="combotri1" layoutX="181.0" layoutY="53.0" prefHeight="25.0" prefWidth="122.0" promptText="Titre_magazine" />
+                        <Button fx:id="bntTri1" layoutX="83.0" layoutY="53.0" mnemonicParsing="false" onAction="#TrierMagazines1" prefHeight="25.0" prefWidth="79.0" text="Trier" />
+                        <Button fx:id="btnMo" layoutX="83.0" layoutY="369.0" mnemonicParsing="false" onAction="#recupererMagazine1" prefHeight="25.0" prefWidth="78.0" text="Modifier" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+         <effect>
+            <Blend opacity="0.0" />
+         </effect>
+      </TabPane>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#02020a" height="485.0" layoutX="777.0" layoutY="98.0" stroke="BLACK" strokeType="INSIDE" width="94.0" />
+   </children>
+   <padding>
+      <Insets left="5.0" />
+   </padding>
+</AnchorPane>
