@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" stylesheets="@stylestock.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stockfx.HelloController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <center>
+            <Pane prefHeight="758.0" prefWidth="1477.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="1250.0" fitWidth="1473.0" layoutX="-102.0" layoutY="-330.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@colorful.png" />
+                     </image>
+                  </ImageView>
+                  <TabPane layoutX="4.0" layoutY="8.0" prefHeight="768.0" prefWidth="1366.0" stylesheets="@stylestock.css" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab fx:id="tab1" text="Overview">
+                           <content>
+                              <AnchorPane prefHeight="535.0" prefWidth="1361.0">
+                                 <children>
+                                    <PieChart layoutX="85.0" layoutY="61.0" />
+                                    <BarChart fx:id="barChart" layoutX="97.0" layoutY="125.0" prefHeight="461.0" prefWidth="576.0">
+                                      <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                      </yAxis>
+                                    </BarChart>
+                                    <Text fill="WHITE" layoutX="149.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantite par Marchandise en Stock" wrappingWidth="424.792928200692">
+                                       <font>
+                                          <Font name="Candara" size="27.0" />
+                                       </font>
+                                    </Text>
+                                 </children></AnchorPane>
+                           </content></Tab>
+                      <Tab fx:id="tab2" style="-fx-background-color: transparent;" text="Marchandises">
+                           <content>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00000059" height="313.0" layoutX="2.0" layoutY="14.0" opacity="0.75" stroke="#344347" strokeType="INSIDE" width="919.0" />
+                                    <Label layoutX="16.0" layoutY="26.0" prefHeight="37.0" prefWidth="119.0" text="Nom Marchandise" textFill="WHITE">
+                                       <font>
+                                          <Font name="Candara" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <JFXTextArea fx:id="Innom" focusColor="#a2acc9" layoutX="16.0" layoutY="66.0" prefHeight="42.0" prefWidth="181.0" unFocusColor="WHITE" />
+                                    <Label layoutX="231.0" layoutY="26.0" prefHeight="37.0" prefWidth="119.0" text="Categorie" textFill="WHITE">
+                                       <font>
+                                          <Font name="Candara" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="447.0" layoutY="26.0" prefHeight="37.0" prefWidth="119.0" text="Date D'arrivée" textFill="WHITE">
+                                       <font>
+                                          <Font name="Candara" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <DatePicker fx:id="indate" layoutX="447.0" layoutY="66.0" prefHeight="34.0" prefWidth="182.0" />
+                                    <JFXTextArea fx:id="inqunatite" focusColor="#a2acc9" layoutX="16.0" layoutY="181.0" prefHeight="0.0" prefWidth="173.0" text="fdsf" unFocusColor="WHITE" />
+                                    <Label layoutX="16.0" layoutY="138.0" prefHeight="37.0" prefWidth="119.0" text="Quantité" textFill="WHITE">
+                                       <font>
+                                          <Font name="Candara" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="231.0" layoutY="138.0" prefHeight="37.0" prefWidth="119.0" text="Prix Unitaire" textFill="WHITE">
+                                       <font>
+                                          <Font name="Candara" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <JFXTextArea fx:id="inprixunitaire" focusColor="#a2acc9" layoutX="231.0" layoutY="181.0" prefHeight="0.0" prefWidth="173.0" text="fdsf" unFocusColor="WHITE" />
+                                    <Label layoutX="452.0" layoutY="136.0" prefHeight="37.0" prefWidth="119.0" text="Prix total" textFill="WHITE">
+                                       <font>
+                                          <Font name="Candara" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <JFXTextArea fx:id="Inprixtotal" focusColor="#a2acc9" layoutX="452.0" layoutY="179.0" prefHeight="0.0" prefWidth="173.0" text="fdsf" unFocusColor="WHITE" />
+                                    <ComboBox fx:id="incategorie" layoutX="231.0" layoutY="66.0" prefHeight="35.0" prefWidth="182.0" promptText="categorie" />
+                                    <Label layoutX="670.0" layoutY="136.0" prefHeight="37.0" prefWidth="119.0" text="Id Fournisseur" textFill="WHITE">
+                                       <font>
+                                          <Font name="Candara" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <JFXTextArea fx:id="inidfournisseur" focusColor="#a2acc9" layoutX="670.0" layoutY="179.0" prefHeight="0.0" prefWidth="173.0" text="fdsf" unFocusColor="WHITE" />
+                                    <JFXButton layoutX="242.0" layoutY="259.0" onAction="#AddMarch" prefHeight="52.0" prefWidth="108.0" style="-fx-border-radius: 20; -fx-background-color: #00FF93;" text="Ajouter" textFill="WHITE">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton layoutX="393.0" layoutY="259.0" prefHeight="52.0" prefWidth="108.0" style="-fx-border-radius: 100; -fx-background-color: #808080;" text="Cancel" textFill="WHITE">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton layoutX="947.0" layoutY="463.0" onAction="#ListMarch" prefHeight="58.0" prefWidth="174.0" style="-fx-background-color: #00FF93;" text="Lister" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <TableView fx:id="tablemarchandise" layoutX="6.0" layoutY="337.0" prefHeight="315.0" prefWidth="912.0" stylesheets="@stylestock.css">
+                                      <columns>
+                                        <TableColumn fx:id="idCol" prefWidth="96.0" text="ID Marchandise" />
+                                        <TableColumn fx:id="nomcol" prefWidth="128.0" text="Nom Marchandise" />
+                                          <TableColumn fx:id="categoriecol" prefWidth="71.0" text="Categorie" />
+                                          <TableColumn fx:id="datecol" minWidth="9.0" prefWidth="90.0" text="Date d'arrivée" />
+                                          <TableColumn fx:id="quantcol" prefWidth="65.0" text="Quantite" />
+                                          <TableColumn fx:id="prixucol" prefWidth="111.0" text="prix unitaire" />
+                                          <TableColumn fx:id="prixtotcol" prefWidth="104.0" text="prix total" />
+                                          <TableColumn id="column" fx:id="idfournisseurcol" prefWidth="123.0" text="ID Fournisseur" />
+                                          <TableColumn id="column" fx:id="Editcol" prefWidth="123.0" text="Edit" />
+                                      </columns>
+                                    </TableView>
+                                   <FontAwesomeIconView fill="#00ff93" glyphName="REFRESH" layoutX="1018.0" layoutY="445.0" onMouseClicked="#Refrechtable" size="30" wrappingWidth="32.0" />
+                                    <JFXButton layoutX="1018.0" layoutY="71.0" onAction="#ListMarch" prefHeight="58.0" prefWidth="174.0" style="-fx-background-color: #00FE99;" text="Generate PDF" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children>
+                              </AnchorPane>
+                           </content></Tab>
+                        <Tab fx:id="tab3" style="-fx-background-color: transparent;" text="Fournisseurs">
+                           <content>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                           </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+               </children>
+            </Pane>
+         </center>
+      </BorderPane>
+   </children>
+</StackPane>
