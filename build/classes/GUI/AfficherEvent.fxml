@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="580.0" prefWidth="820.0" styleClass="rightbar" stylesheets="@afficherevent.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AfficherEventController">
+   <children>
+      <AnchorPane prefHeight="580.0" prefWidth="200.0" styleClass="sidebar" stylesheets="@affichagemagazines.css">
+         <children>
+            <ImageView fitHeight="129.0" fitWidth="147.0" layoutX="27.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/272750578_977821313144051_7040848613990936832_n.png" />
+               </image>
+            </ImageView>
+            <ButtonBar layoutX="2.0" layoutY="217.0" />
+            <Button fx:id="btnhome" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="-9.0" layoutY="215.0" mnemonicParsing="false" onAction="#afficherEvent" prefHeight="42.0" prefWidth="228.0" text="Overview" textFill="#e7e5e5">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_Home_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <stylesheets>
+                  <URL value="@afficherevent.css" />
+                  <URL value="@style.css" />
+               </stylesheets>
+            </Button>
+            <Button fx:id="btnIntAjouterEvent" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="-9.0" layoutY="275.0" mnemonicParsing="false" onAction="#IntAjouterEvent" prefHeight="42.0" prefWidth="228.0" text="Ajouter/Modifier" textFill="#e7e5e5">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_Xbox_Menu_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <stylesheets>
+                  <URL value="@style.css" />
+                  <URL value="@afficherevent.css" />
+               </stylesheets>
+            </Button>
+            <Button fx:id="btnAff" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="-8.0" layoutY="337.0" mnemonicParsing="false" onAction="#afficherEvent1" prefHeight="42.0" prefWidth="228.0" stylesheets="@style.css" text="Se deconnecter" textFill="#e7e5e5">
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_Sign_Out_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Label layoutX="282.0" layoutY="37.0" prefHeight="24.0" prefWidth="140.0" text="Evénements" textFill="#acaaaf">
+         <font>
+            <Font name="Cambria Bold" size="24.0" />
+         </font>
+      </Label>
+      <TabPane fx:id="tabPane" cache="true" layoutX="222.0" layoutY="99.0" prefHeight="474.0" prefWidth="645.0" side="RIGHT" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="tab" style="-fx-background-color: transparent;" text="Untitled Tab 1">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="474.0" prefWidth="596.0">
+                     <children>
+                        <TableView fx:id="tabMagazine" editable="true" layoutX="63.0" layoutY="75.0" prefHeight="291.0" prefWidth="447.0">
+                          <columns>
+                                <TableColumn fx:id="colonne_image" prefWidth="75.0" text="Image" />
+                            <TableColumn fx:id="colonne_titre" prefWidth="75.0" text="Titre" />
+                            <TableColumn fx:id="colonne_genre" prefWidth="75.0" text="Genre" />
+                             <TableColumn fx:id="colonne_description" prefWidth="100.0" text="Descripton" />
+                          
+                            
+                          </columns>
+                        </TableView>
+                        <TextField fx:id="rech" layoutX="229.0" layoutY="34.0" onKeyTyped="#RechercheMagazine" prefHeight="30.0" prefWidth="183.0" promptText="Search..." style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                        <ImageView fitHeight="27.0" fitWidth="21.0" layoutX="381.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8_Search_52px.png" />
+                           </image>
+                        </ImageView>
+                        <ComboBox fx:id="combotri1" layoutX="63.0" layoutY="37.0" prefWidth="150.0" promptText="Titre_magazine" />
+                        <Button fx:id="btnSupprimer" layoutX="63.0" layoutY="378.0" mnemonicParsing="false" onAction="#supprimerMagazine" prefHeight="25.0" prefWidth="74.0" text="Supprimer" />
+                        <Button fx:id="btnRecuperer" layoutX="436.0" layoutY="378.0" mnemonicParsing="false" onAction="#recupererMagazine" prefHeight="25.0" prefWidth="74.0" text="Modifier" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Untitled Tab">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="nom_event" layoutX="215.0" layoutY="64.0" />
+                        <TextField fx:id="image_event" layoutX="215.0" layoutY="181.0" />
+                        <Label layoutX="70.0" layoutY="65.0" text="Nom évenement" textFill="WHITE" />
+                        <Label layoutX="72.0" layoutY="107.0" text="Date début" textFill="WHITE" />
+                        <Label layoutX="74.0" layoutY="144.0" text="Date Fin" textFill="WHITE" />
+                        <Label layoutX="73.0" layoutY="183.0" text="Image" textFill="#f8f4f4" />
+                        <Button fx:id="btn_ajouter_event" layoutX="199.0" layoutY="412.0" mnemonicParsing="false" onAction="#addEvent" prefHeight="30.0" prefWidth="70.0" text="Ajouter" />
+                        <Button fx:id="btnModifierEvent" layoutX="308.0" layoutY="412.0" mnemonicParsing="false" onAction="#modifierEvent" prefHeight="30.0" prefWidth="71.0" text="Modifier" />
+                        <Label layoutX="75.0" layoutY="222.0" text="Prix" textFill="#fdfcfc" />
+                        <Label layoutX="74.0" layoutY="261.0" text="Description" textFill="#e0e0e0" />
+                        <Label layoutX="73.0" layoutY="296.0" text="Emplacement" textFill="WHITE" />
+                        <Label layoutX="72.0" layoutY="339.0" text="Nbr max de participants" textFill="WHITE" />
+                        <DatePicker fx:id="date_d_event" layoutX="215.0" layoutY="103.0" prefHeight="25.0" prefWidth="152.0" />
+                        <DatePicker fx:id="date_f_event" layoutX="216.0" layoutY="142.0" prefHeight="25.0" prefWidth="151.0" />
+                        <TextField fx:id="prix_event" layoutX="215.0" layoutY="219.0" />
+                        <TextField fx:id="description_event" layoutX="215.0" layoutY="257.0" />
+                        <TextField fx:id="emplacement_event" layoutX="216.0" layoutY="295.0" />
+                        <TextField fx:id="nbr_max_event" layoutX="217.0" layoutY="333.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Untitled Tab">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ListView fx:id="tabCol1" layoutX="24.0" layoutY="134.0" prefHeight="198.0" prefWidth="79.0" />
+                        <ListView fx:id="tabCol2" layoutX="104.0" layoutY="134.0" prefHeight="198.0" prefWidth="79.0" />
+                        <ListView fx:id="tabCol3" layoutX="184.0" layoutY="134.0" prefHeight="198.0" prefWidth="79.0" />
+                        <ListView fx:id="tabCol4" layoutX="264.0" layoutY="134.0" prefHeight="198.0" prefWidth="79.0" />
+                        <ListView fx:id="tabCol5" layoutX="344.0" layoutY="134.0" prefHeight="198.0" prefWidth="79.0" />
+                        <ListView fx:id="tabCol6" layoutX="424.0" layoutY="134.0" prefHeight="198.0" prefWidth="79.0" />
+                        <ListView fx:id="tabCol8" layoutX="358.0" layoutY="276.0" prefHeight="198.0" prefWidth="65.0" visible="false" />
+                        <ListView fx:id="tabCol7" layoutX="504.0" layoutY="134.0" prefHeight="198.0" prefWidth="79.0" />
+                        <TextField fx:id="rech" layoutX="370.0" layoutY="45.0" onKeyPressed="#RechercheEvent" onKeyTyped="#RechercheMagazine" prefHeight="30.0" prefWidth="183.0" promptText="Search..." style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                        <ComboBox fx:id="combotri" layoutX="52.0" layoutY="48.0" prefWidth="150.0" promptText="Choisissez..." />
+                        <Button fx:id="btnSupprimerEvent" layoutX="247.0" layoutY="363.0" mnemonicParsing="false" onAction="#SupprimerEvent" prefHeight="25.0" prefWidth="74.0" stylesheets="@afficherevent.css" text="Supprimer" />
+                        <Button fx:id="btnReccupererEvent" layoutX="441.0" layoutY="363.0" mnemonicParsing="false" onAction="#ReccupererEvent" prefHeight="25.0" prefWidth="74.0" text="Modifier" />
+                        <Button fx:id="btnTriEvent" layoutX="259.0" layoutY="48.0" mnemonicParsing="false" onAction="#TrierEvent" prefHeight="25.0" prefWidth="79.0" text="Trier" />
+                        <ImageView fitHeight="30.0" fitWidth="33.0" layoutX="517.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8_Search_52px.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="50.0" layoutY="101.0" text="Nom" textFill="WHITE" />
+                        <Label layoutX="123.0" layoutY="101.0" text="DateD" textFill="WHITE" />
+                        <Label layoutX="211.0" layoutY="100.0" text="DateF" textFill="WHITE" />
+                        <Label layoutX="289.0" layoutY="100.0" text="Prix" textFill="WHITE" />
+                        <Label layoutX="368.0" layoutY="100.0" text="NbrP" textFill="WHITE" />
+                        <Label layoutX="435.0" layoutY="100.0" text="Description" textFill="WHITE" />
+                        <Label layoutX="508.0" layoutY="101.0" text="Emplacement" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+         <effect>
+            <Blend opacity="0.0" />
+         </effect>
+      </TabPane>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#02020a" height="511.0" layoutX="838.0" layoutY="72.0" stroke="BLACK" strokeType="INSIDE" width="33.0" />
+   </children>
+   <padding>
+      <Insets left="5.0" />
+   </padding>
+</AnchorPane>
