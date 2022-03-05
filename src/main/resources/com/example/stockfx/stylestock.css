@@ -1,10 +1,5 @@
 
-.effect-rect{
-    -fx-effect: blur(16px);
-    -fx-background-color: rgba(17, 25, 40, 0.75);
-    -fx-border-radius: 12px;
-    -fx-border: 1px solid rgba(255, 255, 255, 0.125);
-}
+
 .Overview:hover{
 
     -fx-border-color: #660099;
@@ -31,14 +26,16 @@
     -fx-border-width :0px 0px 3px 0px ;
 }
 
-.text-field {
-    -fx-background-color: #a9a9a9 , #4059a9 , white;
-    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
-}
 
+.text-field {
+    -fx-background-color: -fx-text-box-border, -fx-background ;
+    -fx-background-insets: 0, 0 0 1 0 ;
+    -fx-background-radius: 0 ;
+    -fx-text-fill:#00FE99;
+}
 .text-field:focused {
-    -fx-background-color: #a9a9a9 , white , white;
-    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
+
+    -fx-background-color:transparent; -fx-text-fill:#00FE99; -fx-font-size:16
 }
 .table-view {
     -fx-background-color:#a396f8;
@@ -96,4 +93,7 @@
  	-fx-border-width: 0;
 	-fx-border-insets: 0 0 0 0;
 	-fx-border-radius: 0;
+}
+.bar.data0.chart-bar{
+    -fx-bar-fill:navy;
 }
