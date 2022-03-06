@@ -43,15 +43,15 @@
                               <AnchorPane prefHeight="535.0" prefWidth="1361.0">
                                  <children>
                                     <PieChart layoutX="85.0" layoutY="61.0" />
-                                    <BarChart fx:id="barChart" layoutX="72.0" layoutY="98.0" onMouseClicked="#showstat" prefHeight="461.0" prefWidth="576.0" style="-fx-bar-fill: black;">
+                                    <BarChart fx:id="barChart" layoutX="72.0" layoutY="98.0" onMouseClicked="#showstat" prefHeight="472.0" prefWidth="576.0" style="-fx-alternative-column-fill-visible: false; -fx-alternative-row-fill-visible: false; -fx-horizontal-grid-lines-visible: false; -fx-region-background: blue;" styleClass="default-color0">
                                       <xAxis>
-                                        <CategoryAxis fx:id="CategoryAxisx" side="BOTTOM" />
+                                        <CategoryAxis fx:id="CategoryAxisx" prefHeight="11.0" prefWidth="521.0" side="BOTTOM" styleClass="xaxis" tickLabelFill="#2febda" />
                                       </xAxis>
                                       <yAxis>
-                                        <NumberAxis fx:id="CategoryAxisy" side="LEFT" />
+                                        <NumberAxis fx:id="CategoryAxisy" side="LEFT" styleClass="yaxis" tickLabelFill="#2febda" />
                                       </yAxis>
                                     </BarChart>
-                                    <Text fill="WHITE" layoutX="200.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantite par Marchandise en Stock" wrappingWidth="424.792928200692">
+                                    <Text fill="WHITE" layoutX="173.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantite par Marchandise en Stock" wrappingWidth="424.792928200692">
                                        <font>
                                           <Font name="Candara" size="27.0" />
                                        </font>
@@ -121,6 +121,11 @@
                                           <Font size="16.0" />
                                        </font>
                                     </JFXButton>
+                                    <JFXButton layoutX="987.0" layoutY="481.0" onAction="#Generatepdf" prefHeight="80.0" prefWidth="259.0" style="-fx-background-color: #00FE99;" text="Generate Data PDF" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </JFXButton>
                                     <TableView fx:id="tablemarchandise" layoutX="6.0" layoutY="337.0" prefHeight="315.0" prefWidth="912.0" stylesheets="@stylestock.css">
                                       <columns>
                                         <TableColumn fx:id="idCol" prefWidth="96.0" text="ID Marchandise" />
@@ -134,17 +139,11 @@
                                           <TableColumn id="column" fx:id="Editcol" prefWidth="123.0" text="Edit" />
                                       </columns>
                                     </TableView>
-                                   <FontAwesomeIconView fill="#00ff93" glyphName="REFRESH" layoutX="1005.0" layoutY="528.0" onMouseClicked="#Refrechtable" size="40" wrappingWidth="32.0" />
-                                    <JFXButton layoutX="1082.0" layoutY="622.0" onAction="#Generatepdf" prefHeight="58.0" prefWidth="174.0" style="-fx-background-color: #00FE99;" text="Generate PDF" textFill="WHITE">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </JFXButton>
-                                    <Text fill="WHITE" layoutX="1076.0" layoutY="522.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rafresh List" wrappingWidth="171.13671875">
+                                   <FontAwesomeIconView fill="#00ff93" glyphName="REFRESH" layoutX="1004.0" layoutY="462.0" onMouseClicked="#Refrechtable" size="40" wrappingWidth="32.0" />
+                                    <Text fill="WHITE" layoutX="1075.0" layoutY="456.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rafresh List" wrappingWidth="171.13671875">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font></Text>
-                                    <TabPane layoutX="930.0" layoutY="14.0" prefHeight="316.0" prefWidth="427.0" tabClosingPolicy="UNAVAILABLE" />
                                  </children>
                               </AnchorPane>
                            </content></Tab>

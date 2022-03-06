@@ -1,6 +1,7 @@
 
 package com.example.stockfx.services;
 
+
 import com.example.stockfx.entities.Marchandise;
 import com.itextpdf.text.html.simpleparser.HTMLWorker;
 import java.sql.Connection;
@@ -47,6 +48,7 @@ public class ServiceStock implements Istock<Marchandise> {
         }
         
     }
+
 
     @Override
     public void modifier(Marchandise t) {

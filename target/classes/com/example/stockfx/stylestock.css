@@ -94,6 +94,40 @@
 	-fx-border-insets: 0 0 0 0;
 	-fx-border-radius: 0;
 }
-.bar.data0.chart-bar{
-    -fx-bar-fill:navy;
+.default-color0.chart-bar {
+    -fx-bar-fill: #2febda;
+}
+.chart-content {
+    -fx-padding: 30px;
+    -fx-font-size: 18px;
+
+}
+.chart-legend-item{
+    -fx-background-color:transparent;
+    -fx-text-fill: #191970;
+    -fx-padding: 10px;
+}
+.xaxis{
+      -fx-border-color:  #00FF93 transparent transparent;
+      -fx-border-width:3;
+      -fx-font-size:30px;
+
+}
+.yaxis{
+      -fx-border-color: transparent #00FF93 transparent transparent;
+      -fx-border-width:3;
+}
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+.chart-vertical-grid-lines {
+    -fx-stroke: transparent;
+}
+.chart-horizontal-grid-lines {
+    -fx-stroke: #3278fa;
+}
+.chart-alternative-row-fill {
+    -fx-fill: transparent;
+    -fx-stroke: transparent;
+    -fx-stroke-width: 0;
 }

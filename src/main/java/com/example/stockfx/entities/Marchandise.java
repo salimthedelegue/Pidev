@@ -48,6 +48,11 @@ public class Marchandise {
             this.id_fournisseur = id_fournisseur;
         }
         */
+    public Marchandise(String categorie_marchandise, double quantite){
+        this.categorie_marchandise=categorie_marchandise;
+        this.quantite=quantite;
+
+    }
     public Marchandise(String categorie_marchandise, String nom_marchandise, String date_arrive, double quantite, float prix_unitaire_marchandise, float prix_total_marchandise, int id_fournisseur) {
         this.categorie_marchandise = categorie_marchandise;
         this.nom_marchandise = nom_marchandise;

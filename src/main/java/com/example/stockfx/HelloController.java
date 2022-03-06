@@ -200,23 +200,43 @@ public class HelloController implements Initializable {
 
     @FXML
     private Tab tab1;
-    private ObservableList<String> dbTypeList = FXCollections.observableArrayList("pick one", "PS DVD", "Hardware components", "Gears");
+    private ObservableList<String> dbTypeList = FXCollections.observableArrayList("pick one", "PS DVD", "Hardware components", "Gears", "Streaming related");
     private ObservableList<ObservableList> data;
     private ObservableList<Marchandise> oblist = FXCollections.observableArrayList();
+    private ObservableList<Marchandise> liststat = FXCollections.observableArrayList();
     private ObservableList<String> marchNames = FXCollections.observableArrayList();
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         incategorie.setItems(dbTypeList);
         loadDate();
+        Connection c;
+        //SELECT `categorie_marchandise`,SUM(`quantite`) FROM `marchandise` GROUP BY `categorie_marchandise`;
+        try {
+            c = MyDB.getInstance().getConnection();
+            //SQL FOR SELECTING SUM of quantities and grouby category
+            String SQL = "SELECT `categorie_marchandise`,SUM(`quantite`) FROM `marchandise` GROUP BY `categorie_marchandise`";
+            //ResultSet
+            ResultSet rs = c.createStatement().executeQuery(SQL);
+            while (rs.next()) {
+                liststat.add(new Marchandise(rs.getString("categorie_marchandise"), rs.getFloat("SUM(`quantite`)")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         XYChart.Series set1=new XYChart.Series<>();
-        set1.getData().add(new XYChart.Data("azouzi",5000));
-        set1.getData().add(new XYChart.Data("Ales",8000));
-        set1.getData().add(new XYChart.Data("meme",10000));
-        set1.getData().add(new XYChart.Data("qsdqsd",580));
-        set1.getData().add(new XYChart.Data("bbb",10000));
+
+        for (int i = 0; i < liststat.size(); i++) {
+                //System.out.println(liststat.get(i).getCategorie_marchandise());
+                //System.out.println(liststat.get(i).getQuantite());
+                set1.getData().add(new XYChart.Data(liststat.get(i).getCategorie_marchandise(), liststat.get(i).getQuantite()));
+
+                set1.setName("Quantities per category");
+        }
         barChart.getData().addAll(set1);
+
 
     }
 
