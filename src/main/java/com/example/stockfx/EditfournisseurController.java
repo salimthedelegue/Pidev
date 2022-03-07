@@ -123,12 +123,12 @@ public class EditfournisseurController implements Initializable {
         } else {
             getQuery();
             insert();
-            cancel();
+            canceleditfourn();
 
         }
     }
     @FXML
-    void cancel() {
+    void canceleditfourn() {
         nom_fournisseur_edit.setText(null);
         num_telfour_edit.setText(null);
         num_fixfour_edit.setText(null);
@@ -173,7 +173,7 @@ public class EditfournisseurController implements Initializable {
 
     }
     void setTextField(int id_fournisseur, String nomfour, String num_tel,String num_fix,String email,String matri_fisc,String photo_four  ) {
-        fournisseureId=id_fournisseur ;
+        fournisseureId=id_fournisseur;
         nom_fournisseur_edit.setText(nomfour);
         num_telfour_edit.setText(num_tel);
         num_fixfour_edit.setText(num_fix);

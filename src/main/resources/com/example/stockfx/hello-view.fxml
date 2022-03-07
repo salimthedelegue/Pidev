@@ -194,7 +194,7 @@
                                           <Font name="Candara Bold" size="17.0" />
                                        </font>
                                     </JFXButton>
-                                    <ImageView fx:id="img_preview" fitHeight="313.0" fitWidth="297.0" layoutX="769.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="img_preview" fitHeight="319.0" fitWidth="302.0" layoutX="769.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
                                     <JFXTextArea fx:id="text_path" disable="true" editable="false" layoutX="544.0" layoutY="51.0" prefHeight="48.0" prefWidth="255.0" style="-fx-background-color: transparent;" styleClass="text-field" visible="false" />
                                     <Text fill="WHITE" layoutX="598.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Paath" wrappingWidth="146.00735294117646">
                                        <font>

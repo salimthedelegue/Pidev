@@ -6,7 +6,6 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.*;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -19,7 +18,6 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfWriter;
 //import helpers.DbConnect;
 import java.awt.Desktop;
-import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -45,7 +43,6 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -73,7 +70,6 @@ import javafx.event.ActionEvent;
 //part fournisseur
 import javafx.scene.image.ImageView;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
@@ -210,7 +206,7 @@ public class HelloController implements Initializable {
     private TableColumn<?, ?> num_telfour_col;
 
     @FXML
-    private TableColumn<?, ?> photo_four_col;
+    private TableColumn<Fournisseur, String> photo_four_col;
     @FXML
     private TableColumn<?, ?> nom_fournisseur_col;
 
@@ -994,12 +990,15 @@ public class HelloController implements Initializable {
         num_fixfour_col.setCellValueFactory(new PropertyValueFactory<>("num_fixe"));
         email_four_col.setCellValueFactory(new PropertyValueFactory<>("email"));
         matricule_four_col.setCellValueFactory(new PropertyValueFactory<>("matricule"));
-        photo_four_col.setCellValueFactory(new PropertyValueFactory<>("photo"));
+        photo_four_col.setCellValueFactory(new PropertyValueFactory<Fournisseur, String>("photo"));
+
+        //cell of button imaga
 
         //add cell of button edit
+              
         Callback<TableColumn<Fournisseur, String>, TableCell<Fournisseur, String>> cellFoctory = (TableColumn<Fournisseur, String> param) -> {
             // make cell containing buttons
-            final TableCell<Fournisseur, String> cell1 = new TableCell<Fournisseur, String>() {
+            final TableCell<Fournisseur, String> cell = new TableCell<Fournisseur, String>() {
                 @Override
                 public void updateItem(String item, boolean empty) {
                     Connection c;
@@ -1011,14 +1010,6 @@ public class HelloController implements Initializable {
                         setText(null);
 
                     } else {
-                        /*image
-                        ImageView imagev = new ImageView(new Image(item));
-                        imagev.setFitHeight(120);
-                        imagev.setFitWidth(200);
-                        setGraphic(imagev);
-                                              */
-
-
                         FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
                         FontAwesomeIconView editIcon = new FontAwesomeIconView(FontAwesomeIcon.PENCIL_SQUARE);
 
@@ -1038,8 +1029,8 @@ public class HelloController implements Initializable {
                             try {
                                 Connection cnx;
                                 cnx = MyDB.getInstance().getConnection();
-                                marchandise = tablemarchandise.getSelectionModel().getSelectedItem();
-                                String query = "DELETE FROM `Fournisseur` WHERE idFournisseur  =" + fournisseur.getId_fournisseur();
+                                fournisseur = table_fournisseur.getSelectionModel().getSelectedItem();
+                                String query = "DELETE FROM `Fournisseur` WHERE id_fournisseur  =" + fournisseur.getId_fournisseur();
                                 PreparedStatement ps = cnx.prepareStatement(query);
                                 ps.execute();
                                 Refrechtablefournisseur();
@@ -1088,11 +1079,43 @@ public class HelloController implements Initializable {
 
             };
 
-            return cell1;
+            return cell;
         };
         edit_four_col.setCellFactory(cellFoctory);
         table_fournisseur.setItems(oblistFourn);
+
         //photo_four_col.setCellFactory(cellFactoryImage);
+        Callback<TableColumn<Fournisseur, String>, TableCell<Fournisseur, String>> cellFactoryImage = (TableColumn<Fournisseur, String> param) -> {
+            // make cell containing buttons
+            final TableCell<Fournisseur, String> cellImg = new TableCell<Fournisseur, String>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    Connection c;
+                    super.updateItem(item, empty);
+                    //that cell created only on non-empty rows
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else  {
+
+                            //System.out.println("img "+getTableRow().getItem().getPhoto());
+                            String pathImg = "C:\\xampp\\htdocs\\stockfxphotofournisseur\\" + item;
+                            ImageView imagev = new ImageView(new Image(pathImg));
+                            imagev.setFitHeight(100);
+                            imagev.setFitWidth(100);
+                            setGraphic(imagev);
+
+
+
+                    }
+                }
+
+
+            };
+
+            return cellImg;
+        };
+        photo_four_col.setCellFactory(cellFactoryImage);
 
     }
     @FXML
@@ -1104,9 +1127,9 @@ public class HelloController implements Initializable {
             String SQL = "SELECT * from FOURNISSEUR";
             //ResultSet
             ResultSet rs = c.createStatement().executeQuery(SQL);
+            oblistFourn.clear();
             while (rs.next()){
                 oblistFourn.add(new Fournisseur(rs.getInt("id_fournisseur"),rs.getString("nom_fournisseur"),rs.getString("numtel_fournisseur"),rs.getString("numFixe_fournisseur"),rs.getString("email"),rs.getString("matricule_fiscale"),rs.getString("photo")));
-
             }
 
 
