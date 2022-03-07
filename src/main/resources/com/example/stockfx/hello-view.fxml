@@ -26,7 +26,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" stylesheets="@stylestock.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stockfx.HelloController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1300.0" stylesheets="@stylestock.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stockfx.HelloController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <center>
@@ -37,14 +37,14 @@
                         <Image url="@colorful.png" />
                      </image>
                   </ImageView>
-                  <TabPane layoutX="4.0" layoutY="8.0" prefHeight="768.0" prefWidth="1366.0" stylesheets="@stylestock.css" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane layoutX="4.0" layoutY="8.0" prefHeight="784.0" prefWidth="1366.0" stylesheets="@stylestock.css" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                       <Tab fx:id="tab1" text="Overview">
                            <content>
                               <AnchorPane prefHeight="535.0" prefWidth="1361.0">
                                  <children>
                                     <PieChart layoutX="85.0" layoutY="61.0" />
-                                    <BarChart fx:id="barChart" layoutX="72.0" layoutY="98.0" onMouseClicked="#showstat" prefHeight="524.0" prefWidth="620.0" style="-fx-legend-side: left;">
+                                    <BarChart fx:id="barChart" layoutX="72.0" layoutY="61.0" prefHeight="524.0" prefWidth="620.0" style="-fx-legend-side: left;">
                                       <xAxis>
                                         <CategoryAxis fx:id="CategoryAxisx" prefHeight="11.0" prefWidth="521.0" side="BOTTOM" styleClass="xaxis" tickLabelFill="#2febda" />
                                       </xAxis>
@@ -58,7 +58,7 @@
                                           <String fx:value="chart-plot-background" />
                                        </styleClass>
                                     </BarChart>
-                                    <Text fill="WHITE" layoutX="176.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantite par Marchandise en Stock" wrappingWidth="424.792928200692">
+                                    <Text fill="WHITE" layoutX="170.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantite par Marchandise en Stock" wrappingWidth="424.792928200692">
                                        <font>
                                           <Font name="Candara" size="27.0" />
                                        </font>
@@ -75,7 +75,7 @@
                                           <Font name="Candara" size="17.0" />
                                        </font>
                                     </Label>
-                                    <JFXTextArea fx:id="Innom" focusColor="#a2acc9" layoutX="16.0" layoutY="66.0" prefHeight="42.0" prefWidth="181.0" style="-fx-background-color: tranparent;" styleClass="text-field" unFocusColor="WHITE" />
+                                    <JFXTextArea fx:id="Innom" layoutX="16.0" layoutY="66.0" prefHeight="42.0" prefWidth="181.0" style="-fx-background-color: tranparent;" styleClass="text-field" unFocusColor="WHITE" />
                                     <Label layoutX="231.0" layoutY="26.0" prefHeight="37.0" prefWidth="119.0" text="Categorie" textFill="WHITE">
                                        <font>
                                           <Font name="Candara" size="16.0" />
@@ -87,7 +87,7 @@
                                        </font>
                                     </Label>
                                     <DatePicker fx:id="indate" layoutX="447.0" layoutY="66.0" prefHeight="34.0" prefWidth="182.0" styleClass="text-field" />
-                                    <JFXTextArea fx:id="inqunatite" focusColor="#a2acc9" layoutX="16.0" layoutY="181.0" prefHeight="0.0" prefWidth="173.0" style="-fx-background-color: tranparent;" styleClass="text-field" unFocusColor="WHITE" />
+                                    <JFXTextArea fx:id="inqunatite" layoutX="16.0" layoutY="181.0" prefHeight="0.0" prefWidth="173.0" style="-fx-background-color: tranparent;" styleClass="text-field" unFocusColor="WHITE" />
                                     <Label layoutX="16.0" layoutY="138.0" prefHeight="37.0" prefWidth="119.0" text="Quantité" textFill="WHITE">
                                        <font>
                                           <Font name="Candara" size="17.0" />
@@ -98,20 +98,20 @@
                                           <Font name="Candara" size="17.0" />
                                        </font>
                                     </Label>
-                                    <JFXTextArea fx:id="inprixunitaire" focusColor="#a2acc9" layoutX="231.0" layoutY="181.0" prefHeight="0.0" prefWidth="173.0" style="-fx-background-color: tranparent;" styleClass="text-field" unFocusColor="WHITE" />
+                                    <JFXTextArea fx:id="inprixunitaire" layoutX="231.0" layoutY="181.0" prefHeight="0.0" prefWidth="173.0" style="-fx-background-color: tranparent;" styleClass="text-field" unFocusColor="WHITE" />
                                     <Label layoutX="452.0" layoutY="136.0" prefHeight="37.0" prefWidth="119.0" text="Prix total" textFill="WHITE">
                                        <font>
                                           <Font name="Candara" size="17.0" />
                                        </font>
                                     </Label>
-                                    <JFXTextArea fx:id="Inprixtotal" focusColor="#a2acc9" layoutX="452.0" layoutY="179.0" prefHeight="0.0" prefWidth="173.0" style="-fx-background-color: tranparent;" styleClass="text-field" unFocusColor="WHITE" />
+                                    <JFXTextArea fx:id="Inprixtotal" layoutX="452.0" layoutY="179.0" prefHeight="0.0" prefWidth="173.0" style="-fx-background-color: tranparent;" styleClass="text-field" unFocusColor="WHITE" />
                                     <ComboBox fx:id="incategorie" layoutX="231.0" layoutY="66.0" prefHeight="35.0" prefWidth="182.0" promptText="categorie" style="-fx-background-color: tranparent;" styleClass="text-field" />
                                     <Label layoutX="670.0" layoutY="138.0" prefHeight="37.0" prefWidth="119.0" text="Id Fournisseur" textFill="WHITE">
                                        <font>
                                           <Font name="Candara" size="17.0" />
                                        </font>
                                     </Label>
-                                    <JFXTextArea fx:id="inidfournisseur" focusColor="WHITE" layoutX="670.0" layoutY="177.0" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: tranparent;" styleClass="text-field" unFocusColor="WHITE" />
+                                    <JFXTextArea fx:id="inidfournisseur" layoutX="670.0" layoutY="177.0" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: tranparent;" styleClass="text-field" unFocusColor="WHITE" />
                                     <JFXButton layoutX="242.0" layoutY="259.0" onAction="#AddMarch" prefHeight="52.0" prefWidth="108.0" style="-fx-border-radius: 20; -fx-background-color: #00FF93;" text="Ajouter" textFill="WHITE">
                                        <effect>
                                           <DropShadow />
@@ -158,60 +158,88 @@
                            <content>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000005d" height="297.0" layoutX="14.0" layoutY="8.0" stroke="#344347" strokeType="INSIDE" width="1059.0" />
-                                    <Text fill="WHITE" layoutX="35.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID Fournisseur" wrappingWidth="146.00735294117646">
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000005d" height="328.0" layoutX="14.0" layoutY="8.0" stroke="#344347" strokeType="INSIDE" width="1059.0" />
+                                    <Text fill="WHITE" layoutX="34.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom Fournisseur" wrappingWidth="146.00735294117646">
                                        <font>
                                           <Font name="Candara" size="17.0" />
                                        </font>
                                     </Text>
-                                    <JFXTextArea layoutX="37.0" layoutY="51.0" prefHeight="48.0" prefWidth="142.0" />
-                                    <Text fill="WHITE" layoutX="196.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom Fournisseur" wrappingWidth="146.00735294117646">
+                                    <JFXTextArea fx:id="in_nom_fournisseur" layoutX="36.0" layoutY="51.0" prefHeight="48.0" prefWidth="142.0" style="-fx-background-color: tranparent;" styleClass="text-field" />
+                                    <Text fill="WHITE" layoutX="192.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numéro Tel " wrappingWidth="146.00735294117646">
                                        <font>
                                           <Font name="Candara" size="17.0" />
                                        </font>
                                     </Text>
-                                    <JFXTextArea layoutX="198.0" layoutY="51.0" prefHeight="48.0" prefWidth="142.0" />
-                                    <Text fill="WHITE" layoutX="354.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numéro Tel " wrappingWidth="146.00735294117646">
+                                    <JFXTextArea fx:id="in_num_tel" layoutX="194.0" layoutY="51.0" prefHeight="48.0" prefWidth="142.0" style="-fx-background-color: transparent;" styleClass="text-field" />
+                                    <Text fill="WHITE" layoutX="34.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numéro Fix" wrappingWidth="146.00735294117646">
                                        <font>
                                           <Font name="Candara" size="17.0" />
                                        </font>
                                     </Text>
-                                    <JFXTextArea layoutX="356.0" layoutY="51.0" prefHeight="48.0" prefWidth="142.0" />
-                                    <Text fill="WHITE" layoutX="32.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numéro Fix" wrappingWidth="146.00735294117646">
+                                    <JFXTextArea fx:id="in_num_fix" layoutX="36.0" layoutY="164.0" prefHeight="48.0" prefWidth="142.0" style="-fx-background-color: transparent;" styleClass="text-field" />
+                                    <Text fill="WHITE" layoutX="196.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="146.00735294117646">
                                        <font>
                                           <Font name="Candara" size="17.0" />
                                        </font>
                                     </Text>
-                                    <JFXTextArea layoutX="34.0" layoutY="201.0" prefHeight="48.0" prefWidth="142.0" />
-                                    <Text fill="WHITE" layoutX="193.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="146.00735294117646">
+                                    <JFXTextArea fx:id="in_email" layoutX="197.0" layoutY="164.0" prefHeight="48.0" prefWidth="142.0" style="-fx-background-color: tranparent;" styleClass="text-field" />
+                                    <Text fill="WHITE" layoutX="356.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Matricule Fiscale" wrappingWidth="146.00735294117646">
                                        <font>
                                           <Font name="Candara" size="17.0" />
                                        </font>
                                     </Text>
-                                    <JFXTextArea layoutX="195.0" layoutY="201.0" prefHeight="48.0" prefWidth="142.0" />
-                                    <Text fill="WHITE" layoutX="354.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Matricule Fiscale" wrappingWidth="146.00735294117646">
-                                       <font>
-                                          <Font name="Candara" size="17.0" />
-                                       </font>
-                                    </Text>
-                                    <JFXTextArea layoutX="356.0" layoutY="201.0" prefHeight="48.0" prefWidth="142.0" />
-                                    <Text fill="WHITE" layoutX="582.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pick a photo" wrappingWidth="106.00735294117646">
-                                       <font>
-                                          <Font name="Candara" size="17.0" />
-                                       </font>
-                                    </Text>
-                                    <JFXButton layoutX="570.0" layoutY="165.0" onAction="#loadimage" prefHeight="91.0" prefWidth="179.0" style="-fx-border-radius: 25; -fx-background-color: #00FF93;" text="Select" textFill="WHITE">
+                                    <JFXTextArea fx:id="in_matricule" layoutX="358.0" layoutY="164.0" prefHeight="48.0" prefWidth="142.0" style="-fx-background-color: transparent;" styleClass="text-field" />
+                                    <JFXButton layoutX="550.0" layoutY="110.0" onAction="#loadimage" prefHeight="91.0" prefWidth="179.0" style="-fx-border-radius: 25; -fx-background-color: #00FF93;" text="Pick a photo" textFill="WHITE">
                                        <font>
                                           <Font name="Candara Bold" size="17.0" />
                                        </font>
                                     </JFXButton>
-                                    <ImageView fx:id="img_preview" fitHeight="228.0" fitWidth="285.0" layoutX="770.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true" />
-                                    <JFXTextArea fx:id="text_path" layoutX="570.0" layoutY="51.0" prefHeight="48.0" prefWidth="215.0" />
-                                    <Text fill="WHITE" layoutX="582.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Paath" wrappingWidth="146.00735294117646">
+                                    <ImageView fx:id="img_preview" fitHeight="313.0" fitWidth="297.0" layoutX="769.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                                    <JFXTextArea fx:id="text_path" disable="true" editable="false" layoutX="544.0" layoutY="51.0" prefHeight="48.0" prefWidth="255.0" style="-fx-background-color: transparent;" styleClass="text-field" visible="false" />
+                                    <Text fill="WHITE" layoutX="598.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Paath" wrappingWidth="146.00735294117646">
                                        <font>
                                           <Font name="Candara" size="17.0" />
                                        </font>
                                     </Text>
+                                    <Text fill="WHITE" layoutX="369.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type Véhicule" wrappingWidth="146.00735294117646">
+                                       <font>
+                                          <Font name="Candara" size="17.0" />
+                                       </font>
+                                    </Text>
+                                    <ComboBox fx:id="combo_typeveh" layoutX="367.0" layoutY="63.0" prefHeight="36.0" prefWidth="150.0" />
+                                    <JFXButton layoutX="274.0" layoutY="252.0" onAction="#AddFour" prefHeight="60.0" prefWidth="137.0" style="-fx-border-radius: 25; -fx-background-color: #00FF93;" text="Ajouter" textFill="WHITE">
+                                       <font>
+                                          <Font name="Candara Bold" size="17.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton layoutX="456.0" layoutY="252.0" onAction="#loadimage" prefHeight="60.0" prefWidth="137.0" style="-fx-border-radius: 25; -fx-background-color: #808080;" text="Cancel" textFill="WHITE">
+                                       <font>
+                                          <Font name="Candara Bold" size="17.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <TableView fx:id="table_fournisseur" layoutX="14.0" layoutY="336.0" prefHeight="328.0" prefWidth="889.0">
+                                      <columns>
+                                        <TableColumn fx:id="id_fourn_col" prefWidth="98.0" text="ID Fournisseur" />
+                                        <TableColumn fx:id="nom_fournisseur_col" prefWidth="104.0" text="Nom" />
+                                          <TableColumn fx:id="num_telfour_col" prefWidth="116.0" text="Num Tel" />
+                                          <TableColumn fx:id="num_fixfour_col" prefWidth="94.0" text="Numéro Fix" />
+                                          <TableColumn fx:id="email_four_col" prefWidth="101.0" text="Email" />
+                                          <TableColumn fx:id="matricule_four_col" prefWidth="105.0" text="Matricule" />
+                                          <TableColumn fx:id="photo_four_col" prefWidth="180.0" text="Photo" />
+                                          <TableColumn fx:id="edit_four_col" prefWidth="89.0" text="Edit" />
+                                      </columns>
+                                    </TableView>
+                                    <JFXButton layoutX="937.0" layoutY="388.0" onAction="#AddFour" prefHeight="80.0" prefWidth="183.0" style="-fx-border-radius: 25; -fx-background-color: #00FF93;" text="Generate PDF" textFill="WHITE">
+                                       <font>
+                                          <Font name="Candara Bold Italic" size="18.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <Text fill="WHITE" layoutX="1001.0" layoutY="530.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REFRESH">
+                                       <font>
+                                          <Font name="System Bold" size="24.0" />
+                                       </font>
+                                    </Text>
+                                    <FontAwesomeIconView fill="#00ff93" glyphName="REFRESH" layoutX="954.0" layoutY="534.0" onMouseClicked="#Refrechtablefournisseur" size="40" />
                                  </children></AnchorPane>
                            </content>
                         </Tab>

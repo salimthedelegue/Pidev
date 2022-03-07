@@ -1,10 +1,12 @@
 package com.example.stockfx;
+import com.example.stockfx.entities.Fournisseur;
+import com.example.stockfx.services.ServiceFournisseur;
 import com.itextpdf.text.*;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Rectangle;
-import com.itextpdf.text.html.simpleparser.HTMLWorker;
 import com.itextpdf.text.pdf.*;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -16,24 +18,17 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfWriter;
 //import helpers.DbConnect;
-import java.awt.*;
 import java.awt.Desktop;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.io.FileOutputStream;
-import java.io.*;
 import java.io.FileNotFoundException;
-import java.text.DateFormatSymbols;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.IOException;
 import java.util.*;
@@ -42,17 +37,15 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -60,51 +53,35 @@ import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import com.example.stockfx.entities.Marchandise;
 import com.example.stockfx.services.ServiceStock;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.util.Callback;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import java.io.IOException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import utils.MyDB;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
 //import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 
-import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import javafx.event.ActionEvent;
-import javafx.scene.control.TableView;
 
-import static jdk.dynalink.linker.support.Guards.isNotNull;
 //part fournisseur
 import javafx.scene.image.ImageView;
-import java.net.MalformedURLException;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.XYChart;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
+import java.io.File;
+
 
 public class HelloController implements Initializable {
+    private String path;
+    File selectedFile;
     @FXML
     private ImageView img_preview;
     @FXML
@@ -196,6 +173,48 @@ public class HelloController implements Initializable {
     @FXML
     private TableColumn<Marchandise, String> Editcol;
     Marchandise marchandise = null;
+    //***********Partie Fournisseur**********
+    Fournisseur fournisseur = null;
+    @FXML
+    private TableView<Fournisseur> table_fournisseur;
+    @FXML
+    private JFXTextArea in_email;
+
+    @FXML
+    private JFXTextArea in_matricule;
+
+    @FXML
+    private JFXTextArea in_nom_fournisseur;
+
+    @FXML
+    private JFXTextArea in_num_fix;
+
+    @FXML
+    private JFXTextArea in_num_tel;
+    @FXML
+    private ComboBox<String> combo_typeveh;
+    @FXML
+    private TableColumn<Fournisseur, String> edit_four_col;
+
+    @FXML
+    private TableColumn<?, ?> email_four_col;
+    @FXML
+    private TableColumn<?, ?> id_fourn_col;
+    @FXML
+    private TableColumn<?, ?> matricule_four_col;
+
+    @FXML
+    private TableColumn<?, ?> num_fixfour_col;
+
+    @FXML
+    private TableColumn<?, ?> num_telfour_col;
+
+    @FXML
+    private TableColumn<?, ?> photo_four_col;
+    @FXML
+    private TableColumn<?, ?> nom_fournisseur_col;
+
+
 
 
     @FXML
@@ -205,14 +224,20 @@ public class HelloController implements Initializable {
     private ObservableList<Marchandise> oblist = FXCollections.observableArrayList();
     private ObservableList<Marchandise> liststat = FXCollections.observableArrayList();
     private ObservableList<String> marchNames = FXCollections.observableArrayList();
-
+    //***********Partie Fournisseur**********
+    private ObservableList<String> dbTypeVehicule = FXCollections.observableArrayList("Camion", "Voiture", "Moto");
+    private ObservableList<Fournisseur> oblistFourn = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         incategorie.setItems(dbTypeList);
+        combo_typeveh.setItems(dbTypeVehicule);
         loadDate();
+        loadDataFournisseur();
         Connection c;
+        //************Statistiques Marchanidses**************
+
         //SELECT `categorie_marchandise`,SUM(`quantite`) FROM `marchandise` GROUP BY `categorie_marchandise`;
         try {
             c = MyDB.getInstance().getConnection();
@@ -390,15 +415,17 @@ public class HelloController implements Initializable {
         }
     }
 
+
+
     @FXML
     private void AddMarch(ActionEvent event) {
-        //boolean isMyDateValide=isdate(String.valueOf(indate.getValue().format(DateTimeFormatter.ofPattern("yy-MMM-dd"))));
+        boolean isMyDateValide=isdate(String.valueOf(indate.getValue().format(DateTimeFormatter.ofPattern("yy-MMM-dd"))));
         boolean isMyNameValide = isName(Innom.getText());
         boolean isMyQuantityValide = isDoubl(inqunatite.getText());
         boolean isMyPriceUValide = isreal(inprixunitaire.getText());
         boolean isMyPriceTValide = isreal(Inprixtotal.getText());
         boolean isMyFournisseurValide = isinte(inidfournisseur.getText());
-        if (indate.getValue()!=null && incategorie.getValue()!=null && isMyNameValide==true && isMyQuantityValide==true && isMyPriceUValide==true && isMyPriceTValide==true&& isMyFournisseurValide==true) {
+        if (isMyDateValide== true && indate.getValue()!=null && incategorie.getValue()!=null && isMyNameValide==true && isMyQuantityValide==true && isMyPriceUValide==true && isMyPriceTValide==true&& isMyFournisseurValide==true) {
             ServiceStock sp = new ServiceStock();
             Marchandise m = new Marchandise(incategorie.getValue(), Innom.getText(), indate.getValue().format(DateTimeFormatter.ofPattern("yy-MMM-dd")), Double.parseDouble(inqunatite.getText()), Float.parseFloat(inprixunitaire.getText()), Float.parseFloat(Inprixtotal.getText()), Integer.parseInt(inidfournisseur.getText()));
             try {
@@ -848,27 +875,23 @@ public class HelloController implements Initializable {
 
 
     }
-
+/*
     @FXML
     void showstat(MouseEvent event) {
-        Connection c;
+        WritableImage image = barChart.snapshot(new SnapshotParameters(), null);
+
+        // TODO: probably use a file chooser here
+        File file = new File("chart.png");
 
         try {
-            c = MyDB.getInstance().getConnection();
-            //SQL FOR SELECTING ALL OF CUSTOMER
-            String SQL = "SELECT * from MARCHANDISE";
-            //ResultSet
-            ResultSet rs = c.createStatement().executeQuery(SQL);
-            while (rs.next()) {
-                oblist.add(new Marchandise(rs.getInt("id_marchandise"), rs.getString("categorie_marchandise"), rs.getString("nom_marchandise"), rs.getString("date_arrive"), rs.getFloat("quantite"), rs.getFloat("prix_unitaire_marchandise"), rs.getFloat("prix_total_marchandise"), rs.getInt("Id_fournisseur")));
 
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+        } catch (IOException e) {
+            // TODO: handle exception here
         }
 
      }
-
+*/
         //******************PARTIE FOURNISSEUR******************
     @FXML
     void loadimage(ActionEvent event) throws MalformedURLException {
@@ -884,5 +907,211 @@ public class HelloController implements Initializable {
 
         }
     }
+    public static boolean isemail(String val) {
+        String emailv = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+        if (val.matches(emailv)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public static boolean isphonenumber(String val) {
+        String num_telval = "^(\\+\\d{1,2}\\s?)?1?\\-?\\.?\\s?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$";
+        if (val.matches(num_telval)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public static boolean ismatricule(String val) {
+        String num_matric = "^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}$";
+        if (val.matches(num_matric)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    @FXML
+    void AddFour(ActionEvent event) {
+            //boolean isMyDateValide=isdate(String.valueOf(indate.getValue().format(DateTimeFormatter.ofPattern("yy-MMM-dd"))));
+            boolean isMyNameFourValide = isName(in_nom_fournisseur.getText());
+            boolean isMYNUmTelValide=isphonenumber(in_num_tel.getText());
+            boolean isMYNumFixValide=isphonenumber(in_num_fix.getText());
+            boolean isMyMatriculeValide=ismatricule(in_matricule.getText());
+            boolean isMyEmailValide=isemail(in_email.getText());
+            String fromFile = text_path.getText();
+            File file = new File(text_path.getText());
+            if (in_nom_fournisseur.getText()!=null && in_num_tel.getText()!=null && in_num_fix.getText()!=null && in_matricule.getText()!=null  && isMyNameFourValide==true && isMYNUmTelValide==true && isMYNumFixValide==true && isMyMatriculeValide==true&& isMyEmailValide==true && text_path.getText()!=null) {
+                ServiceFournisseur sf = new ServiceFournisseur();
+                Fournisseur f = new Fournisseur(in_nom_fournisseur.getText(),in_num_tel.getText(), in_num_fix.getText(), in_email.getText(), in_matricule.getText(),file.getName());
+                System.out.println(text_path.getText());
+                try {
 
+                    String toFile = "C:\\xampp\\htdocs\\stockfxphotofournisseur\\"+file.getName();
+                    Path source = Paths.get(fromFile);
+                    Path target = Paths.get(toFile);
+                    try {
+                        Files.move(source, target);
+                         // if target exists, replace it.
+                        // Files.move(source, target, StandardCopyOption.REPLACE_EXISTING);
+                    }catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    sf.ajouterFournisseur(f);
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setContentText("added successfully!");
+                    alert.show();
+                    //incategorie.set(0);
+                    in_nom_fournisseur.setText("");
+                    in_num_tel.setText("");
+                    in_num_fix.setText("");
+                    in_email.setText("");
+                    in_matricule.setText("");
+                    text_path.setText("");
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("FAIL");
+                alert.setContentText("PLEASE VERIFY DATA ");
+                alert.show();
+
+            }
+
+        }
+    private void loadDataFournisseur() {
+        Connection c;
+        c = MyDB.getInstance().getConnection();
+        Refrechtablefournisseur();
+        id_fourn_col.setCellValueFactory(new PropertyValueFactory<>("id_fournisseur"));
+        nom_fournisseur_col.setCellValueFactory(new PropertyValueFactory<>("nom_fournisseur"));
+        num_telfour_col.setCellValueFactory(new PropertyValueFactory<>("num_telephone"));
+        num_fixfour_col.setCellValueFactory(new PropertyValueFactory<>("num_fixe"));
+        email_four_col.setCellValueFactory(new PropertyValueFactory<>("email"));
+        matricule_four_col.setCellValueFactory(new PropertyValueFactory<>("matricule"));
+        photo_four_col.setCellValueFactory(new PropertyValueFactory<>("photo"));
+
+        //add cell of button edit
+        Callback<TableColumn<Fournisseur, String>, TableCell<Fournisseur, String>> cellFoctory = (TableColumn<Fournisseur, String> param) -> {
+            // make cell containing buttons
+            final TableCell<Fournisseur, String> cell1 = new TableCell<Fournisseur, String>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    Connection c;
+                    super.updateItem(item, empty);
+
+                    //that cell created only on non-empty rows
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+
+                    } else {
+                        /*image
+                        ImageView imagev = new ImageView(new Image(item));
+                        imagev.setFitHeight(120);
+                        imagev.setFitWidth(200);
+                        setGraphic(imagev);
+                                              */
+
+
+                        FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
+                        FontAwesomeIconView editIcon = new FontAwesomeIconView(FontAwesomeIcon.PENCIL_SQUARE);
+
+                        deleteIcon.setStyle(
+
+                                " -fx-cursor: hand ;"
+                                        + "-glyph-size:28px;"
+                                        + "-fx-fill:#ff1744;"
+                        );
+                        editIcon.setStyle(
+                                " -fx-cursor: hand ;"
+                                        + "-glyph-size:28px;"
+                                        + "-fx-fill:#00E676;"
+                        );
+                        deleteIcon.setOnMouseClicked((MouseEvent event) -> {
+
+                            try {
+                                Connection cnx;
+                                cnx = MyDB.getInstance().getConnection();
+                                marchandise = tablemarchandise.getSelectionModel().getSelectedItem();
+                                String query = "DELETE FROM `Fournisseur` WHERE idFournisseur  =" + fournisseur.getId_fournisseur();
+                                PreparedStatement ps = cnx.prepareStatement(query);
+                                ps.execute();
+                                Refrechtablefournisseur();
+
+                            } catch (SQLException ex) {
+                                Logger.getLogger(HelloController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+
+
+                        });
+                        editIcon.setOnMouseClicked((MouseEvent event) -> {
+
+                            fournisseur = table_fournisseur.getSelectionModel().getSelectedItem();
+                            FXMLLoader loader = new FXMLLoader();
+                            loader.setLocation(getClass().getResource("Editfournisseur.fxml"));
+                            try {
+                                loader.load();
+                            } catch (IOException ex) {
+                                Logger.getLogger(HelloController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+
+                            EditfournisseurController editControllerfourniss = loader.getController();
+                            editControllerfourniss.setUpdate(true);
+                            editControllerfourniss.setTextField(fournisseur.getId_fournisseur(), fournisseur.getNom_fournisseur(), fournisseur.getNum_telephone(),
+                                    fournisseur.getNum_fixe(), fournisseur.getEmail(), fournisseur.getMatricule(),fournisseur.getPhoto());
+                            Parent parent = loader.getRoot();
+                            Stage stage = new Stage();
+                            stage.setScene(new Scene(parent));
+                            stage.initStyle(StageStyle.UTILITY);
+                            stage.show();
+
+                        });
+
+                        HBox managebtn = new HBox(editIcon, deleteIcon);
+                        managebtn.setStyle("-fx-alignment:center");
+                        HBox.setMargin(deleteIcon, new Insets(2, 2, 0, 3));
+                        HBox.setMargin(editIcon, new Insets(2, 3, 0, 2));
+
+                        setGraphic(managebtn);
+
+                        setText(null);
+
+                    }
+
+                }
+
+            };
+
+            return cell1;
+        };
+        edit_four_col.setCellFactory(cellFoctory);
+        table_fournisseur.setItems(oblistFourn);
+        //photo_four_col.setCellFactory(cellFactoryImage);
+
+    }
+    @FXML
+    public void Refrechtablefournisseur() {
+        Connection c;
+
+        try {
+            c = MyDB.getInstance().getConnection();
+            String SQL = "SELECT * from FOURNISSEUR";
+            //ResultSet
+            ResultSet rs = c.createStatement().executeQuery(SQL);
+            while (rs.next()){
+                oblistFourn.add(new Fournisseur(rs.getInt("id_fournisseur"),rs.getString("nom_fournisseur"),rs.getString("numtel_fournisseur"),rs.getString("numFixe_fournisseur"),rs.getString("email"),rs.getString("matricule_fiscale"),rs.getString("photo")));
+
+            }
+
+
+        } catch (SQLException ex) {
+            Logger.getLogger(HelloController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

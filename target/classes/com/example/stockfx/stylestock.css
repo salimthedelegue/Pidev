@@ -103,7 +103,6 @@
 
 }
 .chart-legend-item{
-    -fx-background-color:transparent;
     -fx-text-fill: #191970;
     -fx-padding: 10px;
 }

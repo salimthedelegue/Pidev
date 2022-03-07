@@ -12,8 +12,6 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     Parent parent;
     Stage stage;
-    private double xOffset = 0;
-    private double yOffset = 0;
     @Override
 
     public void start(Stage stage) throws IOException {
@@ -23,6 +21,7 @@ public class HelloApplication extends Application {
         stage.getIcons().add(anotherIcon);
         //stage.initStyle(StageStyle.TRANSPARENT);
         stage.setTitle("Stock Module");
+        stage.setMaximized(true);
         stage.setScene(scene);
         stage.show();
     }

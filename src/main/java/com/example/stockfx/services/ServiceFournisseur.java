@@ -36,8 +36,9 @@ public class ServiceFournisseur implements Ifournisseur<Fournisseur> {
     @Override
     public void ajouterFournisseur(Fournisseur f) throws SQLException{
         try {
-            String req = "insert into fournisseur (nom_fournisseur,num_telephone,date_arrive,quantite,prix_unitaire_marchandise,prix_total_marchandise,id_fournisseur) values"
-                    + " ( '" + f.getNom_fournisseur() + "','" + f.getNum_telephone() + "', '" + f.getNum_fixe() + "','" + f.getEmail() + "', '" + f.getMatricule() + "', '" + f.getType_véhicule() + "','" + f.getPhoto() + "')";
+
+            String req = "insert into fournisseur (nom_fournisseur,numtel_fournisseur,numFixe_fournisseur,email,matricule_fiscale,photo) values"
+                    + " ( '" + f.getNom_fournisseur() + "','" + f.getNum_telephone() + "', '" + f.getNum_fixe() + "','" + f.getEmail() + "', '" + f.getMatricule() + "', '" + f.getPhoto() + "')";
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
         } catch (SQLException ex) {

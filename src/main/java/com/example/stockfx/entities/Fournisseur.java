@@ -14,16 +14,15 @@ public class Fournisseur {
     public Fournisseur(){
 
     }
-    public Fournisseur(String nom_fournisseur, String num_telephone, String num_fixe, String email, String matricule, String type_véhicule, String photo) {
+    public Fournisseur(String nom_fournisseur ,String num_telephone, String num_fixe, String email, String matricule, String photo) {
         this.nom_fournisseur = nom_fournisseur;
         this.num_telephone = num_telephone;
         this.num_fixe = num_fixe;
         this.email = email;
         this.matricule = matricule;
-        this.type_véhicule = type_véhicule;
         this.photo = photo;
     }
-    public Fournisseur(int id_fournisseur,String nom_fournisseur, String num_telephone, String num_fixe, String email, String matricule, String type_véhicule, String photo) {
+    public Fournisseur(int id_fournisseur,String nom_fournisseur, String num_telephone, String num_fixe, String email, String matricule, String photo) {
         this.idFournisseur=id_fournisseur;
         this.nom_fournisseur = nom_fournisseur;
         this.num_telephone = num_telephone;
