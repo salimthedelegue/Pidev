@@ -5,7 +5,11 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.*;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -18,17 +22,28 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfWriter;
 //import helpers.DbConnect;
 import java.awt.Desktop;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
-import java.io.FileOutputStream;
-import java.io.FileNotFoundException;
+import java.util.Date;
 import java.util.List;
-
-import java.io.IOException;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,18 +58,35 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import com.example.stockfx.entities.Marchandise;
 import com.example.stockfx.services.ServiceStock;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.activation.*;
+import java.util.*;
+
+import javafx.util.Duration;
 import utils.MyDB;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
@@ -70,11 +102,16 @@ import javafx.event.ActionEvent;
 //part fournisseur
 import javafx.scene.image.ImageView;
 
+import javax.imageio.ImageIO;
+import javax.management.Notification;
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
-import java.io.File;
+import javax.mail.Message.RecipientType;
+import org.controlsfx.control.Notifications;
+import com.twilio.Twilio;
 
-
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMultipart;
 public class HelloController implements Initializable {
     private String path;
     File selectedFile;
@@ -223,7 +260,8 @@ public class HelloController implements Initializable {
     //***********Partie Fournisseur**********
     private ObservableList<String> dbTypeVehicule = FXCollections.observableArrayList("Camion", "Voiture", "Moto");
     private ObservableList<Fournisseur> oblistFourn = FXCollections.observableArrayList();
-
+    public static final String ACCOUNT_SID = "AC6d45e72872be4dc89b31f64632235722";
+    public static final String AUTH_TOKEN = "7829dcb9e8a557f28e8638e345d254c1";
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -259,12 +297,15 @@ public class HelloController implements Initializable {
         barChart.getData().addAll(set1);
 
 
+
+
     }
 
     private void loadDate() {
         Connection c;
         c = MyDB.getInstance().getConnection();
         Refrechtable();
+
         idCol.setCellValueFactory(new PropertyValueFactory<>("id_marchandise"));
         categoriecol.setCellValueFactory(new PropertyValueFactory<>("categorie_marchandise"));
         nomcol.setCellValueFactory(new PropertyValueFactory<>("nom_marchandise"));
@@ -415,13 +456,15 @@ public class HelloController implements Initializable {
 
     @FXML
     private void AddMarch(ActionEvent event) {
-        boolean isMyDateValide=isdate(String.valueOf(indate.getValue().format(DateTimeFormatter.ofPattern("yy-MMM-dd"))));
+
+
+        //boolean isMyDateValide=isdate(String.valueOf(indate.getValue().format(DateTimeFormatter.ofPattern("yy-MMM-dd"))));
         boolean isMyNameValide = isName(Innom.getText());
-        boolean isMyQuantityValide = isDoubl(inqunatite.getText());
+        boolean isMyQuantityValide = isreal(inqunatite.getText());
         boolean isMyPriceUValide = isreal(inprixunitaire.getText());
         boolean isMyPriceTValide = isreal(Inprixtotal.getText());
         boolean isMyFournisseurValide = isinte(inidfournisseur.getText());
-        if (isMyDateValide== true && indate.getValue()!=null && incategorie.getValue()!=null && isMyNameValide==true && isMyQuantityValide==true && isMyPriceUValide==true && isMyPriceTValide==true&& isMyFournisseurValide==true) {
+        if (isMyNameValide==true && isMyQuantityValide==true && isMyPriceUValide==true && isMyPriceTValide==true && indate.getValue()!=null && incategorie.getValue()!=null && Innom.getText()!=null && inqunatite.getText()!=null && inprixunitaire.getText()!=null && Inprixtotal.getText()!=null && inidfournisseur.getText()!=null && isMyFournisseurValide==true) {
             ServiceStock sp = new ServiceStock();
             Marchandise m = new Marchandise(incategorie.getValue(), Innom.getText(), indate.getValue().format(DateTimeFormatter.ofPattern("yy-MMM-dd")), Double.parseDouble(inqunatite.getText()), Float.parseFloat(inprixunitaire.getText()), Float.parseFloat(Inprixtotal.getText()), Integer.parseInt(inidfournisseur.getText()));
             try {
@@ -437,6 +480,22 @@ public class HelloController implements Initializable {
                 inprixunitaire.setText("");
                 Inprixtotal.setText("");
                 inidfournisseur.setText("");
+
+                //************NOTIFICATION**************
+
+//                Image imgn =new Image("C:\\Users\\Sana\\Downloads\\v2withtableview\\Stockfx\\src\\main\\resources\\com\\example\\stockfx\\checkMark.png");
+//                Notifications notificationBuilder= Notifications.create()
+//                        .title("taskcomplete")
+//                        .text("Added Sucess")
+//                        .graphic(new ImageView(imgn))
+//                        .hideAfter(Duration.seconds(5))
+//                        .position(Pos.CENTER);
+//                notificationBuilder.darkStyle();
+//                notificationBuilder.show();
+
+
+//************NOTIFICATION**************
+
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -482,6 +541,7 @@ public class HelloController implements Initializable {
 
 
         try {
+            sendAttachmentEmail();
             Rectangle pageSize = new Rectangle(595, 842);
             pageSize.setBackgroundColor(new BaseColor(119, 51, 255));
             Document doc = new Document(pageSize);
@@ -806,13 +866,14 @@ public class HelloController implements Initializable {
     @FXML
     void Refrechtable() {
         Connection c;
-
+      sendAttachmentEmail();
         try {
             c = MyDB.getInstance().getConnection();
             //SQL FOR SELECTING ALL OF CUSTOMER
             String SQL = "SELECT * from MARCHANDISE";
             //ResultSet
             ResultSet rs = c.createStatement().executeQuery(SQL);
+            oblist.clear();
             while (rs.next()){
                 oblist.add(new Marchandise(rs.getInt("id_marchandise"),rs.getString("categorie_marchandise"),rs.getString("nom_marchandise"),rs.getString("date_arrive"),rs.getFloat("quantite"),rs.getFloat("prix_unitaire_marchandise"),rs.getFloat("prix_total_marchandise"),rs.getInt("Id_fournisseur")));
 
@@ -823,6 +884,10 @@ public class HelloController implements Initializable {
             Logger.getLogger(HelloController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+
+
+
     @FXML
     void ListMarch(ActionEvent event) {
         Connection c;
@@ -1120,6 +1185,8 @@ public class HelloController implements Initializable {
     }
     @FXML
     public void Refrechtablefournisseur() {
+
+        //notifier("Good!", "It's working now!");
         Connection c;
 
         try {
@@ -1137,4 +1204,178 @@ public class HelloController implements Initializable {
             Logger.getLogger(HelloController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    private static void notifier(String pTitle, String pMessage) {
+        Platform.runLater(() -> {
+                    Stage owner = new Stage(StageStyle.TRANSPARENT);
+                    StackPane root = new StackPane();
+                    root.setStyle("-fx-background-color: TRANSPARENT");
+                    Scene scene = new Scene(root, 1, 1);
+                    scene.setFill(Color.TRANSPARENT);
+                    owner.setScene(scene);
+                    owner.setWidth(1);
+                    owner.setHeight(1);
+                    owner.toBack();
+                    owner.show();
+                    Notifications.create().title(pTitle).text(pMessage).showInformation();
+                }
+        );
+    }
+    /*
+    private static void sendHTMLEmail(){
+            // Recipient's email ID needs to be mentioned.
+            String to = "azouzim80@gmail";
+
+            // Sender's email ID needs to be mentioned
+            String from = "mohamedali.azouzi@esprit.tn";
+
+            // Assuming you are sending email from localhost
+            String host = "localhost";
+
+            // Get system properties
+            Properties properties = System.getProperties();
+
+            // Setup mail server
+            properties.setProperty("mail.smtp.host", host);
+
+            // Get the default Session object.
+            Session session = Session.getDefaultInstance(properties);
+
+            try {
+                // Create a default MimeMessage object.
+                MimeMessage message = new MimeMessage(session);
+
+                // Set From: header field of the header.
+                message.setFrom(new InternetAddress(from));
+
+                // Set To: header field of the header.
+                message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+                // Set Subject: header field
+                message.setSubject("This is the Subject Line!");
+
+                // Send the actual HTML message, as big as you like
+                message.setContent("<h1>This is actual message</h1>", "text/html");
+
+                // Send message
+                Transport.send(message);
+                System.out.println("Sent message successfully....");
+            } catch (MessagingException mex) {
+                mex.printStackTrace();
+            }
+        }
+
+     */
+    /*
+    public void sendAttachmentEmail(Session session, String toEmail, String subject, String body){
+        try{
+            MimeMessage msg = new MimeMessage(session);
+            msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
+            msg.addHeader("format", "flowed");
+            msg.addHeader("Content-Transfer-Encoding", "8bit");
+
+            msg.setFrom(new InternetAddress("no_reply@stock.com", "NoReply-JD"));
+
+            msg.setReplyTo(InternetAddress.parse("mohamedali.azaouzi@esprit.tn", false));
+
+            msg.setSubject(subject, "UTF-8");
+
+            msg.setSentDate(new Date());
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
+
+            // Create the message body part
+            BodyPart messageBodyPart = new MimeBodyPart();
+
+            // Fill the message
+            messageBodyPart.setText(body);
+
+            // Create a multipart message for attachment
+            Multipart multipart = new MimeMultipart();
+
+            // Set text message part
+            multipart.addBodyPart(messageBodyPart);
+
+            // Second part is attachment
+            messageBodyPart = new MimeBodyPart();
+            String filename = "file:///C:/Users/Sana/Desktop/marchandisestest.pdf";
+            DataSource source = new FileDataSource(filename);
+            messageBodyPart.setDataHandler(new DataHandler(source));
+            messageBodyPart.setFileName(filename);
+            multipart.addBodyPart(messageBodyPart);
+
+            // Send the complete message parts
+            msg.setContent(multipart);
+
+            // Send message
+            Transport.send(msg);
+            System.out.println("EMail Sent Successfully with attachment!!");
+        }catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
+     */
+    public void sendAttachmentEmail() {
+        final String userID = "sdali5082@gmail.com";
+        final String userPass = "Dali 1200";
+        final String emailTo = "azouzim80@gmail.com";
+        String host = "smtp.gmail.com";
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.socketFactory.class",
+                "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", "465");
+
+        Session session = Session.getDefaultInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(userID, userPass);
+                    }
+                });
+        Multipart multipart;
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailTo));
+            message.setSubject("Hello, this is a test mail..");
+
+            multipart = new MimeMultipart();
+            String fileName = "marchandisestest.pdf";
+
+            addAttachment(multipart, fileName);
+
+            MimeBodyPart messageBodyPart1 = new MimeBodyPart();
+            messageBodyPart1.setText("No need to reply.");
+            multipart.addBodyPart(messageBodyPart1);
+
+            message.setContent(multipart);
+
+            Transport.send(message);
+            System.out.println("Email successfully sent to: " + emailTo);
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
+        private static void addAttachment(Multipart multipart, String fileName){
+            DataSource source = null;
+            File f = new File("C:/Users/Sana/Desktop" + "/" + fileName);
+            if (f.exists() && !f.isDirectory()) {
+                source = new FileDataSource("C:/Users/Sana/Desktop" + "/" + fileName);
+                BodyPart messageBodyPart = new MimeBodyPart();
+                try {
+                    messageBodyPart.setHeader("Content-Type", "text/html");
+                    messageBodyPart.setDataHandler(new DataHandler(source));
+                    messageBodyPart.setFileName(fileName);
+                    multipart.addBodyPart(messageBodyPart);
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
 }
