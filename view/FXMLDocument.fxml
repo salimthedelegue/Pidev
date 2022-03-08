@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="693.0" style="-fx-background-color: #4059c3;" styleClass="rightbar" stylesheets="@affichagemagazines.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.view.FXMLDocumentController">
+  <tabs>
+    <Tab fx:id="EAjouter" text="Ajouter">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@affichagemagazines.css">
+               <children>
+                  <Button fx:id="ButtonAjouter" layoutX="270.0" layoutY="317.0" mnemonicParsing="false" onAction="#Ajouter" prefHeight="36.0" prefWidth="182.0" style="-fx-background-color: #663a82;" styleClass="increment-button" stylesheets="@style.css" text="ajouter" textAlignment="CENTER" textFill="#393f6e" textOverrun="CLIP" />
+                  <TextArea fx:id="DescriptionAjouter" layoutX="95.0" layoutY="43.0" prefHeight="252.0" prefWidth="486.0" />
+                  <Label layoutX="14.0" layoutY="43.0" prefHeight="74.0" prefWidth="75.0" text="Description" />
+                  <ImageView fitHeight="129.0" fitWidth="147.0" layoutX="19.0" layoutY="317.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@272750578_977821313144051_7040848613990936832_n.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="GoToService" layoutX="513.0" layoutY="412.0" mnemonicParsing="false" onAction="#GoToService" prefHeight="26.0" prefWidth="165.0" style="-fx-background-color: #663a82;" stylesheets="@style.css" text="Services de maintenance" />
+                  <ComboBox fx:id="list3" layoutX="464.0" layoutY="316.0" onAction="#Getdep" prefHeight="33.0" prefWidth="154.0" style="-fx-background-color: #663a82;" stylesheets="@style.css" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab fx:id="ESupprimer" text="Supprimer">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="ButtonSupprimer" layoutX="229.0" layoutY="288.0" mnemonicParsing="false" onAction="#Supprimer" prefHeight="37.0" prefWidth="206.0" style="-fx-background-color: #663a82;" stylesheets="@style.css" text="supprimer" />
+                  <ComboBox fx:id="list" layoutX="185.0" layoutY="144.0" onAction="#GetID" prefHeight="37.0" prefWidth="242.0" />
+                  <ImageView fitHeight="129.0" fitWidth="147.0" layoutX="14.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@272750578_977821313144051_7040848613990936832_n.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="GoToService1" layoutX="514.0" layoutY="417.0" mnemonicParsing="false" onAction="#GoToService" prefHeight="26.0" prefWidth="165.0" style="-fx-background-color: #663a82;" stylesheets="@style.css" text="Services de maintenance" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab fx:id="EModdifer" text="Modifier">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="ButtonModfier" layoutX="240.0" layoutY="330.0" mnemonicParsing="false" onAction="#Modifier" prefHeight="26.0" prefWidth="102.0" style="-fx-background-color: #663a82;" stylesheets="@style.css" text="Modifier" />
+                  <TextArea fx:id="DescriptionModifier" layoutX="103.0" layoutY="74.0" prefHeight="242.0" prefWidth="478.0" />
+                  <Label layoutX="14.0" layoutY="106.0" prefHeight="51.0" prefWidth="77.0" text="Description" />
+                  <ComboBox fx:id="list2" layoutX="183.0" layoutY="32.0" onAction="#GetID2" prefWidth="150.0" />
+                  <ImageView fitHeight="129.0" fitWidth="147.0" layoutX="14.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@272750578_977821313144051_7040848613990936832_n.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="GoToService2" layoutX="514.0" layoutY="406.0" mnemonicParsing="false" onAction="#GoToService" prefHeight="26.0" prefWidth="165.0" style="-fx-background-color: #663a82;" stylesheets="@style.css" text="Services de maintenance" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab fx:id="EModdifer1" text="Consulter">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="441.0" prefWidth="654.0">
+               <children>
+                  <TextField fx:id="rech" layoutX="225.0" layoutY="43.0" onKeyTyped="#RechercheTyped" />
+                  <Button layoutX="399.0" layoutY="43.0" mnemonicParsing="false" onAction="#ChercherAfficher" style="-fx-background-color: #663a82;" stylesheets="@style.css" text="Chercher" />
+                  <ComboBox fx:id="combotri" layoutX="34.0" layoutY="43.0" prefWidth="150.0" />
+                  <Label fx:id="LabelBah" layoutX="11.0" layoutY="105.0" prefHeight="338.0" prefWidth="670.0" />
+                  <Button fx:id="trier" layoutX="522.0" layoutY="43.0" mnemonicParsing="false" onAction="#trierbouton" prefHeight="26.0" prefWidth="126.0" text="Trier" />
+                  <ImageView fitHeight="129.0" fitWidth="147.0" layoutX="544.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@272750578_977821313144051_7040848613990936832_n.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="pdf" layoutX="451.0" layoutY="410.0" mnemonicParsing="false" onAction="#PDF" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #663a82;" stylesheets="@style.css" text="PDF" />
+                  <Button layoutX="373.0" layoutY="409.0" mnemonicParsing="false" onAction="#exel" prefHeight="26.0" prefWidth="68.0" style="-fx-background-color: #663a82;" stylesheets="@style.css" text="Exel" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>

@@ -1,0 +1,23 @@
+/*
+ * Empty Stylesheet file.
+ */
+.sidebar{
+    -fx-background-color:#05071E;
+}
+.sidebar-box{
+    -fx-background-color:transparent;
+}
+.sidebar-box:hover{
+    -fx-background-color:#101660;
+}
+.rightbar{
+    -fx-background-color:#02020A;
+}
+.tabPane .tab
+{
+    -fx-background-color: transparent;
+
+}
+.mainFxmlClass {
+
+}
