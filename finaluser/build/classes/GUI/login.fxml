@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="516.0" prefWidth="846.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.LoginController">
+   <children>
+      <ImageView fitHeight="516.0" fitWidth="863.0" pickOnBounds="true">
+         <image>
+            <Image url="@../img/business-plan-bar-gaming.jpg" />
+         </image>
+      </ImageView>
+      <HBox alignment="TOP_CENTER" layoutX="-2.0" prefHeight="135.0" prefWidth="863.0" style="-fx-border-width: 10;" styleClass="b">
+         <children>
+            <Button mnemonicParsing="false" onAction="#login" prefHeight="45.0" prefWidth="220.0" text="Login">
+               <font>
+                  <Font name="Century Gothic" size="42.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#signup" prefHeight="45.0" prefWidth="220.0" text="SignUp">
+               <font>
+                  <Font name="Century Gothic" size="42.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <AnchorPane fx:id="arlogin" layoutX="1.0" layoutY="103.0" prefHeight="409.0" prefWidth="852.0">
+         <children>
+            <ImageView fitHeight="205.0" fitWidth="145.0" layoutX="340.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/login-icon-png-21.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="password" layoutX="333.0" layoutY="189.0" promptText="Insert Your Password" />
+            <TextField fx:id="username" layoutX="333.0" layoutY="132.0" promptText="Insert Your email" />
+            <Button layoutX="354.0" layoutY="276.0" mnemonicParsing="false" onAction="#loginn" prefHeight="70.0" prefWidth="145.0" style="-fx-border-color: #3e1046; -fx-border-width: 6;" text="Login" textAlignment="CENTER">
+               <font>
+                  <Font name="Century Gothic" size="15.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="168.0" fitWidth="150.0" layoutX="710.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/273112629_101101675832705_8099753981398715536_n.jpg" />
+               </image>
+            </ImageView>
+            <Button fx:id="oublier" layoutX="346.0" layoutY="355.0" mnemonicParsing="false" onAction="#oublier" prefHeight="31.0" prefWidth="169.0" text="mot de passe oublié ?" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="arsignup" layoutX="3.0" layoutY="140.0" prefHeight="360.0" prefWidth="852.0" visible="false">
+         <children>
+            <TextField fx:id="prenom" layoutX="152.0" layoutY="112.0" promptText="Inserer votre Prenom" />
+            <TextField fx:id="numtel_user" layoutX="152.0" layoutY="176.0" promptText="Inserer votre numéro telephone" />
+            <TextField fx:id="nom" layoutX="152.0" layoutY="48.0" promptText="Inserer votre nom" />
+            <TextField fx:id="email" layoutX="540.0" layoutY="48.0" promptText="inserer votre email" />
+            <Button layoutX="353.0" layoutY="250.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="56.0" prefWidth="158.0" text="Sign Up !" />
+            <PasswordField fx:id="mdp" layoutX="540.0" layoutY="112.0" promptText="inserer votre mot de passe" />
+            <TextField fx:id="adresse_user" layoutX="540.0" layoutY="176.0" promptText="inserer votre adresse" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="mdpoublier" layoutX="3.0" layoutY="140.0" prefHeight="375.0" prefWidth="860.0" visible="false">
+         <children>
+            <TextField fx:id="email1" layoutX="297.0" layoutY="120.0" prefHeight="31.0" prefWidth="220.0" promptText="Entrez votre email" />
+            <Button fx:id="envoyermdp" layoutX="303.0" layoutY="199.0" mnemonicParsing="false" onAction="#envoyermdp" prefHeight="31.0" prefWidth="208.0" text="Envoyer" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
