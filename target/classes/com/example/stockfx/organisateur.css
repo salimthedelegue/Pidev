@@ -1,0 +1,99 @@
+/*
+ * Empty Stylesheet file.
+ */
+.sidebar{
+   
+    -fx-background-color: #05071F;
+    background-color: #861657;
+background-image: linear-gradient(315deg, #861657 0%, #aa4465 74%);
+
+    
+
+
+background-image: linear-gradient(315deg, #8989bb 0%, #a5a4cb 74%);
+
+}
+.sidebar-box{
+    -fx-background-color:transparent;
+}
+.sidebar-box:hover{
+    -fx-background-color:#101660;
+}
+.rightbar{
+    -fx-background-color:#02020A;
+}
+.tabPane .tab
+{
+    -fx-background-color: transparent;
+
+}
+.mainFxmlClass {
+
+}
+
+
+.scroll-pane {
+    -fx-background-color: #02030A;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #10165F;
+    -fx-background-radius: 5em;
+}
+
+.scroll-pane > .corner {
+    -fx-background-color: black;
+}
+
+.button:hover{
+-fx-background-color : #10165F;
+}
+.button:pressed
+{
+-fx-background-color : #1620A1;
+}
+
+.scroll-pane {
+    -fx-background-color: #02030A;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #10165F;
+    -fx-background-radius: 5em;
+}
+
+.scroll-pane > .corner {
+    -fx-background-color: black;
+}
+

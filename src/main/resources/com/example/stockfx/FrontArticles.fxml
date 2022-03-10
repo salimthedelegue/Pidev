@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="bigCon" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1F456E;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stockfx.FrontArticlesController">
+    <stylesheets>
+        <URL value="@frontarticles.css" />
+    </stylesheets>
+   <children>
+      <AnchorPane layoutX="40.0" layoutY="35.0" prefHeight="121.0" prefWidth="133.0" visible="false">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="121.0" stroke="BLACK" strokeType="INSIDE" width="135.0">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#0e72d0" />
+                        <Stop color="#971d1d" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Rectangle>
+            <Label layoutX="23.0" layoutY="11.0" prefHeight="17.0" prefWidth="77.0" text="Label" textFill="#f2f2f2" />
+            <Label layoutX="23.0" layoutY="35.0" prefHeight="17.0" prefWidth="77.0" text="Label" textFill="#fcfcfc" />
+            <Label layoutX="23.0" layoutY="61.0" prefHeight="17.0" prefWidth="77.0" text="Label" textFill="WHITE" />
+            <Hyperlink layoutX="40.0" layoutY="86.0" prefHeight="23.0" prefWidth="63.0" text="Voir">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Hyperlink>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

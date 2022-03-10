@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="662.0" prefWidth="869.0" style="-fx-background-color: #1F456E;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stockfx.PanierController">
+    <stylesheets>
+        <URL value="@panier.css" />
+    </stylesheets>
+   <children>
+      <ChoiceBox fx:id="filtre" layoutX="641.0" layoutY="30.0" prefWidth="150.0" />
+      <TextField fx:id="rech" layoutX="137.0" layoutY="30.0" onAction="#rech" />
+      <ScrollPane fx:id="listD" layoutX="137.0" layoutY="85.0" prefHeight="370.0" prefWidth="616.0">
+         <content>
+            <VBox fx:id="v1" prefHeight="366.0" prefWidth="614.0" />
+         </content>
+      </ScrollPane>
+      <Slider fx:id="slider" layoutX="386.0" layoutY="35.0" />
+      <TextField fx:id="pmin" layoutX="310.0" layoutY="29.0" prefHeight="26.0" prefWidth="70.0" />
+      <TextField fx:id="pmax" layoutX="532.0" layoutY="29.0" prefHeight="26.0" prefWidth="70.0" />
+      <Button fx:id="idpanier" layoutX="223.0" layoutY="497.0" mnemonicParsing="false" onAction="#voirpanier" style="-fx-background-color: #663a82;" text="Liste panier" textFill="#f8f8f8" />
+      <Button fx:id="id_commande_comfirmer" layoutX="445.0" layoutY="497.0" mnemonicParsing="false" onAction="#listercommande" style="-fx-background-color: #663a82;" text="liste des commande comfirmer" textFill="#f5f3f3" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="629.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="130.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.4736842215061188" green="0.25" blue="0.4289473593235016" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill></Rectangle>
+      <JFXButton layoutX="7.0" layoutY="227.0" onAction="#goto_magazine_front" prefHeight="38.0" prefWidth="116.0" style="-fx-background-color: #663a82;" text="Magazine" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="8.0" layoutY="123.0" onAction="#goto_reclamation_front" prefHeight="38.0" prefWidth="116.0" style="-fx-background-color: #663a82;" text="Reclamation" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="8.0" layoutY="338.0" onAction="#goto_evenement_front" prefHeight="38.0" prefWidth="116.0" style="-fx-background-color: #663a82;" text="Evenement" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

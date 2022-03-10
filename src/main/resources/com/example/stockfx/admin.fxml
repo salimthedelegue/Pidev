@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stockfx.AdminController">
+   <children>
+      <Pane prefHeight="897.0" prefWidth="1366.0">
+         <children>
+            <ImageView fitHeight="768.0" fitWidth="1366.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@wp5231525-4k-gaming-wallpapers.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <TabPane prefHeight="768.0" prefWidth="1366.0" stylesheets="@stylestock.css" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="tab1" text="Overview">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="1366.0" />
+            </content>
+          </Tab>
+          <Tab fx:id="tab2" text="Les modules">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button layoutX="50.0" layoutY="35.0" mnemonicParsing="false" onAction="#goto_getion_user" prefHeight="162.0" prefWidth="340.0" style="-fx-background-color: #00BFFF; -fx-border-radius: 25;" text="Gestion user" textFill="WHITE">
+                           <font>
+                              <Font size="35.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="50.0" layoutY="244.0" mnemonicParsing="false" onAction="#goto_gestion_stock" prefHeight="162.0" prefWidth="340.0" style="-fx-background-color: rgb(232,0,162); -fx-border-radius: 25;" text="Gestion Stock" textFill="WHITE">
+                           <font>
+                              <Font size="35.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="50.0" layoutY="456.0" mnemonicParsing="false" onAction="#goto_gestion_reclamation" prefHeight="162.0" prefWidth="339.0" style="-fx-background-color: #00BFFF; -fx-border-radius: 25;" text="Gestion Reclamation" textFill="WHITE">
+                           <font>
+                              <Font size="35.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="908.0" layoutY="456.0" mnemonicParsing="false" onAction="#goto_gestion_events" prefHeight="162.0" prefWidth="339.0" style="-fx-background-color: rgb(232,0,162); -fx-border-radius: 25;" text="Gestion Evenements" textFill="WHITE">
+                           <font>
+                              <Font size="35.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="908.0" layoutY="35.0" mnemonicParsing="false" onAction="#goto_gestion_magazine" prefHeight="162.0" prefWidth="340.0" style="-fx-border-radius: 25; -fx-background-color: rgb(232,0,162);" stylesheets="@stylestock.css" text="Gestion Magazine" textFill="WHITE">
+                           <font>
+                              <Font size="35.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="907.0" layoutY="244.0" mnemonicParsing="false" onAction="#goto_gestion_ventes" prefHeight="162.0" prefWidth="340.0" style="-fx-background-color: #00BFFF; -fx-border-radius: 25;" text="Gestion Vente" textFill="WHITE">
+                           <font>
+                              <Font size="35.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="908.0" layoutY="35.0" mnemonicParsing="false" onAction="#goto_gestion_magazine" prefHeight="162.0" prefWidth="340.0" style="-fx-border-radius: 25; -fx-background-color: rgb(232,0,162);" stylesheets="@stylestock.css" text="Gestion Magazine" textFill="WHITE">
+                           <font>
+                              <Font size="35.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

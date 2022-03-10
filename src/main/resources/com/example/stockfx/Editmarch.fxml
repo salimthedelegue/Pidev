@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="626.0" style="-fx-background-color: #322255;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stockfx.EditController">
+   <children>
+      <Text fill="WHITE" layoutX="141.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EDIT MARCHANDISE DOWN" textAlignment="CENTER" wrappingWidth="317.8203125">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Text>
+      <Label layoutX="33.0" layoutY="116.0" prefHeight="50.0" prefWidth="82.0" text="Nom march" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="309.0" layoutY="120.0" prefHeight="50.0" prefWidth="82.0" text="Categorie" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="33.0" layoutY="192.0" prefHeight="50.0" prefWidth="82.0" text="Quantité" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="321.0" layoutY="192.0" prefHeight="50.0" prefWidth="82.0" text="Prix Unitaire" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="dateedit" layoutX="126.0" layoutY="297.0" />
+      <JFXComboBox fx:id="categorieedit" layoutX="397.0" layoutY="120.0" prefHeight="42.0" prefWidth="174.0" unFocusColor="WHITE" />
+      <Label layoutX="22.0" layoutY="278.0" prefHeight="50.0" prefWidth="104.0" text="Date D'arrivée" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="315.0" layoutY="278.0" prefHeight="50.0" prefWidth="82.0" text="Prix Total" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="149.0" layoutY="365.0" onMouseClicked="#savechanges" prefHeight="66.0" prefWidth="140.0" style="-fx-background-color: #00FF93; -fx-border-radius: 20;" text="Change" textFill="WHITE">
+         <effect>
+            <DropShadow />
+         </effect>
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="356.0" layoutY="365.0" onMouseClicked="#cancel" prefHeight="66.0" prefWidth="128.0" style="-fx-background-color: #808080; -fx-border-radius: 20;" text="Cancel" textFill="WHITE">
+         <effect>
+            <DropShadow />
+         </effect>
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </JFXButton>
+      <TextField fx:id="nameedit" layoutX="126.0" layoutY="126.0" prefHeight="32.0" prefWidth="149.0" />
+      <TextField fx:id="quantiteedit" layoutX="126.0" layoutY="210.0" prefHeight="32.0" prefWidth="149.0" styleClass="text-field" />
+      <TextField fx:id="prixuedit" layoutX="420.0" layoutY="210.0" prefHeight="32.0" prefWidth="149.0" styleClass="text-field" />
+      <TextField fx:id="prixtedit" layoutX="427.0" layoutY="287.0" prefHeight="32.0" prefWidth="149.0" styleClass="text-field" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="683.0" style="-fx-background-color: #322255;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stockfx.EditfournisseurController">
+    <children>
+        <Text fill="WHITE" layoutX="183.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EDIT FOURNISSEUR " textAlignment="CENTER" wrappingWidth="317.8203125">
+            <font>
+                <Font name="System Bold" size="30.0" />
+            </font>
+        </Text>
+        <Label layoutX="15.0" layoutY="124.0" prefHeight="50.0" prefWidth="128.0" text="Nom Fournisseur" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+        <Label layoutX="28.0" layoutY="198.0" prefHeight="50.0" prefWidth="82.0" text="Num Fix" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+        <Label layoutX="352.0" layoutY="124.0" prefHeight="50.0" prefWidth="82.0" text="Num Tel" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+        <Label layoutX="22.0" layoutY="284.0" prefHeight="50.0" prefWidth="114.0" text="Matricule Fiscale" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+        <Label layoutX="352.0" layoutY="284.0" prefHeight="50.0" prefWidth="82.0" text="Photo" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+        <JFXButton layoutX="202.0" layoutY="458.0" onMouseClicked="#savechangesfourn" prefHeight="66.0" prefWidth="140.0" style="-fx-background-color: #00FF93; -fx-border-radius: 20;" text="Change" textFill="WHITE">
+            <effect>
+                <DropShadow />
+            </effect>
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </JFXButton>
+        <JFXButton layoutX="428.0" layoutY="458.0" onAction="#canceleditfourn" onMouseClicked="#canceleditfourn" prefHeight="66.0" prefWidth="128.0" style="-fx-background-color: #808080; -fx-border-radius: 20;" text="Cancel" textFill="WHITE">
+            <effect>
+                <DropShadow />
+            </effect>
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </JFXButton>
+      <Label layoutX="352.0" layoutY="198.0" prefHeight="50.0" prefWidth="82.0" text="Email" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <JFXTextArea fx:id="nom_fournisseur_edit" layoutX="151.0" layoutY="124.0" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: transparent;" styleClass="text-field" stylesheets="@stylestock.css" />
+      <JFXTextArea fx:id="num_fixfour_edit" layoutX="151.0" layoutY="205.0" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: tranparent;" styleClass="text-field" stylesheets="@stylestock.css" />
+      <JFXTextArea fx:id="matricule_fisc_edit" layoutX="151.0" layoutY="284.0" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: transparent;" styleClass="text-field" stylesheets="@stylestock.css" />
+      <JFXTextArea fx:id="num_telfour_edit" layoutX="451.0" layoutY="123.0" prefHeight="36.0" prefWidth="170.0" style="-fx-background-color: transparent;" styleClass="text-field" stylesheets="@stylestock.css" />
+      <JFXTextArea fx:id="email_four_edit" layoutX="453.0" layoutY="205.0" prefHeight="36.0" prefWidth="170.0" style="-fx-background-color: transparent;" styleClass="text-field" stylesheets="@stylestock.css" />
+      <JFXTextArea fx:id="photo_four_edit" layoutX="452.0" layoutY="291.0" prefHeight="36.0" prefWidth="176.0" style="-fx-background-color: transparent;" styleClass="text-field" stylesheets="@stylestock.css" />
+    </children>
+</AnchorPane>

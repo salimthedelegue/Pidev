@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="522.0" prefWidth="1013.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stockfx.LoginController">
+   <children>
+      <ImageView fitHeight="522.0" fitWidth="1013.0" pickOnBounds="true">
+         <image>
+            <Image url="@pexels-lucie-liz-3165335%20(1).jpg" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="522.0" strokeType="INSIDE" strokeWidth="0.0" width="253.0">
+         <fill>
+            <LinearGradient endX="0.6255924170616114" endY="0.3270142180094786" startX="0.8625592417061612">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.9731359481811523" green="0.980217456817627" blue="0.9868420958518982" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7099999785423279" green="0.13490000367164612" blue="0.6810381412506104" opacity="0.8700000047683716" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+         <stroke>
+            <LinearGradient endX="0.6540284360189573" endY="0.5971563981042654" startX="0.6824644549763034">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.9731359481811523" green="0.980217456817627" blue="0.9868420958518982" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.47830504179000854" green="0.13490000367164612" blue="0.7099999785423279" opacity="0.8700000047683716" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </stroke>
+      </Rectangle>
+      <HBox alignment="TOP_CENTER" layoutX="-2.0" prefHeight="137.0" prefWidth="1015.0" style="-fx-border-width: 10;">
+         <children>
+            <Button mnemonicParsing="false" onAction="#login" prefHeight="82.0" prefWidth="191.0" style="-fx-background-color: rgb(8,108,164);" text="Login" textFill="WHITE">
+               <font>
+                  <Font name="Century Gothic" size="30.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#signup" prefHeight="82.0" prefWidth="197.0" style="-fx-background-color: rgb(8,108,164);" text="SignUp" textFill="WHITE">
+               <font>
+                  <Font name="Century Gothic" size="30.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <AnchorPane fx:id="arlogin" layoutX="76.0" layoutY="101.0" prefHeight="421.0" prefWidth="899.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="421.0" layoutX="289.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="303.0">
+               <fill>
+                  <RadialGradient centerX="0.5" centerY="0.5284360189573459" radius="0.5344827586206897">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.9731359481811523" green="0.980217456817627" blue="0.9868420958518982" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" opacity="0.6839826703071594" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </RadialGradient>
+               </fill>
+            </Rectangle>
+            <ImageView fitHeight="205.0" fitWidth="145.0" layoutX="368.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@login-icon-png-21.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="password" layoutX="366.0" layoutY="203.0" promptText="Insert Your Password" />
+            <TextField fx:id="username" layoutX="366.0" layoutY="143.0" promptText="Insert Your email" />
+            <Button layoutX="368.0" layoutY="266.0" mnemonicParsing="false" onAction="#loginn" prefHeight="70.0" prefWidth="145.0" style="-fx-background-color: rgb(8,108,164); -fx-border-width: 25;" stylesheets="@stylestock.css" text="Login" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Century Gothic" size="30.0" />
+               </font>
+            </Button>
+            <Button fx:id="oublier" layoutX="369.0" layoutY="355.0" mnemonicParsing="false" onAction="#oublier" prefHeight="31.0" prefWidth="145.0" style="-fx-background-color: white;" text="mot de passe oublié">
+               <font>
+                  <Font name="Century Gothic" size="12.0" />
+               </font></Button>
+            <ImageView fitHeight="166.0" fitWidth="221.0" layoutX="-45.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@272750578_977821313144051_7040848613990936832_n.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="arsignup" layoutX="3.0" layoutY="140.0" prefHeight="360.0" prefWidth="852.0" visible="false">
+         <children>
+            <ImageView fitHeight="166.0" fitWidth="221.0" layoutX="28.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@272750578_977821313144051_7040848613990936832_n.png" />
+               </image>
+            </ImageView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="413.0" layoutX="250.0" layoutY="-39.0" stroke="BLACK" strokeType="INSIDE" width="613.0">
+               <fill>
+                  <RadialGradient centerX="0.5" centerY="0.5284360189573459" radius="0.5344827586206897">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.9731359481811523" green="0.980217456817627" blue="0.9868420958518982" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" opacity="0.6839826703071594" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </RadialGradient>
+               </fill>
+            </Rectangle>
+            <TextField fx:id="prenom" layoutX="257.0" layoutY="112.0" promptText="Inserer votre Prenom" />
+            <TextField fx:id="numtel_user" layoutX="257.0" layoutY="176.0" promptText="Inserer votre numéro telephone" />
+            <TextField fx:id="nom" layoutX="257.0" layoutY="48.0" promptText="Inserer votre nom" />
+            <TextField fx:id="email" layoutX="645.0" layoutY="48.0" promptText="inserer votre email" />
+            <Button layoutX="425.0" layoutY="250.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="66.0" prefWidth="191.0" style="-fx-background-color: rgb(8,108,164);" text="Sign Up !">
+               <font>
+                  <Font size="31.0" />
+               </font></Button>
+            <PasswordField fx:id="mdp" layoutX="645.0" layoutY="112.0" promptText="inserer votre mot de passe" />
+            <TextField fx:id="adresse_user" layoutX="645.0" layoutY="176.0" promptText="inserer votre adresse" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="mdpoublier" layoutX="3.0" layoutY="140.0" prefHeight="375.0" prefWidth="860.0" visible="false">
+         <children>
+            <TextField fx:id="email1" layoutX="297.0" layoutY="120.0" prefHeight="31.0" prefWidth="220.0" promptText="Entrez votre email" />
+            <Button fx:id="envoyermdp" layoutX="303.0" layoutY="199.0" mnemonicParsing="false" onAction="#envoyermdp" prefHeight="31.0" prefWidth="208.0" text="Envoyer" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

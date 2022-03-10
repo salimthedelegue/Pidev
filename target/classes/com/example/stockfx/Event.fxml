@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="bigCon" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1F456E;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stockfx.EventController">
+    <stylesheets>
+        <URL value="@event.css" />
+    </stylesheets>
+   <children>
+      <AnchorPane fx:id="container" layoutX="61.0" layoutY="86.0" prefHeight="260.0" prefWidth="337.0">
+         <children>
+            <ImageView fx:id="imgEv" fitHeight="149.0" fitWidth="259.0" layoutX="80.0" layoutY="-1.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@images/272750578_977821313144051_7040848613990936832_n.png" />
+               </image>
+            </ImageView>
+            <Rectangle fx:id="recDate" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="149.0" layoutX="3.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="79.0" />
+            <Rectangle fx:id="recNom" arcHeight="5.0" arcWidth="5.0" fill="#010910" height="76.0" layoutX="3.0" layoutY="147.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="270.0" />
+            <Rectangle fx:id="recPrix" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="76.0" layoutX="273.0" layoutY="146.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="66.0" />
+            <Label fx:id="labDate" layoutX="4.0" layoutY="49.0" prefHeight="49.0" prefWidth="90.0" text="04/mars/2022" visible="false" />
+            <Label fx:id="labNom" layoutX="22.0" layoutY="176.0" prefHeight="17.0" prefWidth="107.0" text="Karim gharbi visa" textFill="WHITE" visible="false" />
+            <Label fx:id="labPrix" layoutX="293.0" layoutY="176.0" text="25DT" visible="false" />
+            <Hyperlink fx:id="link" layoutX="139.0" layoutY="223.0" prefHeight="38.0" prefWidth="59.0" text="Hyperlink" visible="false" />
+         </children>
+      </AnchorPane>
+      <Label fx:id="labelev" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="3.0" layoutY="-4.0" prefHeight="38.0" prefWidth="611.0" style="-fx-background-color: #1Fblack56E;" text="Evénements à la une" textAlignment="CENTER" textFill="#e4e4e4" wrapText="true">
+         <font>
+            <Font name="Tempus Sans ITC" size="30.0" />
+         </font>
+      </Label>
+      <TextField fx:id="rech" layoutY="34.0" maxHeight="49.0" maxWidth="1.7976931348623157E308" onAction="#rechercherfront" onKeyTyped="#RechercheMagazine" opacity="0.9" prefHeight="49.0" prefWidth="611.0" promptText="Rechercher événement..." style="-fx-background-color: white; -fx-border-color: #B7C3D7; -fx-border-radius: 0;">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </TextField>
+      <ImageView fx:id="imgrech" fitHeight="27.0" fitWidth="21.0" layoutX="567.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/icons8_Search_52px.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stockfx.OrganisateurController">
+    <stylesheets>
+        <URL value="@organisateur.css" />
+    </stylesheets>
+   <children>
+      <AnchorPane prefHeight="594.0" prefWidth="219.0" style="-fx-background-color: #861657;" styleClass="sidebar" stylesheets="@affichagemagazines.css">
+         <children>
+            <ImageView fitHeight="129.0" fitWidth="147.0" layoutX="27.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@272750578_977821313144051_7040848613990936832_n.png" />
+               </image>
+            </ImageView>
+            <ButtonBar layoutX="2.0" layoutY="217.0" />
+            <Button fx:id="btnhomeO" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="-3.0" layoutY="215.0" mnemonicParsing="false" onAction="#afficherOrg" prefHeight="42.0" prefWidth="228.0" text="Overview" textFill="#e7e5e5">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons8_Home_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <stylesheets>
+                  <URL value="@afficherevent.css" />
+                  <URL value="@style.css" />
+               </stylesheets>
+            </Button>
+            <Button fx:id="btnIntAjouterOrg" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="-3.0" layoutY="275.0" mnemonicParsing="false" onAction="#IntAjouterOrg" prefHeight="42.0" prefWidth="228.0" text="Ajouter/Modifier" textFill="#e7e5e5">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons8_Xbox_Menu_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <stylesheets>
+                  <URL value="@style.css" />
+                  <URL value="@afficherevent.css" />
+               </stylesheets>
+            </Button>
+            <Button fx:id="btnAffOrg" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="-6.0" layoutY="337.0" mnemonicParsing="false" onAction="#afficherOrg1" prefHeight="42.0" prefWidth="228.0" stylesheets="@style.css" text="Se deconnecter" textFill="#e7e5e5">
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons8_Sign_Out_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Label layoutX="292.0" layoutY="47.0" prefHeight="30.0" prefWidth="167.0" text="Organisateurs" textFill="#acaaaf">
+         <font>
+            <Font name="Cambria Bold" size="24.0" />
+         </font>
+      </Label>
+      <TabPane fx:id="tabPane" cache="true" layoutX="232.0" layoutY="109.0" prefHeight="474.0" prefWidth="645.0" side="RIGHT" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="tab" style="-fx-background-color: transparent;" text="Untitled Tab 1" />
+            <Tab text="Untitled Tab">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: black;" styleClass="mainFxmlClass" stylesheets="@organisateur.css">
+                     <children>
+                        <TextField fx:id="nom_org" layoutX="215.0" layoutY="42.0" />
+                        <Label layoutX="86.0" layoutY="43.0" text="Nom Organisateur" textFill="WHITE" />
+                        <Label layoutX="87.0" layoutY="107.0" text="Type" textFill="WHITE" />
+                        <Label layoutX="92.0" layoutY="176.0" text="Email" textFill="WHITE" />
+                        <Label layoutX="90.0" layoutY="253.0" text="Numéro" textFill="#f8f4f4" />
+                        <Button fx:id="btn_ajouter_org" layoutX="199.0" layoutY="412.0" mnemonicParsing="false" onAction="#addOrg" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #861657;" text="Ajouter" textFill="#fbf6f6" />
+                        <Button fx:id="btnModifierOrg" layoutX="308.0" layoutY="412.0" mnemonicParsing="false" onAction="#modifierOrg" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #861657;" text="Modifier" textFill="#fffdfd" />
+                        <TextField fx:id="email_org" layoutX="215.0" layoutY="177.0" />
+                        <TextField fx:id="num_org" layoutX="215.0" layoutY="248.0" />
+                        <ComboBox fx:id="type_org" layoutX="215.0" layoutY="103.0" prefWidth="150.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Untitled Tab">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: black;" stylesheets="@organisateur.css">
+                     <children>
+                        <ListView fx:id="tabCol1" layoutX="109.0" layoutY="134.0" prefHeight="198.0" prefWidth="79.0" />
+                        <ListView fx:id="tabCol2" layoutX="189.0" layoutY="134.0" prefHeight="198.0" prefWidth="79.0" />
+                        <ListView fx:id="tabCol3" layoutX="269.0" layoutY="134.0" prefHeight="198.0" prefWidth="148.0" />
+                        <ListView fx:id="tabCol4" layoutX="418.0" layoutY="134.0" prefHeight="198.0" prefWidth="79.0" />
+                        <TextField fx:id="rech1" layoutX="370.0" layoutY="45.0" onKeyPressed="#RechercheOrg" onKeyTyped="#RechercheMagazine" prefHeight="30.0" prefWidth="183.0" promptText="Search..." style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                        <ComboBox fx:id="combotri1" layoutX="52.0" layoutY="48.0" prefWidth="150.0" promptText="Choisissez..." />
+                        <Button fx:id="btnSupprimerOrg" layoutX="160.0" layoutY="363.0" mnemonicParsing="false" onAction="#SupprimerOrg" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: #861657;" stylesheets="@afficherevent.css" text="Supprimer" textFill="#f6f4f4" />
+                        <Button fx:id="btnReccupererOrg" layoutX="403.0" layoutY="363.0" mnemonicParsing="false" onAction="#ReccupererOrg" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: #861657;" text="Modifier" textFill="#fdfafa" />
+                        <Button fx:id="btnTriOrg" layoutX="259.0" layoutY="48.0" mnemonicParsing="false" onAction="#TrierOrg" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: #861657;" text="Trier" textFill="#fdfcfc" />
+                        <ImageView fitHeight="30.0" fitWidth="33.0" layoutX="517.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8_Search_52px.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="137.0" layoutY="101.0" text="Nom" textFill="WHITE" />
+                        <Label layoutX="219.0" layoutY="101.0" text="Type" textFill="WHITE" />
+                        <Label layoutX="319.0" layoutY="100.0" text="Email" textFill="WHITE" />
+                        <Label layoutX="409.0" layoutY="100.0" text="Numéro" textFill="WHITE" />
+                        <ListView fx:id="tabcol11" layoutX="506.0" layoutY="134.0" prefHeight="198.0" prefWidth="79.0" visible="false" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+         <effect>
+            <Blend opacity="0.0" />
+         </effect>
+      </TabPane>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="511.0" layoutX="848.0" layoutY="82.0" stroke="BLACK" strokeType="INSIDE" width="33.0" />
+   </children>
+</AnchorPane>
