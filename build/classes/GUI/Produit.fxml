@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ProduitController">
+   <children>
+      <Button fx:id="boutton_ajouter" layoutX="20.0" layoutY="450.0" mnemonicParsing="false" onAction="#ajouter" text="ajouter produit" />
+      <TextField fx:id="tfdescription_produit" layoutX="15.0" layoutY="94.0" promptText="description produit" />
+      <TextField fx:id="tfimage_produit" layoutX="32.0" layoutY="2.0" promptText="image produit" visible="false" />
+      <TextField fx:id="tflien_produit" layoutX="15.0" layoutY="187.0" promptText="lien produit" />
+      <TextField fx:id="tfprix_produit" layoutX="14.0" layoutY="237.0" promptText="prix produit" />
+      <TextField fx:id="tfnom_produit" layoutX="15.0" layoutY="38.0" promptText="nom produit">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></TextField>
+      <ScrollPane fx:id="listP" layoutX="253.0" layoutY="11.0" prefHeight="488.0" prefWidth="507.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="486.0" prefWidth="496.0" />
+        </content>
+      </ScrollPane>
+      <TextField fx:id="tfid_produit" layoutX="15.0" layoutY="2.0" promptText="id" visible="false" />
+      <Button fx:id="id_annuler" layoutX="164.0" layoutY="450.0" mnemonicParsing="false" text="retour" visible="false" />
+      <Button fx:id="id_image" layoutX="19.0" layoutY="139.0" mnemonicParsing="false" onAction="#selectinage" text="selectionner une image" />
+      <ChoiceBox fx:id="categorie" layoutX="89.0" layoutY="293.0" prefWidth="150.0" />
+      <Label layoutX="10.0" layoutY="296.0" text="Categorie : ">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="stat" layoutX="25.0" layoutY="397.0" mnemonicParsing="false" onAction="#voirstat" text="stat" />
+   </children>
+</AnchorPane>

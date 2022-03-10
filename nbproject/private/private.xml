@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/ahmed%20amine/Documents/NetBeansProjects/gameland2/src/GUI/mailUtil.java</file>
+            <file>file:/C:/Users/ahmed%20amine/Documents/NetBeansProjects/gameland2/src/gameland2/Gameland2.java</file>
+            <file>file:/C:/Users/ahmed%20amine/Documents/NetBeansProjects/gameland2/src/GUI/PanierController.java</file>
+            <file>file:/C:/Users/ahmed%20amine/Documents/NetBeansProjects/gameland2/src/service/PanierService.java</file>
+            <file>file:/C:/Users/ahmed%20amine/Documents/NetBeansProjects/gameland2/src/GUI/Listecommandecomfirmer.fxml</file>
+            <file>file:/C:/Users/ahmed%20amine/Documents/NetBeansProjects/gameland2/src/GUI/StatProduit.fxml</file>
+            <file>file:/C:/Users/ahmed%20amine/Documents/NetBeansProjects/gameland2/src/GUI/ListecommandecomfirmerController.java</file>
+            <file>file:/C:/Users/ahmed%20amine/Documents/NetBeansProjects/gameland2/src/service/CommandeService.java</file>
+            <file>file:/C:/Users/ahmed%20amine/Documents/NetBeansProjects/gameland2/src/GUI/QRCodeWriter.java</file>
+            <file>file:/C:/Users/ahmed%20amine/Documents/NetBeansProjects/gameland2/src/GUI/Listeproduitpanier.fxml</file>
+            <file>file:/C:/Users/ahmed%20amine/Documents/NetBeansProjects/gameland2/src/entite/User.java</file>
+            <file>file:/C:/Users/ahmed%20amine/Documents/NetBeansProjects/gameland2/src/GUI/ProduitController.java</file>
+            <file>file:/C:/Users/ahmed%20amine/Documents/NetBeansProjects/gameland2/src/service/ProduitService.java</file>
+            <file>file:/C:/Users/ahmed%20amine/Documents/NetBeansProjects/gameland2/src/utils/DataSource.java</file>
+            <file>file:/C:/Users/ahmed%20amine/Documents/NetBeansProjects/gameland2/src/entite/Produit.java</file>
+            <file>file:/C:/Users/ahmed%20amine/Documents/NetBeansProjects/gameland2/src/entite/Commande.java</file>
+            <file>file:/C:/Users/ahmed%20amine/Documents/NetBeansProjects/gameland2/src/GUI/ListeproduitpanierController.java</file>
+            <file>file:/C:/Users/ahmed%20amine/Documents/NetBeansProjects/gameland2/src/gameland2/NewFXMain.java</file>
+            <file>file:/C:/Users/ahmed%20amine/Documents/NetBeansProjects/gameland2/src/service/IService.java</file>
+            <file>file:/C:/Users/ahmed%20amine/Documents/NetBeansProjects/gameland2/src/GUI/StatProduitController.java</file>
+        </group>
+    </open-files>
+</project-private>
