@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello GestionUSERController!{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Admin</h4>
+            <p class="card-description"> Gestion des users <code>.table</code>
+            </p>
+            <div class="table-responsive">
+                {% if User %}
+                    <table id="User" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Numero tel</th>
+                            <th>Adresse </th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for User in User %}
+                            <tr>
+                                <td>{{ User.id_user }}</td>
+
+                                <td>{{ User.nom }}</td>
+                                <td>{{ User.prenom }}</td>
+                                <td>{{ User.email }}</td>
+                                <td>{{ User.role }}</td>
+                                <td>{{ User.numtel_user }}</td>
+                                <td>{{ User.adresse_user }}</td>
+
+
+                                <td>
+
+                                    <a href="{{ path('edit_USER',{'id':User.id_user}) }}" class="btn btn-dark">Modifier</a>
+                                    <a href="{{ path('suppuser',{'id':User.id_user}) }}" class="btn btn-danger"
+                                       onclick="return confirm('Etes vous sûr de supprimer ce USER?');">Supprimer</a>
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>Aucun USER</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
