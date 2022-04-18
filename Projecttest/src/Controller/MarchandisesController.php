@@ -36,7 +36,7 @@ class MarchandisesController extends AbstractController
         ]);;
     }
     /**
-     * @Route("/", name="home")
+     * @Route("/connexion", name="home")
      */
     public function home(): Response
     {

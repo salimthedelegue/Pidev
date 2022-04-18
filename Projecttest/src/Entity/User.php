@@ -3,7 +3,18 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert ;
+use Vich\UploaderBundle\Mapping\Annotation\uploadable;
+use App\Repository\UserRepository;
+
+
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity ;
+
 /**
  * User
  *
@@ -13,12 +24,11 @@ use Symfony\Component\Validator\Constraints as Assert ;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="id_user", type="integer", nullable=false)
+     * @ORM\Column(name="id_user", type="integer", nullable=true)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -33,7 +43,7 @@ class User
 
     /**
      * @var string
-     * @Assert\NotBlank(message = "veuillez ecrire votre nom")
+
      * @Assert\Length(min=3)
      * @Assert\Regex(
      *     pattern="/\d/",
@@ -47,53 +57,46 @@ class User
 
     /**
      * @var string
-     * @Assert\NotBlank(message = "veuillez ecrire votre prenom")
      * @Assert\Length(min=3)
      * @Assert\Regex(
      *     pattern="/\d/",
      *     match=false,
      *     message="votre prenom ne doit pas contenir un numéro"
      * )
-     * @ORM\Column(name="prenom", type="string", length=50, nullable=false)
+     * @ORM\Column(name="prenom", type="string", length=50, nullable=true)
      */
     private $prenom;
 
 
     /**
-     * @Assert\NotBlank(message = "veuillez ecrire votre email")
      * @Assert\Email(message = "The email '{{ value }}' is not a valid email.")
      * @Assert\Length(min=3)
-     * @ORM\Column(name="email", type="string", length=50, nullable=false)
+     * @ORM\Column(name="email", type="string", length=50, nullable=true)
      */
     private $email;
     /**
 
      * @var string
-
      * @ORM\Column(name="role", type="string", length=50, nullable=false)
      */
     private $role='CLIENT';
 
     /**
-    @Assert\NotBlank(message = "veuillez ecrire votre numéro téléphone")
      * @var int
      * @Assert\Length(min=8)
-     * @ORM\Column(name="numtel_user", type="integer", nullable=false)
+     * @ORM\Column(name="numtel_user", type="integer", nullable=true)
      */
     public $numtel_user;
 
     /**
-    @Assert\NotBlank(message = "veuillez ecrire votre adresse user")
      * @var string
-
-     * @ORM\Column(name="adresse_user", type="string", length=50, nullable=false)
+     * @ORM\Column(name="adresse_user", type="string", length=50, nullable=true)
      */
     public $adresse_user;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="connected", type="integer", nullable=false)
+     * @ORM\Column(name="connected", type="integer", nullable=true)
      */
     private $connected = '0';
 
@@ -199,4 +202,28 @@ class User
     }
 
 
+    public function getRoles()
+    {
+        // TODO: Implement getRoles() method.
+    }
+
+    public function getPassword()
+    {
+        // TODO: Implement getPassword() method.
+    }
+
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getUsername()
+    {
+        // TODO: Implement getUsername() method.
+    }
 }
