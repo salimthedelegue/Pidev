@@ -18,6 +18,58 @@ class UserRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, User::class);
     }
+    public function trierprenom1()
+    {
+        return $this->createQueryBuilder('User')
+            ->orderBy('User.prenom', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+    public function trierprenom2()
+    {
+        return $this->createQueryBuilder('User')
+            ->orderBy('User.prenom', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function triernom1()
+    {
+        return $this->createQueryBuilder('User')
+            ->orderBy('User.nom', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+    public function triernom2()
+    {
+        return $this->createQueryBuilder('User')
+            ->orderBy('User.nom', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+    public function trieremail1()
+    {
+        return $this->createQueryBuilder('User')
+            ->orderBy('User.email', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+    public function trieremail2()
+    {
+        return $this->createQueryBuilder('User')
+            ->orderBy('User.email', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+    public function finduserbynom($nom)
+    {
+        return $this->createQueryBuilder('User')
+            ->where('User.nom LIKE :nom')
+            ->setParameter('nom', '%'.$nom.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
 
     // /**
     //  * @return User[] Returns an array of User objects

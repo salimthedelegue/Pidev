@@ -30,24 +30,27 @@ class GestionuserController extends AbstractController
             'controller_name' => 'GestionuserController',
         ]);
     }
+
     /**
-     * @param UserRepository  $User
+     * @param UserRepository $User
      * @return \Symfony\Component\HttpFoundation\Response
-     *@Route("/afficheU",name="user_list")
+     * @Route("/afficheU",name="user_list")
      */
-    public function afficher(UserRepository  $repository){
+    public function afficher(UserRepository $repository)
+    {
 
         $User = $this->getDoctrine()->getRepository(User::class)->findAll();
-        return $this->render('gestionuser/index.html.twig',['User'=>$User]);
+        return $this->render('gestionuser/index.html.twig', ['User' => $User]);
 
     }
+
     /**
      * @Route("/supprimer/{id}", name="suppuser")
      */
     public function supprimer(User $user): Response
     {
         $em = $this->getDoctrine()->getManager();
-        $em-> remove($user);
+        $em->remove($user);
         $em->flush();
         return $this->redirectToRoute('user_list');
     }
@@ -55,14 +58,14 @@ class GestionuserController extends AbstractController
     /**
      * @Route("/user/edit/{id}", name="edit_USER")
      */
-    public function edit(Request $request,User $user)
+    public function edit(Request $request, User $user)
     {
         $form = $this->createForm(UserType::class, $user);
-        $form->add('Save',SubmitType::class);
+        $form->add('Save', SubmitType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager=$this->getDoctrine()->getManager();
+            $manager = $this->getDoctrine()->getManager();
             $manager->flush();
             return $this->redirectToRoute('user_list');
 
@@ -79,28 +82,34 @@ class GestionuserController extends AbstractController
      */
 
 
-    public function ajouter(Request $request ,UserPasswordEncoderInterface $encoder){
-        $user =new User();
-        $form=$this->createForm(UserType::class,$user);
-        $form->add('Save',SubmitType::class);
+    public function ajouter(Request $request, UserPasswordEncoderInterface $encoder)
+    {
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
+        $form->add('Save', SubmitType::class);
         $form->handleRequest($request);
-        if ($form->isSubmitted()&& $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $passwordCrypte = $encoder->encodePassword($user, $user->getMdp());
             $user->setMdp($passwordCrypte);
-            $user=$form->getData();
-            $em=$this->getDoctrine()->getManager();
+            $user = $form->getData();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'vous compte a été creé avec succées veuillez consultez votre compte!'
+            );
+            return $this->redirectToRoute('loginnn');
         }
-        return $this->render('gestionuser/login-register.html.twig',[
+        return $this->render('gestionuser/login-register.html.twig', [
             'formregister' => $form->createView()
         ]);;
     }
+
     /**
      * @Route("/", name="loginnn")
      */
-    public function login(Request $request,SessionInterface $session): Response
+    public function login(Request $request, SessionInterface $session): Response
     {
         $userRepository = $this->getDoctrine()->getRepository(User::class);
 
@@ -109,7 +118,7 @@ class GestionuserController extends AbstractController
         $connexion->handleRequest($request);
         if ($connexion->isSubmitted() && $connexion->isValid()) {
             $verifuser = $userRepository->findOneBy(array('email' => $useronline->getEmail()));
-            if (is_null($verifuser) ) {
+            if (is_null($verifuser)) {
                 return $this->render('gestionuser/message.html.twig', ['message' => 'Email ou mot de passe incorrect']);
             } else {
                 if ($verifuser->getRole() == "CLIENT") {
@@ -138,6 +147,7 @@ class GestionuserController extends AbstractController
         $session->clear();
         return $this->redirectToRoute('loginnn');
     }
+
     /**
      * @Route("/listuser", name="listuser", methods={"GET"})
      */
@@ -168,5 +178,110 @@ class GestionuserController extends AbstractController
         $dompdf->stream("mypdf.pdf", [
             "Attachment" => false
         ]);
+    }
+
+
+    /**
+     * @Route("/TriernomASC/back", name="trie1",methods={"GET"})
+     */
+    public function Trierprenom1(Request $request, UserRepository $UserRepository): Response
+    {
+        $UserRepository = $this->getDoctrine()->getRepository(User::class);
+        $user = $UserRepository->trierprenom1();
+
+        return $this->render('gestionuser/index.html.twig', [
+            'User' => $user,
+        ]);
+    }
+
+    /**
+     * @Route("/TriernomASC/back", name="trie2",methods={"GET"})
+     */
+    public function Trierprenom2(Request $request, UserRepository $UserRepository): Response
+    {
+        $UserRepository = $this->getDoctrine()->getRepository(User::class);
+        $user = $UserRepository->trierprenom2();
+
+        return $this->render('gestionuser/index.html.twig', [
+            'User' => $user,
+        ]);
+    }
+
+    /**
+     * @Route("/TriernomASC/back", name="trie3",methods={"GET"})
+     */
+    public function Triernom1(Request $request, UserRepository $UserRepository): Response
+    {
+        $UserRepository = $this->getDoctrine()->getRepository(User::class);
+        $user = $UserRepository->triernom1();
+
+        return $this->render('gestionuser/index.html.twig', [
+            'User' => $user,
+        ]);
+    }
+
+    /**
+     * @Route("/TriernomDESC/back", name="trie4",methods={"GET"})
+     */
+    public function Triernom2(Request $request, UserRepository $UserRepository): Response
+    {
+        $UserRepository = $this->getDoctrine()->getRepository(User::class);
+        $user = $UserRepository->triernom2();
+
+        return $this->render('gestionuser/index.html.twig', [
+            'User' => $user,
+        ]);
+    }
+
+    /**
+     * @Route("/TrieremailASC/back", name="trie5",methods={"GET"})
+     */
+    public function Trieremail1(Request $request, UserRepository $UserRepository): Response
+    {
+        $UserRepository = $this->getDoctrine()->getRepository(User::class);
+        $user = $UserRepository->trieremail1();
+
+        return $this->render('gestionuser/index.html.twig', [
+            'User' => $user,
+        ]);
+    }
+
+    /**
+     * @Route("/TrieremailDESC/back", name="trie6",methods={"GET"})
+     */
+    public function Trieremail2(Request $request, UserRepository $UserRepository): Response
+    {
+        $UserRepository = $this->getDoctrine()->getRepository(User::class);
+        $user = $UserRepository->trieremail2();
+
+        return $this->render('gestionuser/index.html.twig', [
+            'User' => $user,
+        ]);
+    }
+
+    /**
+     * @Route("/search/back", name="offreajax", methods={"GET"})
+     */
+
+    public function searchoffreajax(Request $request, UserRepository $UserRepository): Response
+    {
+        $UserRepository = $this->getDoctrine()->getRepository(User::class);
+        $requestString = $request->get('searchValue');
+        $user = $UserRepository->finduserbynom($requestString);
+
+        return $this->render('gestionuser/index.html.twig', [
+            "User" => $user
+        ]);
+    }
+
+    public function getRealEntities($entities)
+    {
+
+        foreach ($entities as $entity) {
+            $realEntities[$entity->getId()] = $entity->getNom();
+        }
+
+        return $realEntities;
+
     }
 }
