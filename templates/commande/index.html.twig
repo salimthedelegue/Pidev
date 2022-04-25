@@ -1,0 +1,49 @@
+{% extends 'base-front.html.twig' %}
+
+
+{% block body %}
+		<div class="nav-item d-flex">
+			<a class="nav-link btn btn-primary" href="{{ path('cart_index') }}">
+				<i class="fas fa-shopping-cart mr-1"></i>
+				Panier
+				<span style="font-size:1.2em;height:30px; width:30px;display: inline-block; background: red; border-radius: 50%; color:white; text-align:center; font-weight: bold; padding: 2px;">{{ totalItems }}</span>
+			</a>
+		</div>
+	</div>
+    <div class="header-cart-toggle">
+                <svg role="img" class="df-icon df-icon--bag">
+                    <use xlink:href="{{asset('front_office/assets/img/necromancers.svg#bag')}}"/>
+                </svg>
+                <svg role="img" class="df-icon df-icon--close">
+                    <use xlink:href="front_office/assets/img/necromancers.svg#close"/>
+                </svg>
+                <span class="header-cart-toggle__items-count">4</span>
+</div>
+{% for produit in produits %}
+
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="affiche-art">
+                <img src="{{ asset('upload/images/'~produit.getImageProduit()~'') }}">
+            </div>
+
+
+
+        </div>
+        <div class="col-md-6">
+
+            <h1 class="pro-d-title"><strong>{{ produit.nomProduit }}</strong></h1>
+            <p class="pt-1">{{ produit.descriptionProduit }}</p>
+            <p class="mb-2 text-muted text-uppercase small">{{ produit.lienProduit }}</p>
+            <p><span class="our_price_display">{{ produit.prixProduit }} DT </span></p>
+            <button id="add-to-cart" onclick="add({{ produit.id_produit }})" class="btn">
+                <a href="{{ path('cart_add', {'id': produit.id_produit}) }}">Ajoutez au panier</a>
+            </button><br>
+   
+        </div>
+    </div>
+        
+{% endfor %}
+
+
+{% endblock %}

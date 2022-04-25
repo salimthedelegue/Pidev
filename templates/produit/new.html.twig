@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Produit{% endblock %}
+
+{% block body %}
+    <h1>Create new Produit</h1>
+
+
+    
+
+            <div class="page-header">
+                <h3 class="page-title"> Form elements </h3>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Marchandises</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Ajouter Marchandise</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="row">
+                <div class="col-12 grid-margin">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Horizontal Two column</h4>
+                                {{ include('produit/_form.html.twig') }}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+
+        <!-- partial --><a href="{{ path('produit_index') }}">back to list</a>
+{% endblock %}

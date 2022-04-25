@@ -1,0 +1,100 @@
+{% extends 'base-front.html.twig' %}
+
+
+
+{% block body %}
+
+
+<main class="site-content checkout-page" id="wrapper">
+			<div class="row">
+				<div class="col-lg-8">
+			{% if produits | length > 0 %}
+        		{% for produit in produits %}
+            		<tr>
+ 
+                		<td>{{ produit.lienProduit }}</td>
+
+
+            		</tr>
+        	{% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        	{% endfor %}
+
+			{% else %}
+				<p>comfirmer votre commande</p>
+			{% endif %}
+
+							{% if produits | length > 0 %}
+
+								<button class="btn btn-lg btn-block checkout-order__button"><a href="{{ path('app_default',{'id': commande.id_commande}) }}">imprimer facture</a></button>
+							{% endif %}
+
+				</div>
+				
+				<div class="col-lg-4">
+					<div class="checkout-order">
+						<h3 class="h4 checkout-order__title">Your order</h3>
+						<div class="table-responsive">
+								{% if items | length > 0 %}
+
+							<table class="table shop-table">
+								<tbody>
+							
+							{% for item in items %}
+
+									<tr>
+										<td class="product__info">
+											<figure class="product__thumb">
+												<a href="#"><img src="{{ asset('upload/images/'~item.product.getImageProduit()~'') }}" alt=""> </a>
+											</figure>
+											<div class="product__info-content">
+												<h5 class="product__name"><a href="#">{{ item.product.getNomProduit() }}</a></h5>
+												<span class="product__cat">{{item.product.getCategorieProduit()}}</span>
+											</div>
+										</td>
+										<td class="product__total"><span class="product__total-currency">{{ item.product.getPrixProduit() | number_format(2, ',', '.') ~ ' DNT ' }}
+										
+									 </td>
+									 	<td class="text-center align-middle">
+								<a href="{{ path('cart_remove', {'id': item.product.id_produit}) }}" class="btn btn-danger btn-sm">
+									<i class="fas fa-trash"></i>
+								</a>
+							</td>			
+									</tr>
+							{% endfor %}		
+															
+
+								</tbody>
+							</table>
+						</div>
+						<div class="checkout-order__totals">
+							<div class="table-responsive">
+								<table class="table">
+									<tfoot>
+
+										<tr class="checkout-order__order-total">
+											<th>Cart Total</th>
+											<td><span class="amount"><span class="amount-currency"></span>{{ totalTTC | number_format(2, ',', '.')  ~ ' DNT' }}</span></td>
+										</tr>
+										</tfoot>
+								</table>
+
+
+
+								<button class="btn btn-lg btn-block checkout-order__button"><a href="{{ path('comfirmcom') }}">comfirmer commande</a></button>
+								{% else %}
+									<p>Aucun article</p>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		
+
+
+
+	{% endblock %}

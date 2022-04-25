@@ -1,0 +1,182 @@
+{% extends 'base-front.html.twig' %}
+
+{% block body %}
+		<main class="site-content site-content--center page" id="wrapper">
+			<div class="container container--large">
+				<div class="page-heading page-heading--default">
+					<div class="page-heading__subtitle h5 color-primary">mes</div>
+					<h1 class="page-heading__title h2">  commandes </h1>
+				</div>
+				
+				<div class="table-responsive mt-sm-auto mb-sm-auto">
+					<table class="table matches-table standings-table">
+						<thead>
+							<tr>
+								<th>num commande</th>
+								<th>adresse</th>
+								<th>date</th>
+								<th>prix totale</th>
+								<th>mes jeux</th>
+								<th>mes jeux 2</th>
+
+
+							</tr>
+						</thead>
+						<tbody>
+
+                        {% for commande in commandes %}
+
+							<tr>
+								<td>{{ commande.id_commande }}</td>
+								<td class="standings-table__team">
+									<figure class="match-team" role="group">
+										<figure class="match-team-logo match-team-logo--team-2" role="group">
+											<img src="{{asset('front_office/assets/img/samples/logo-rhinos-30@2x.png 2x')}}" srcset="{{asset('front_office/assets/img/samples/logo-rhinos-30@2x.png 2x')}}" alt="" >
+										</figure>
+										<figcaption>
+												<div class="match-team__country ">{{ commande.getDateCommande() |date("d/m/Y")}}</div>
+										</figcaption>
+									</figure>
+								</td>
+								<td class="standings-table__wins">{{ commande.getAdresseLivraison()}}</td>
+								<td class="standings-table__losses">{{ commande.getPrixTotale() }}</td>
+								<td><button id="add-to-cart" onclick="add({{ commande.id_commande }})" class="btn btn-primary btn-xs">
+                                        <a href="{{ path('voirproduitcommande', {'id': commande.id_commande}) }}">voir jeux</a>
+                                        </button><br>
+
+                                </td>
+								<td><button id="add-to-cart" class="btn btn-primary btn-xs">
+                                        <a href ="" data-path="{{ path('voirproduitcommandeaj', {'id': commande.id_commande}) }}" class="envoyer">voir jeux</a>
+                                        </button><br>
+
+                                </td>
+								
+							</tr>
+
+                            {% endfor %}
+		
+						</tbody>
+					</table>
+				</div>
+                
+			</div>
+
+
+            <div class="container container--large">
+				<div class="page-heading page-heading--default">
+					<div class="page-heading__subtitle h5 ">mes</div>
+					<h1 class="page-heading__title h2 color-primary"> jeux </h1>
+            {% if commande1 is not null %}
+
+                    <h3 class="page-heading__title h5">( {{commande1.id_commande}} )</h3>
+
+            {% endif %}
+				</div>
+				
+				<div class="table-responsive mt-sm-auto mb-sm-auto">
+					<table class="table matches-table standings-table">
+						<thead>
+							<tr>
+								<th>num produit</th>
+								<th>nom produit</th>
+								<th>prix</th>
+								<th>lien</th>
+
+
+							</tr>
+						</thead>
+						<tbody>
+
+                        {% for produit in produits %}
+
+							<tr>
+								<td>{{ produit.id_produit }}</td>
+								<td class="standings-table__team">
+									<figure class="match-team" role="group">
+										<figure class="match-team-logo match-team-logo--team-3" role="group">
+											<img src="{{asset('front_office/assets/img/samples/logo-panthers-30.png')}}" srcset="{{asset('front_office/assets/img/samples/logo-panthers-30.png')}}" alt="">
+										</figure>
+										<figcaption>
+												<div class="match-team__country ">{{ produit.nomProduit}}</div>
+										</figcaption>
+									</figure>
+								</td>
+								<td class="standings-table__wins">{{produit.prixProduit}}</td>
+								<td class="standings-table__losses">{{ produit.lienProduit}}</td>
+								<td>
+                                    <img src="{{ asset('upload/images/'~produit.getImageProduit()~'') }}" height="200px" widh="200px">
+
+                                </td>
+								
+							</tr>
+
+                            {% endfor %}
+		
+						</tbody>
+					</table>
+				</div>
+
+
+
+<div class="table-responsive mt-sm-auto mb-sm-auto">
+					<table class="table matches-table standings-table">
+						<thead>
+							<tr>
+								<th>num produit</th>
+								<th>nom produit</th>
+								<th>prix</th>
+								<th>lien</th>
+
+
+							</tr>
+						</thead>
+						<tbody id="produits1">
+
+						</tbody>
+					</table>
+				</div>
+
+                
+			</div>
+		</main>
+	</style>
+	 <script language = "javascript" src = "https://code.jquery.com/jquery-2.2.4.min.js"></script> 
+		            <script type="text/javascript">
+                    $(document).ready(function(){
+                        $(document).on('click','.envoyer',function(){ // Sur tous les éléments ayant une class "envoyer"
+                            var path = $(this).attr("data-path");
+                            $.ajax({
+                                type : 'GET',
+                                url : path,
+       							 dataType: "json",
+				success: function (response) {
+					console.log(response);
+        			var response = JSON.parse(response);
+
+     				var e = $('<tr><th>Name</th><th>Address</th></tr>');  
+                  	$('#produits1').append(e); 
+dump(response);
+					response.forEach(
+
+            				element => {
+    									var e = $('<tr><td id = "name"></td><td id = "idp"></td></tr>');
+
+                     					$('#name', e).html(element['name']);
+  
+                     					$('#idp', e).html(element['idp']);
+
+					                    $('#produits1').append(e);
+					
+            							 });
+                  							}
+  
+                           			 });
+                        });
+
+               
+            });
+                     
+
+                </script>
+
+{% endblock %}

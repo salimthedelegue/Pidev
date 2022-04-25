@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title of the PDF</title>
+    </head>
+    <body>
+       
+        <h1>Facture</h1>
+        <table class="">
+        
+        {% for produit in produits %}
+         <tr><td>Nom   :    {{ produit.getNomProduit()}}</td></tr>
+        <tr> <td>Prix  :  {{ produit.getPrixProduit() }}</td></tr>
+
+         {% endfor %}
+         </tr>
+         
+         <table>
+<h3>Prix total  :  {{commande1.getPrixTotale()}}</h3>
+
+    </body>
+</html>
