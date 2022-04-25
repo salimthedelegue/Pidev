@@ -69,6 +69,14 @@ class UserRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    public function getmdp($id)
+    {
+        return $this->createQueryBuilder('User')
+            ->where('User.id_user =:id')
+            ->setParameter('id', '$id')
+            ->getQuery()
+            ->getResult();
+    }
 
 
     // /**

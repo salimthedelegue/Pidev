@@ -7,17 +7,21 @@ namespace App\Controller;
 use App\Entity\Reclamation;
 use App\Entity\User;
 use App\Form\LoginType;
+use App\Form\ResetpassType;
 use App\Form\UserType;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Repository\UserRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use function PHPUnit\Framework\matches;
 
 class GestionuserController extends AbstractController
 {
@@ -36,10 +40,15 @@ class GestionuserController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/afficheU",name="user_list")
      */
-    public function afficher(UserRepository $repository)
+    public function afficher(UserRepository $repository, Request $request, PaginatorInterface $paginator)
     {
 
         $User = $this->getDoctrine()->getRepository(User::class)->findAll();
+        $User = $paginator->paginate($User,
+            $request->query->getInt('page', 1),
+            4
+
+        );
         return $this->render('gestionuser/index.html.twig', ['User' => $User]);
 
     }
@@ -89,7 +98,9 @@ class GestionuserController extends AbstractController
         $form->add('Save', SubmitType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $passwordCrypte = $encoder->encodePassword($user, $user->getMdp());
+
+            $passwordCrypte = md5($user->getMdp());
+
             $user->setMdp($passwordCrypte);
             $user = $form->getData();
             $em = $this->getDoctrine()->getManager();
@@ -109,7 +120,7 @@ class GestionuserController extends AbstractController
     /**
      * @Route("/", name="loginnn")
      */
-    public function login(Request $request, SessionInterface $session): Response
+    public function login(Request $request, SessionInterface $session, UserPasswordEncoderInterface $encoder): Response
     {
         $userRepository = $this->getDoctrine()->getRepository(User::class);
 
@@ -118,15 +129,18 @@ class GestionuserController extends AbstractController
         $connexion->handleRequest($request);
         if ($connexion->isSubmitted() && $connexion->isValid()) {
             $verifuser = $userRepository->findOneBy(array('email' => $useronline->getEmail()));
-            if (is_null($verifuser)) {
-                return $this->render('gestionuser/message.html.twig', ['message' => 'Email ou mot de passe incorrect']);
+
+
+            if ($verifuser == null || $verifuser->getMdp() != md5($useronline->getMdp())) {
+                return $this->render('gestionuser/message.html.twig', ['message' => 'Email ou mot de passe incorrect'
+                ]);
             } else {
                 if ($verifuser->getRole() == "CLIENT") {
-                    $session->set('user', $verifuser);
+                    $session->set('User', $verifuser);
                     return $this->redirectToRoute('home_front');
                 } elseif ($verifuser->getRole() == "ADMIN") {
 
-                    $session->set('user', $verifuser);
+                    $session->set('User', $verifuser);
                     return $this->redirectToRoute('home');
                 }
 
@@ -283,5 +297,25 @@ class GestionuserController extends AbstractController
 
         return $realEntities;
 
+    }
+
+    public function resetpass(Request $request, $email, $oldmdp, $newmdp, UserRepository $UserRepository)
+    {
+
+
+        $userRepository = $this->getDoctrine()->getRepository(User::class);
+
+        $useronline = new User();
+        $connexion = $this->createForm(ResetpassType::class, $useronline);
+        $connexion->handleRequest($request);
+        if ($connexion->isSubmitted() && $connexion->isValid()) {
+            $verifuser = $userRepository->findOneBy(array('email' => $useronline->getEmail()));
+
+
+            if ($verifuser == null || $verifuser->getMdp() != md5($useronline->getMdp())) {
+
+
+            }
+        }
     }
 }

@@ -4,9 +4,9 @@
 
 {% block body %}
 {% block contenpage %}
-<div class="example-wrapper">
-    <div class="card">
-        <div class="card-body">
+
+
+
             <h4 class="card-title">Admin</h4>
             <p class="card-description"> Gestion des users <code>.table</code>
             </p>
@@ -105,15 +105,18 @@
                     <p>Aucun USER</p>
                 {% endif %}
             </div>
-        </div>
-    </div>
 
-</div>
+
+
+
     <a href="{{path('trie3') }}"><i class="btn btn-primary" data-feather="arrow-up"></i>ascendant nom</a>
     <a href="{{path('trie1') }}"><i class="btn btn-danger" data-feather="arrow-down"></i>ascendant prenom</a>
     <a href="{{path('trie5') }}"><i class="btn btn-primary" data-feather="arrow-up"></i>ascendant email</a>
     <a href="{{path('trie4') }}"><i class="btn btn-danger" data-feather="arrow-down"></i>descendant nom</a>
     <a href="{{path('trie2') }}"><i class="btn btn-danger" data-feather="arrow-down"></i>descendant prenom</a>
     <a href="{{path('trie6') }}"><i class="btn btn-danger" data-feather="arrow-down"></i>descendant email</a>
+    <div style="float:right;">
+
+    </div>
 {% endblock %}
 {% endblock %}
