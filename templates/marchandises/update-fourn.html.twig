@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="page-header">
+        <h3 class="page-title"> Formulaire Fournisseur </h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Fournisseurs</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Edit Fournisseur</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Edit Marchandise</h4>
+                    {{form_start(form_update_fournisseur, {'attr': {'novalidate':'novalidate','class':'form-sample','enctype':'multipart/form-data'}}) }}
+                    {# <form class="form-sample"> #}
+                    <p class="card-description">Informations </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Nom Fournisseur</label>
+                                <div class="col-sm-9">
+                                    {{form_widget(form_update_fournisseur.nomFournisseur,{'attr': {'class':'form-control'}})  }}
+                                    <div class="text-danger">{{form_errors(form_update_fournisseur.nomFournisseur) }}</div>
+                                    {#{{ form_row(form_marchandise.nomMarchandise,{'attr': {'class':'form-control'}}) }}
+                                                 <input type="text" class="form-control" />#}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Matricule Fisc</label>
+                                <div class="col-sm-9">
+                                    <div class="text-danger">{{ form_errors(form_update_fournisseur.matriculeFiscale) }}</div>
+                                    {{form_widget(form_fournisseur.matriculeFiscale,{'attr': {'class':'form-control'}})  }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Photo</label>
+                                <div class="col-sm-9">
+                                    {#                                    {{form_widget(form_fournisseur.file,{'attr': {'class':'form-control file-upload-default','name':'img[]','type':'file'}})  }}#}
+                                    <div class="input-group col-xs-12">
+                                        {{form_widget(form_update_fournisseur.photo,{'attr': {'class':'form-control file-upload-info','name':'image','type':'file'}})  }}
+
+                                    </div>
+
+                                    {#                                    <button class="file-upload-browse btn btn-primary" type="button">Upload</button>#}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="card-description"> Contact </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Num tel</label>
+                                <div class="col-sm-9">
+                                    {{form_widget(form_update_fournisseur.numtelFournisseur,{'attr': {'class':'form-control'}})  }}
+                                    <div class="text-danger">{{ form_errors(form_update_fournisseur.numtelFournisseur) }}</div>
+
+                                    {#                                                <input type="text" class="form-control" />#}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Num Fix</label>
+                                <div class="col-sm-9">
+                                    {{form_widget(form_update_fournisseur.numfixeFournisseur,{'attr': {'class':'form-control'}})  }}
+                                    <div class="text-danger">{{ form_errors(form_update_fournisseur.numfixeFournisseur) }}</div>
+                                    {#<input type="text" class="form-control" />#}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">email</label>
+                                <div class="col-sm-9">
+                                    {{form_widget(form_update_fournisseur.email,{'attr': {'class':'form-control'}})  }}
+                                    <div class="text-danger">{{ form_errors(form_update_fournisseur.email) }}</div>
+
+                                    {#<input type="text" class="form-control" />#}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {#                            {{form_widget(form_marchandise.save,{'attr': {'class':'btn btn-info btn-lg btn-block'}})  }}#}
+
+                    <button type="submit" class="btn btn-info btn-lg btn-block">Enregistrer</button>
+
+                    {#<button class="btn btn-info btn-lg btn-block btn-dark">Cancel</button>#}
+
+
+                    {{ form_end(form_update_fournisseur) }}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
