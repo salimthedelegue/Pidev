@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="zxx">
+
 <head>
 
     <!-- Basic Page Needs
@@ -10,12 +9,12 @@
     <meta name="description" content="eSports Team &amp; Gaming HTML Template">
     <meta name="author" content="Dan Fisher">
     <meta name="keywords" content="esports team news HTML template">
-
+    {% block stylesheets %}
     <!-- Favicons
     ================================================== -->
-    <link rel="shortcut icon" href="assets/img/favicons/favicon.ico">
-    <link rel="apple-touch-icon" sizes="120x120" href="assets/img/favicons/favicon-120.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="assets/img/favicons/favicon-152.png">
+    <link rel="shortcut icon" href="{{ asset('front_office/assets/img/favicons/favicon.ico') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('front_office/assets/img/favicons/favicon-120.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('front_office/front_office/assets/img/favicons/favicon-152.png') }}">
 
     <!-- Mobile Specific Metas
     ================================================== -->
@@ -28,45 +27,38 @@
     <!-- CSS
     ================================================== -->
     <!-- Vendor CSS -->
-    <link href="front_office/assets/vendor/magnific-popup/css/magnific-popup.css" rel="stylesheet">
-    <link href="front_office/assets/vendor/slick/css/slick.css" rel="stylesheet">
-    <link href="front_office/assets/vendor/nanoscroller/css/nanoscroller.css" rel="stylesheet">
-    <link href="front_office/assets/vendor/fontawesome/css/brands.css" rel="stylesheet">
+    <link href="{{ asset('front_office/assets/vendor/magnific-popup/css/magnific-popup.css')}}" rel="stylesheet">
+    <link href="{{ asset('front_office/assets/vendor/slick/css/slick.css')}}" rel="stylesheet">
+    <link href="{{ asset('front_office/assets/vendor/nanoscroller/css/nanoscroller.css')}}" rel="stylesheet">
+    <link href="{{ asset('front_office/assets/vendor/fontawesome/css/brands.css')}}" rel="stylesheet">
 
     <!-- Template CSS-->
-    <link href="front_office/assets/css/style.css" rel="stylesheet">
+    <link href="{{ asset('front_office/assets/css/style.css')}}" rel="stylesheet">
 
     <!-- Custom CSS-->
-    <link href="assets/css/custom.css" rel="stylesheet">
-
+    <link href="{{ asset('front_office/assets/css/custom.css')}}" rel="stylesheet">
+{% endblock %}
 </head>
 
-<body class="site-layout--horizontal preloader-is--active">
+<body class="site-layout--landing preloader-is--active bg-image bg-fixed bg--texture-05">
 
 <div class="site-wrapper">
 
     <!-- Header
     ================================================== -->
-    <header id="header" class="site-header site-header--bottom">
+    <header id="header" class="site-header site-header--landing">
 
-        <!-- Logo - Image Based -->
-        <div class="header-logo header-logo--img">
-            <a href="index.html"><img src="assets/img/logo.png" srcset="assets/img/logo@2x.png 2x" alt="Necromancers"></a>
-        </div>
-        <!-- Logo - Image Based / End -->
-
-
-        <!-- Main Navigation -->
+        <!-- Main Navigation Left -->
         <nav class="main-nav">
             <ul class="main-nav__list">
-                <li class="active"><a href="home.html">Home</a></li>
+                <li class=""><a href="#">Home</a></li>
                 <li class="">
                     <a href="#">Teams</a>
                     <ul class="main-nav__sub">
                         <li class="">
                             <a href="#">Team Selections</a>
-                            <ul class="main-nav__sub main-nav__sub--dropup">
-                                <li class=""><a href="team-selection-1.html">Team Selection v1</a></li>
+                            <ul class="main-nav__sub">
+                                <li class=""><a href="front_office/team-selection-1.html">Team Selection v1</a></li>
                                 <li class=""><a href="team-selection-2.html">Team Selection v2</a></li>
                                 <li class=""><a href="team-selection-3.html">Team Selection v3</a></li>
                                 <li class=""><a href="team-selection-4.html">Team Selection v4</a></li>
@@ -113,6 +105,19 @@
                         <li class=""><a href="matches-replay.html">Match Replay</a></li>
                     </ul>
                 </li>
+            </ul>
+        </nav>
+        <!-- Main Navigation Left / End -->
+
+        <!-- Logo - Image Based -->
+        <div class="header-logo header-logo--img">
+            <a href="index.html"><img src="{{ asset('front_office/assets/img/logo.png') }}" srcset="{{ asset('front_office/assets/img/logo@2x.png 2x') }}" alt="Necromancers"></a>
+        </div>
+        <!-- Logo - Image Based / End -->
+
+        <!-- Main Navigation Right -->
+        <nav class="main-nav">
+            <ul class="main-nav__list">
                 <li class=""><a href="#">News</a>
                     <ul class="main-nav__sub">
                         <li class=""><a href="blog-1.html">News v1</a></li>
@@ -123,15 +128,16 @@
                         <li class=""><a href="blog-post.html">Post Page</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Features</a>
+                <li class=" has-child"><a href="#">Features</a>
                     <div class="main-nav__megamenu">
                         <div class="row">
                             <div class="col-md-4">
                                 <h6 class="main-nav__title">Main Pages</h6>
                                 <div class="row">
                                     <ul class="col-md-4">
-                                        <li class=""><a href="index.html">Landing Image</a></li>
+                                        <li class="active"><a href="index.html">Landing Image</a></li>
                                         <li class=""><a href="index-2.html">Landing Video</a></li>
+                                        <li class=""><a href="blog-post.html">Post Page</a></li>
                                         <li class=""><a href="blog-1.html">News v1</a></li>
                                         <li class=""><a href="blog-2.html">News v2</a></li>
                                         <li class=""><a href="blog-3.html">News v3</a></li>
@@ -143,7 +149,7 @@
                                         <li class=""><a href="shop-account-orders.html">Account Orders</a></li>
                                         <li class=""><a href="login-register.html">Login & Register</a></li>
                                         <li class=""><a href="features-about-us.html">About Us</a></li>
-                                        <li class=""><a href="management-and-staff.html">Staff</a></li>
+                                        <li class=""><a href="management-and-staff.html">Staff Page</a></li>
                                         <li class=""><a href="staff-member.html">Staff Member<span class="badge badge-danger">New</span></a></li>
                                         <li class=""><a href="features-contact-us.html">Contact Us</a></li>
                                         <li class=""><a href="features-faqs.html">FAQs</a></li>
@@ -154,7 +160,7 @@
                                         <li class=""><a href="features-shortcodes.html">Shortcodes</a></li>
                                         <li class=""><a href="features-typography.html">Typography</a></li>
                                         <li class=""><a href="features-icons.html">Icons</a></li>
-                                        <li class=""><a href="features-404.html">404 Error<span class="badge badge-danger">New</span></a></li>
+                                        <li class=""><a href="features-404.html">404 Error <span class="badge badge-danger">New</span></a></li>
                                         <li class=""><a href="features-bg-1.html">Backgrounds</a></li>
                                     </ul>
                                 </div>
@@ -170,8 +176,8 @@
                                         <li class=""><a href="team-selection-2.html">Team Selection v2</a></li>
                                         <li class=""><a href="team-selection-3.html">Team Selection v3</a></li>
                                         <li class=""><a href="team-selection-4.html">Team Selection v4</a></li>
-                                        <li class=""><a href="team-overview.html">Team Overview v1</a></li>
-                                        <li class=""><a href="team-overview-2.html">Team Overview v2</a></li>
+                                        <li><a href="team-overview.html">Team Overview v1</a></li>
+                                        <li><a href="team-overview-2.html">Team Overview v2</a></li>
                                     </ul>
                                     <ul class="col-md-4">
                                         <li><a href="team-overview.html?slide=1">Team Statistics</a></li>
@@ -231,142 +237,73 @@
                 </li>
             </ul>
         </nav>
-        <!-- Main Navigation / End -->
-
-        <!-- Header Actions -->
-        <div class="header-actions">
-            <div class="header-pagination">
-                <a href="#" class="header-scroll-arrow header-scroll-arrow--left">
-                    <svg role="img" class="df-icon df-icon--left-arrow">
-                        <use xlink:href="assets/img/necromancers.svg#left-arrow"/>
-                    </svg>
-                </a>
-                <ol class="header-pagination--list">
-                    <li><a href="#">01</a></li>
-                    <li><a href="#">02</a></li>
-                    <li><span>...</span></li>
-                    <li><a href="#">08</a></li>
-                </ol>
-                <a href="#" class="header-scroll-arrow header-scroll-arrow--right">
-                    <svg role="img" class="df-icon df-icon--right-arrow">
-                        <use xlink:href="assets/img/necromancers.svg#right-arrow"/>
-                    </svg>
-                </a>
-            </div>
-            <div class="header-filter-toggle">
-                <svg role="img" class="df-icon df-icon--filter">
-                    <use xlink:href="assets/img/necromancers.svg#filter"/>
-                </svg>
-                <div class="filter-menu">
-                    <form action="#" class="filter-menu__form">
-                        <div class="filter-menu__select">
-                            <label class="filter-menu__label">Category</label>
-                            <select class="cs-select">
-                                <option value="" selected>All Categories</option>
-                                <option value="">Esports</option>
-                                <option value="">Gaming</option>
-                                <option value="">Videos</option>
-                            </select>
-                        </div>
-                        <div class="filter-menu__select">
-                            <label class="filter-menu__label">Filter By</label>
-                            <select class="cs-select">
-                                <option value="" selected>Article Date</option>
-                                <option value="">Comments</option>
-                                <option value="">Popularity</option>
-                            </select>
-                        </div>
-                        <div class="filter-menu__select">
-                            <label class="filter-menu__label">Order</label>
-                            <select class="cs-select">
-                                <option value="" selected>Ascending</option>
-                                <option value="">Descending</option>
-                            </select>
-                        </div>
-                        <div class="filter-menu__submit">
-                            <button type="submit" class="btn btn-primary btn-sm btn-block">Filter News</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="header-top-bar-toggle d-md-none hide">
-                <svg role="img" class="df-icon df-icon--joystick">
-                    <use xlink:href="assets/img/necromancers.svg#joystick"/>
-                </svg>
-                <svg role="img" class="df-icon df-icon--close">
-                    <use xlink:href="assets/img/necromancers.svg#close"/>
-                </svg>
-            </div>
-            <div class="header-social-toggle d-none d-md-block">
-                <svg role="img" class="df-icon df-icon--thumb-up">
-                    <use xlink:href="assets/img/necromancers.svg#thumb-up"/>
-                </svg>
-                <span class="header-social-toggle__plus">&nbsp;</span>
-                <ul class="social-menu social-menu--header">
-                    <li><a href="https://discord.gg/xxxx"><span class="link-subtitle">Discord</span>Necrochat</a></li>
-                    <li><a href="https://twitch.tv/"><span class="link-subtitle">Twitch</span>Necroplay</a></li>
-                    <li><a href="https://twitter.com/danfisher_dev"><span class="link-subtitle">Twitter</span>Necrotwt</a></li>
-                    <li><a href="https://www.facebook.com/danfisher.dev/"><span class="link-subtitle">Facebook</span>Necrogame</a></li>
-                </ul>
-            </div>
-            <div class="header-cart-toggle">
-                <svg role="img" class="df-icon df-icon--bag">
-                    <use xlink:href="assets/img/necromancers.svg#bag"/>
-                </svg>
-                <svg role="img" class="df-icon df-icon--close">
-                    <use xlink:href="assets/img/necromancers.svg#close"/>
-                </svg>
-                <span class="header-cart-toggle__items-count">4</span>
-            </div>
-            <div class="header-search-toggle">
-                <svg role="img" class="df-icon df-icon--search">
-                    <use xlink:href="assets/img/necromancers.svg#search"/>
-                </svg>
-                <svg role="img" class="df-icon df-icon--search-close">
-                    <use xlink:href="assets/img/necromancers.svg#search-close"/>
-                </svg>
-            </div>
-            <div class="header-account hide">
-                <div class="header-account__avatar">
-                    <img src="assets/img/samples/account-user-avatar.jpg" srcset="assets/img/samples/account-user-avatar@2x.jpg 2x" alt="">
-                </div>
-                <div class="header-account__body">
-                    Hello!
-                    <div class="header-account__name">James Spiegel</div>
-                </div>
-                <div class="header-account__icon">
-                    <a href="shop-account-settings.html">
-                        <svg role="img" class="df-icon df-icon--account">
-                            <use xlink:href="assets/img/necromancers.svg#account"/>
-                        </svg>
-                    </a>
-                    <a href="login-register.html">
-                        <svg role="img" class="df-icon df-icon--logout">
-                            <use xlink:href="assets/img/necromancers.svg#logout"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <div class="header-menu-toggle">
-                <div class="header-menu-toggle__inner">
-                    <span>&nbsp;</span>
-                    <span>&nbsp;</span>
-                    <span>&nbsp;</span>
-                </div>
-            </div>
-        </div>
-        <!-- Header Actions / End -->
+        <!-- Main Navigation Right / End -->
     </header>
     <!-- Header / End -->
 
     <!-- Content
     ================================================== -->
-    <main class="site-content" id="wrapper">
+    <main class="site-content text-center" id="wrapper">
 
-            {% block body %}
-            {% endblock %}
+        <div class="site-content__center">
+            <h1 class="text-white landing-title"><span class="subtitle landing-subtitle">Esports and Streaming</span>Necromancers</h1>
+            <a href="{{ path('browsing_front') }}" class="btn btn-primary btn-lg btn--landing"><span>Start Browsing!</span></a>
+        </div>
+
     </main>
 
+    <!-- Footer
+    ================================================== -->
+    <footer id="footer" class="footer text-center">
+        <ul class="social-menu social-menu--landing social-menu--landing-glitch">
+            <li>
+                <a href="https://www.facebook.com/danfisher.dev/" target="_blank">
+                    <i class="fab fa-facebook-square"></i>
+                    <span class="link-subtitle">Facebook</span>Necrogame
+                </a>
+            </li>
+            <li>
+                <a href="https://twitter.com/danfisher_dev" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                    <span class="link-subtitle">Twitter</span>Necrotwt
+                </a>
+            </li>
+            <li>
+                <a href="https://twitch.tv" target="_blank">
+                    <i class="fab fa-twitch"></i>
+                    <span class="link-subtitle">Twitch</span>Necroplays
+                </a>
+            </li>
+            <li>
+                <a href="https://discordapp.com/" target="_blank">
+                    <i class="fab fa-discord"></i>
+                    <span class="link-subtitle">Discord</span>Necrochat
+                </a>
+            </li>
+        </ul>
+    </footer>
+    <!-- Footer / End -->
+
+    <div class="landing-detail landing-detail--left">
+        <span>&nbsp;</span>
+        <span>&nbsp;</span>
+        <span>&nbsp;</span>
+    </div>
+    <div class="landing-detail-cover landing-detail-cover--left">
+        <span>&nbsp;</span>
+        <span>&nbsp;</span>
+        <span>&nbsp;</span>
+    </div>
+    <div class="landing-detail landing-detail--right">
+        <span>&nbsp;</span>
+        <span>&nbsp;</span>
+        <span>&nbsp;</span>
+    </div>
+    <div class="landing-detail-cover landing-detail-cover--right">
+        <span>&nbsp;</span>
+        <span>&nbsp;</span>
+        <span>&nbsp;</span>
+    </div>
     <!-- Overlay -->
     <div class="site-overlay"></div>
     <!-- Overlay / End -->
@@ -502,9 +439,9 @@
                             <li class="active">
                                 <a href="#">Main Pages</a>
                                 <ul class="mobile-nav__sub">
-                                    <li class=""><a href="index.html">Landing Image</a></li>
+                                    <li class="active"><a href="index.html">Landing Image</a></li>
                                     <li class=""><a href="index-2.html">Landing Video</a></li>
-                                    <li class="active"><a href="home.html">Home page</a></li>
+                                    <li class=""><a href="home.html">Home page</a></li>
                                     <li class=""><a href="blog-post.html">Post Page</a></li>
                                     <li class=""><a href="blog-1.html">News v1</a></li>
                                     <li class=""><a href="blog-2.html">News v2</a></li>
@@ -530,7 +467,7 @@
                             <li class="">
                                 <a href="#">Team Pages</a>
                                 <ul class="mobile-nav__sub">
-                                    <li class=""><a href="#">Team Selection v1</a></li>
+                                    <li class=""><a href="team-selection-1.html">Team Selection v1</a></li>
                                     <li class=""><a href="team-selection-2.html">Team Selection v2</a></li>
                                     <li class=""><a href="team-selection-3.html">Team Selection v3</a></li>
                                     <li class=""><a href="team-selection-4.html">Team Selection v4</a></li>
@@ -1697,7 +1634,7 @@
                 <div id="dl-menu" class="dl-menuwrapper">
                     <!-- <button class="dl-trigger">Open Menu</button> -->
                     <ul class="dl-menu dl-menuopen">
-                        <li class="active">
+                        <li class="">
                             <a href="home.html">Home</a>
                         </li>
                         <li class="">
@@ -1761,9 +1698,9 @@
                             <ul class="dl-submenu dl-megamenu">
                                 <div class="row">
                                     <ul class="col-md-6 col-lg-4">
-                                        <li class=""><a href="index.html">Landing Image</a></li>
+                                        <li class="active"><a href="index.html">Landing Image</a></li>
                                         <li class=""><a href="index-2.html">Landing Video</a></li>
-                                        <li class="active"><a href="home.html">Home page</a></li>
+                                        <li class=""><a href="home.html">Home page</a></li>
                                         <li class=""><a href="blog-1.html">News v1</a></li>
                                         <li class=""><a href="blog-2.html">News v2</a></li>
                                         <li class=""><a href="blog-3.html">News v3</a></li>
@@ -1873,7 +1810,7 @@
                                         <img src="assets/img/samples/partner-carousel-img-02.png" alt="">
                                     </li>
                                     <li>
-                                        <img src="assets/img/samples/partner-carousel-img-03.png" alt="">
+                                        <img src="{{ asset('front_office/assets/img/samples/partner-carousel-img-03.png') }}" alt="">
                                     </li>
                                 </ul>
                             </div>
@@ -1893,7 +1830,7 @@
         <div class="preloader-inner fadeInUp">
             <div class="pong-loader"></div>
             <svg role="img" class="df-icon df-icon--preloader-arcade">
-                <use xlink:href="assets/img/necromancers.svg#preloader-arcade"/>
+                <use xlink:href="{{ asset('front_office/assets/img/necromancers.svg#preloader-arcade') }}"/>
             </svg>
         </div>
     </div>
@@ -1937,4 +1874,3 @@
 
 </body>
 
-</html>

@@ -5,6 +5,7 @@ use App\Entity\Fournisseur;
 use App\Entity\Marchandise;
 use App\Form\FournisseurType;
 use App\Form\MarchandiseType;
+use App\Repository\MarchandiseRepository;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -14,6 +15,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormBuilderInterface;
 use Gedmo\Sluggable\Util\Urlizer;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
+use Knp\Snappy\Pdf;
+
+
+
 
 
 class MarchandisesController extends AbstractController
@@ -28,7 +35,7 @@ class MarchandisesController extends AbstractController
         ]);
     }
     /**
-     * @Route("/ajouter", name="ajouter_marchandises")
+     * @Route("/ajoutermarchandise", name="ajouter_marchandises")
      */
 
     public function ajoutermarch(Request $request){
@@ -42,7 +49,7 @@ class MarchandisesController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('consulter_marchandises');
         }
-        return $this->render('marchandises/ajouter.html.twig',[
+        return $this->render('marchandises/ajouter-march.html.twig',[
             'form_marchandise' => $form->createView()
         ]);;
     }
@@ -51,12 +58,36 @@ class MarchandisesController extends AbstractController
      */
     public function consultermarchandises(): Response
     {
+
         // Méthode findBy qui permet de récupérer les données avec des critères de filtre et de tri
         $marchandises = $this->getDoctrine()->getRepository(Marchandise::class)->findAll();
+
         return $this->render('marchandises/consultermarch.html.twig', [
-            'marchandises' => $marchandises,
-        ]);;
+            'marchandises' => $marchandises
+        ]);
     }
+    /**
+     * @Route("/generatpdf", name="pdf_marchandises")
+     */
+    public function pdf(): Response
+    {
+        $marchandises = $this->getDoctrine()->getRepository(Marchandise::class)->findAll();
+        $html=$this->renderView('marchandises/pdf.html.twig', [
+          'marchandises' => $marchandises,
+      ]);
+//      return new Response(
+//          $this->knpSnappy->getOutputFromHtml($html),
+//          200,
+//          array(
+//              'Content-Type'          => 'application/pdf',
+//              'Content-Disposition'   => 'inline; filename="'.'file.pdf"'
+//          )
+//      );
+        return new PdfResponse(
+            $this->knpSnappy->getOutputFromHtml([$html]),
+            'file.pdf',[]);
+    }
+
     /**
      * @Route("/marchandises/delete/{idMarchandise}", name="delete_marchandise")
      */
@@ -98,25 +129,35 @@ class MarchandisesController extends AbstractController
             'form_update' => $form->createView()
         ]);;
     }
+
+
+    public function quantity(MarchandiseRepository $repository,NormalizerInterface $Normalizer)
+    {
+        $quantities = $this->getDoctrine()->getRepository(Marchandise::class)->quantitybycategory();
+        $jsonContentquant=$Normalizer->normalize($quantities,'json',['groups'=>'post:read']);
+        return $this->render('marchandises/statistiques.html.twig',['qunatity'=>$quantities]);;
+    }
     /**
      * @Route("/statmarchandises", name="stat_marchandise")
      */
-    public function statmarchandises(): Response
+    public function statmarchandises(NormalizerInterface $Normalizer): Response
     {
-        return $this->render('marchandises/statistiques.html.twig');;
+        $repository=$this->getDoctrine()->getRepository(Marchandise::class);
+        $marchandises=$repository->findAll();
+        $quantities = $this->getDoctrine()->getRepository(Marchandise::class)->quantitybycategory();
+        $jsonContentquant=$Normalizer->normalize($quantities,'json',['groups'=>'post:read']);
+        $jsonContent=$Normalizer->normalize($marchandises,'json',['groups'=>'post:read']);
+        return $this->render('marchandises/statistiques.html.twig',['data'=>$jsonContent,'qunatity'=>$jsonContentquant]);;
     }
+    public function __construct(\Knp\Snappy\Pdf $knpSnappy) { $this->knpSnappy = $knpSnappy; }
 
     /**
      * @Route("/ajouterfournisseur", name="ajouter_fournisseur")
      */
-    public function ajouterfournisseur(Request $request){
+    public function ajouterfournisseur(Request $request,\Knp\Snappy\Pdf $knpSnappyPdf){
         $fournisseur =new Fournisseur();
         $form=$this->createForm(FournisseurType::class,$fournisseur);
         $form->handleRequest($request);
-
-
-
-
         if ($form->isSubmitted()&& $form->isValid()){
             /** @var UploadedFile $uploadedFile */
             $uploadedFile = $form->get('photo')->getData();
@@ -134,6 +175,27 @@ class MarchandisesController extends AbstractController
              /* photo */
             $fournisseur=$form->getData();
             $fournisseur->setPhoto($newFilename);
+            /* PDF */
+           /* $vars=1;
+            $this->get('knp_snappy.pdf')->generateFromHtml(
+                $this->renderView('marchandises/consulterfourn.html.twig', array('some'  => $vars)),
+                '/public/photo_uplod/file.pdf'
+
+            );*/
+
+            /*return new PdfResponse(
+                $this->knpSnappy->getOutputFromHtml([$html]),
+                'file.pdf',[]);*/
+
+            // @var Knp\Snappy\Pdf
+            //$knpSnappyPdf->generate('http://www.google.fr', '/public/photo_uplod/file.pdf');
+            //$knpSnappyPdf->generate(array('http://www.google.fr', 'http://www.knplabs.com', 'http://www.google.com'), '/path/to/the/file.pdf');
+
+            //$snappy = new Pdf('/usr/local/bin/wkhtmltopdf');
+            //$knpSnappyPdf->generate(array('http://www.google.fr', 'http://www.knplabs.com', 'http://www.google.com'), 'kernel.project_dir'.'/public/photo_upload/file1.pdf');
+
+            //$snappy->generateFromHtml('<h1>Bill</h1><p>You owe me money, dude.</p>', '/public/photo_upload/bill-123.pdf');
+            /* PDF */
             $em=$this->getDoctrine()->getManager();
             $em->persist($fournisseur);
             $em->flush();
@@ -167,7 +229,6 @@ class MarchandisesController extends AbstractController
         $fournisseur->setEmail($fournisseur->getEmail());
         $fournisseur->setMatriculeFiscale($fournisseur->getMatriculeFiscale());
         $fournisseur->setPhoto($fournisseur->getPhoto());
-
         $form=$this->createForm(FournisseurType::class,$fournisseur);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
@@ -196,7 +257,7 @@ class MarchandisesController extends AbstractController
         return $this->redirectToRoute('consulter_fournisseurs');
     }
     /**
-     * @Route("/", name="home")
+     * @Route("/back", name="home")
      */
     public function home(): Response
     {
@@ -205,13 +266,23 @@ class MarchandisesController extends AbstractController
         ]);;
     }
     /**
-     * @Route("/front", name="home_front")
+     * @Route("/front", name="welcome_front")
      */
-    public function home_front(): Response
+    public function welcomefront(): Response
     {
-        return $this->render('/Front-template/home-front.html.twig', [
+        return $this->render('Front-template/welcome-front.html.twig',[
+        'controller_name' => 'MarchandisesController',
+        ]);;
+    }
+    /**
+     * @Route("/browsing", name="browsing_front")
+     */
+    public function browsing_front(): Response
+    {
+        return $this->render('Front-template/browsing-front.html.twig',[
             'controller_name' => 'MarchandisesController',
         ]);;
     }
+
 
 }

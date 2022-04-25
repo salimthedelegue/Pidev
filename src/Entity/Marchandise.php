@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -22,6 +23,7 @@ class Marchandise
      * @ORM\Column(name="id_marchandise", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
      */
     private $idMarchandise;
 
@@ -29,14 +31,7 @@ class Marchandise
      * @var string
      *
      * @ORM\Column(name="nom_marchandise", type="string", length=50, nullable=false)
-     * @Assert\NotBlank(
-     *     message="Veuillez remplir ce champ"
-     * )
-     * @Assert\Regex(
-     *     pattern= "/([A-Z][a-z]+([ ]?[a-z]?['-]?[A-Z][a-z]+)*)$/",
-     *     match=true,
-     *     message="Le nom doit etre un nom Majus"
-     * )
+     * @Groups("post:read")
      */
     private $nomMarchandise;
 
@@ -44,9 +39,7 @@ class Marchandise
      * @var string
      *
      * @ORM\Column(name="categorie_marchandise", type="string", length=50, nullable=false)
-     * @Assert\NotBlank(
-     *     message="Veuillez selecter"
-     * )
+     * @Groups("post:read")
      */
     private $categorieMarchandise;
 
@@ -54,9 +47,7 @@ class Marchandise
      * @var string
      *
      * @ORM\Column(name="date_arrive", type="string", length=50, nullable=false)
-     * @Assert\NotBlank(
-     *     message="Veuillez remplir ce champ"
-     * )
+     * @Groups("post:read")
      */
     private $dateArrive;
 
@@ -64,13 +55,7 @@ class Marchandise
      * @var int
      *
      * @ORM\Column(name="quantite", type="integer", nullable=false)
-     * @Assert\NotBlank(
-     *     message="Veuillez remplir ce champ"
-     * )
-     * @Assert\Regex(
-     *     pattern="/^\d{1,10}$/",message="integer "
-     * )
-     * @Assert\NotNull(message="Veuillez remplir ce champ")
+     * @Groups("post:read")
      */
     private $quantite;
 
@@ -78,13 +63,7 @@ class Marchandise
      * @var float
      *
      * @ORM\Column(name="prix_unitaire_marchandise", type="float", precision=10, scale=0, nullable=false)
-     * @Assert\NotBlank(
-     *     message="Veuillez remplir ce champ"
-     * )
-     * @Assert\Regex (
-     *  pattern="/^(?=.)([+-]?([0-9]*)(\\.([0-9]+))?)$/",
-     * message="Entrer un reel"
-     * )
+     * @Groups("post:read")
      */
     private $prixUnitaireMarchandise;
 
@@ -92,13 +71,7 @@ class Marchandise
      * @var float
      *
      * @ORM\Column(name="prix_total_marchandise", type="float", precision=10, scale=0, nullable=false)
-     * @Assert\NotBlank(
-     *     message="Veuillez remplir ce champ"
-     * )
-     * @Assert\Regex (
-     *  pattern="/^(?=.)([+-]?([0-9]*)(\\.([0-9]+))?)$/",
-     * message="Entrer un reel"
-     * )
+     * @Groups("post:read")
      */
     private $prixTotalMarchandise;
 
@@ -109,8 +82,7 @@ class Marchandise
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_fournisseur", referencedColumnName="id_fournisseur")
      * })
-     * @Assert\NotBlank (message="Veuillez choisir un fournisseur")
-     *
+     * @Groups("post:read")
      */
     private $idFournisseur;
 

@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+            <div class="page-header">
+                <h3 class="page-title"> Formulaire Marchandises </h3>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ path('ajouter_marchandises') }}">Marchandises</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Ajouter Marchandise</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="row">
+                <div class="col-12 grid-margin">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Ajouter Marchandise</h4>
+                            {{form_start(form_marchandise, {'attr': {'novalidate':'novalidate','class':'form-sample'}}) }}
+                            {# <form class="form-sample"> #}
+                                <p class="card-description">Informations </p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Nom Marchandise</label>
+                                            <div class="col-sm-9">
+                                                {{form_widget(form_marchandise.nomMarchandise,{'attr': {'class':'form-control'}})  }}
+                                               <div class="text-danger">{{form_errors(form_marchandise.nomMarchandise) }}</div>
+                                                {#{{ form_row(form_marchandise.nomMarchandise,{'attr': {'class':'form-control'}}) }}
+                                                 <input type="text" class="form-control" />#}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Categorie</label>
+                                            <div class="col-sm-9">
+                                                {{form_widget(form_marchandise.categorieMarchandise,{'attr': {'class':'form-control'}})  }}
+                                                <div class="text-danger">{{ form_errors(form_marchandise.categorieMarchandise) }}</div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Date D'arrivee</label>
+                                            <div class="col-sm-9">
+                                                {{form_widget(form_marchandise.dateArrive,{'attr': {'class':'form-control'}})  }}
+                                                <div class="text-danger">{{ form_errors(form_marchandise.dateArrive) }}</div>
+{#                                                <input class="form-control" placeholder="dd/mm/yyyy" />#}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Id Fourn</label>
+                                            <div class="col-sm-9">
+                                                {#
+                                                <select class="form-control">
+                                                    <option>Male</option>
+                                                    <option>Female</option>
+                                                </select>
+                                                #}
+                                                {{form_widget(form_marchandise.idFournisseur,{'attr': {'class':'form-control'}})  }}
+                                                <div class="text-danger">{{ form_errors(form_marchandise.idFournisseur) }}</div>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="card-description"> Budget </p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Quantite</label>
+                                            <div class="col-sm-9">
+                                                {{form_widget(form_marchandise.quantite,{'attr': {'class':'form-control'}})  }}
+                                                    <div class="text-danger">{{ form_errors(form_marchandise.quantite) }}</div>
+
+                                                {#                                                <input type="text" class="form-control" />#}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Prix unitaire</label>
+                                            <div class="col-sm-9">
+                                                {{form_widget(form_marchandise.prixUnitaireMarchandise,{'attr': {'class':'form-control'}})  }}
+                                                <div class="text-danger">{{ form_errors(form_marchandise.prixUnitaireMarchandise) }}</div>
+
+                                                {#<input type="text" class="form-control" />#}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Prix Totale</label>
+                                            <div class="col-sm-9">
+                                                {{form_widget(form_marchandise.prixTotalMarchandise,{'attr': {'class':'form-control'}})  }}
+                                                <div class="text-danger">{{ form_errors(form_marchandise.prixTotalMarchandise) }}</div>
+
+                                                {#<input type="text" class="form-control" />#}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+{#                            {{form_widget(form_marchandise.save,{'attr': {'class':'btn btn-info btn-lg btn-block'}})  }}#}
+
+                                <button type="submit" class="btn btn-info btn-lg btn-block">Enregistrer</button>
+                            <button type="reset" class="btn btn-info btn-lg btn-block btn-dark">Cancel</button>
+
+
+                            {{ form_end(form_marchandise) }}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+
+        <!-- partial -->
+
+{% endblock %}

@@ -18,8 +18,7 @@ class FournisseurType extends AbstractType
             ->add('numfixeFournisseur')
             ->add('email')
             ->add('matriculeFiscale')
-            ->add('photo',FileType::class)
-        ;
+            ->add('photo',FileType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

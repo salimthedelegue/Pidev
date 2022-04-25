@@ -10,9 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="magazine")
  * @ORM\Entity
  */
-/**
- * @ORM\Entity(repositoryClass="App\Repository\MagazineRepository")
- */
 class Magazine
 {
     /**

@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Marchandise;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,7 +22,7 @@ class MarchandiseType extends AbstractType
                 'Hardware components' => 'Hardware components',
                 'Gears' => 'Gears',
             ],])
-            ->add('dateArrive')
+            ->add('dateArrive',DateType::class,['attr' => ['class' => 'select2-search select2-search--dropdown']])
             ->add('quantite')
             ->add('prixUnitaireMarchandise')
             ->add('prixTotalMarchandise')

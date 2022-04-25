@@ -3,16 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Fournisseur
  *
  * @ORM\Table(name="fournisseur")
  * @ORM\Entity
- */
-/**
- * @ORM\Entity(repositoryClass="App\Repository\FournisseurRepository")
  */
 class Fournisseur
 {
@@ -29,14 +25,6 @@ class Fournisseur
      * @var string
      *
      * @ORM\Column(name="nom_fournisseur", type="string", length=30, nullable=false)
-     * @Assert\NotBlank(
-     *     message="veuillez remplir le champ"
-     * )
-     * @Assert\Regex (
-     *     pattern= "/([A-Z][a-z]+([ ]?[a-z]?['-]?[A-Z][a-z]+)*)$/",
-     *     match=true,
-     *     message="Le nom doit etre un nom Majus"
-     * )
      */
     private $nomFournisseur;
 
@@ -44,13 +32,6 @@ class Fournisseur
      * @var string
      *
      * @ORM\Column(name="numtel_fournisseur", type="string", length=20, nullable=false)
-     * @Assert\NotBlank (
-     *     message="veuillez remplir le champ"
-     * )
-     * @Assert\Regex (
-     *     pattern="/^(\\+\\d{1,2}\\s?)?1?\\-?\\.?\\s?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$/",
-     *     message="+216 + 8 "
-     * )
      */
     private $numtelFournisseur;
 
@@ -58,13 +39,6 @@ class Fournisseur
      * @var string
      *
      * @ORM\Column(name="numFixe_fournisseur", type="string", length=20, nullable=false)
-     * @Assert\NotBlank (
-     *     message="veuillez remplir le champ"
-     * )
-     * @Assert\Regex (
-     *     pattern="/^(\\+\\d{1,2}\\s?)?1?\\-?\\.?\\s?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$/",
-     *     message="+216 + 8 "
-     * )
      */
     private $numfixeFournisseur;
 
@@ -72,12 +46,6 @@ class Fournisseur
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, nullable=false)
-     * @Assert\NotBlank(
-     *     message="veuillez remplir le champ"
-     * )
-     * @Assert\Email(
-     *     message="email invalid"
-     * )
      */
     private $email;
 
@@ -85,11 +53,6 @@ class Fournisseur
      * @var string
      *
      * @ORM\Column(name="matricule_fiscale", type="string", length=20, nullable=false)
-     * @Assert\NotBlank ()
-     * @Assert\Regex (
-     *     pattern="/^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}$/",
-     *     message="matricule invalide"
-     * )
      */
     private $matriculeFiscale;
 
@@ -97,7 +60,6 @@ class Fournisseur
      * @var string
      *
      * @ORM\Column(name="photo", type="string", length=255, nullable=false)
-     * @Assert\NotBlank(message="selectez une image")
      */
     private $photo;
 
@@ -181,7 +143,6 @@ class Fournisseur
     {
         return $this->nomFournisseur;
     }
-
 
 
 
