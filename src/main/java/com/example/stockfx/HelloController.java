@@ -1317,9 +1317,9 @@ public class HelloController implements Initializable {
 
      */
     public void sendAttachmentEmail() {
-        final String userID = "sdali5082@gmail.com";
-        final String userPass = "Dali 1200";
-        final String emailTo = "azouzim80@gmail.com";
+        final String userID = "";
+        final String userPass = "";
+        final String emailTo = "";
         String host = "smtp.gmail.com";
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
