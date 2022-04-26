@@ -43,8 +43,52 @@ class EvenementRepository extends ServiceEntityRepository
                 ->getQuery()
                 ->getResult()
                 ;
-        }}
+        }
+        if($criteria['selon']=='Description'){
+            return $this->createQueryBuilder('e')
+                ->andwhere('e.description like :description')
+                ->setParameter('description', $criteria['rech'].'%')
+                ->getQuery()
+                ->getResult()
+                ;
+        }
+            if($criteria['selon']=='Prix'){
+                return $this->createQueryBuilder('e')
+                    ->andwhere('e.prix=:prix')
+                    ->setParameter('prix', $criteria['rech'])
+                    ->getQuery()
+                    ->getResult()
+                    ;
+            }
 
+    }
+
+    public function TrierEvent($criteria)
+    {
+
+        if($criteria['selon']=='Nom'){
+            return $this->createQueryBuilder('e')
+                ->addOrderBy('e.nomEvenement', 'DESC')
+                ->getQuery()
+                ->getResult()
+                ;
+        }
+        if($criteria['selon']=='Description'){
+            return $this->createQueryBuilder('e')
+                ->addOrderBy('e.description', 'DESC')
+                ->getQuery()
+                ->getResult()
+                ;
+        }
+        if($criteria['selon']=='Prix'){
+            return $this->createQueryBuilder('e')
+                ->addOrderBy('e.prix', 'DESC')
+                ->getQuery()
+                ->getResult()
+                ;
+        }
+
+    }
     /*
     public function findOneBySomeField($value): ?Evenement
     {

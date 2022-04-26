@@ -18,7 +18,8 @@ class SearchEventType extends AbstractType
               ->add('selon', ChoiceType::class, [
                   'choices'  => [
                       'Nom' => 'Nom',
-                      'Prix' => 'prix'
+                      'Prix' => 'Prix',
+                      'Description' => 'Description'
                   ],])
           ;
         ;

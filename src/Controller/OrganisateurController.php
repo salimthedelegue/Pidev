@@ -33,6 +33,16 @@ class OrganisateurController extends AbstractController
             'organisateurs' => $organisateurs
         ]);;
     }
+    /**
+     * @Route("/organisateur/afficherFront", name="organisateurFront")
+     */
+    public function afficherOrgFront(OrganisateurRepository $repository)
+    {
+        $organisateurs = $repository->findAll();
+        return $this->render('organisateur/OrganisateurFront.html.twig', [
+            'organisateurs' => $organisateurs
+        ]);;
+    }
 
     /**
      * @Route("/organisateur/delete/{id}", name="delete_organisateur")
@@ -49,21 +59,30 @@ class OrganisateurController extends AbstractController
     /**
      * @Route("/organisateur/ajouterEv", name="ajouter_organisateur")
      */
-    public function ajouterOrg(Request $request)
+    public function ajouterOrg(Request $request,\Swift_Mailer $mailer)
     {
         $organisateur = new Organisateur();
         $form = $this->createForm(OrganisateurType::class, $organisateur);
         $form->add('Save', SubmitType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($organisateur);
             $em->flush();
+
+            $message=( new \Swift_Message('You got Mail'))
+                ->setFrom('noursen.amamo@esprit.tn')
+                ->setTo($form->get('emailOrganisateur')->getData())
+                ->setBody('Bienvenu dans notre equipe '.$form->get('nom')->getData(),'text/plain');
+            $mailer->send($message);
+
             return $this->redirectToRoute('consulter_organisateur');
         }
         return $this->render('organisateur/ajouterOrganisateur.html.twig', [
             'form' => $form->createView()
-        ]);;
+        ]);
+
     }
 
     /**
@@ -83,6 +102,7 @@ class OrganisateurController extends AbstractController
         }
         return $this->render('organisateur/ajouterOrganisateur.html.twig', [
             'form' => $form->createView()
-        ]);;
+        ]);
     }
 }
+
