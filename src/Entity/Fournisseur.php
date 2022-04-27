@@ -3,12 +3,18 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
+use Vich\UploaderBundle\Entity\File as EmbeddedFile;
 
 /**
  * Fournisseur
  *
  * @ORM\Table(name="fournisseur")
  * @ORM\Entity
+ * @Vich\Uploadable
  */
 class Fournisseur
 {
@@ -62,6 +68,27 @@ class Fournisseur
      * @ORM\Column(name="photo", type="string", length=255, nullable=false)
      */
     private $photo;
+
+    /**
+     * @Vich\UploadableField(mapping="fournisseurs",fileNameProperty="photo")
+     * @var File|null
+     */
+    private $imageFile;
+
+    /**
+     * @return File
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void    {
+        $this->imageFile = $imageFile;
+    }
 
     public function getIdFournisseur(): ?int
     {
@@ -128,16 +155,16 @@ class Fournisseur
         return $this;
     }
 
-    public function getPhoto()
+    public function getPhoto(): ?string
     {
         return $this->photo;
     }
 
-    public function setPhoto(string $photo)
+    public function setPhoto(string $photo):void
     {
         $this->photo = $photo;
 
-        return $this;
+        //return $this;
     }
     public function __toString()
     {

@@ -22,7 +22,7 @@ class MarchandiseType extends AbstractType
                 'Hardware components' => 'Hardware components',
                 'Gears' => 'Gears',
             ],])
-            ->add('dateArrive',DateType::class,['attr' => ['class' => 'select2-search select2-search--dropdown']])
+            ->add('dateArrive')
             ->add('quantite')
             ->add('prixUnitaireMarchandise')
             ->add('prixTotalMarchandise')

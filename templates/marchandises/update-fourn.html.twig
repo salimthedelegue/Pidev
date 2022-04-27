@@ -34,7 +34,7 @@
                                 <label class="col-sm-3 col-form-label">Matricule Fisc</label>
                                 <div class="col-sm-9">
                                     <div class="text-danger">{{ form_errors(form_update_fournisseur.matriculeFiscale) }}</div>
-                                    {{form_widget(form_fournisseur.matriculeFiscale,{'attr': {'class':'form-control'}})  }}
+                                    {{form_widget(form_update_fournisseur.matriculeFiscale,{'attr': {'class':'form-control'}})  }}
                                 </div>
                             </div>
                         </div>
@@ -44,13 +44,12 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Photo</label>
                                 <div class="col-sm-9">
-                                    {#                                    {{form_widget(form_fournisseur.file,{'attr': {'class':'form-control file-upload-default','name':'img[]','type':'file'}})  }}#}
+                                    <div class="text-danger">{{form_errors(form_update_fournisseur.matriculeFiscale) }}</div>
+                                    {#{{form_widget(form_fournisseur.file,{'attr': {'class':'form-control file-upload-default','name':'img[]','type':'file'}})  }}#}
                                     <div class="input-group col-xs-12">
-                                        {{form_widget(form_update_fournisseur.photo,{'attr': {'class':'form-control file-upload-info','name':'image','type':'file'}})  }}
-
+                                        {{  form_widget( form_update_fournisseur.imageFile,{'attr': {'class':'form-control file-upload-info','name':'image','type':'file'}})  }}
                                     </div>
-
-                                    {#                                    <button class="file-upload-browse btn btn-primary" type="button">Upload</button>#}
+                                    {#<button class="file-upload-browse btn btn-primary" type="button">Upload</button>#}
                                 </div>
                             </div>
                         </div>
@@ -64,7 +63,7 @@
                                     {{form_widget(form_update_fournisseur.numtelFournisseur,{'attr': {'class':'form-control'}})  }}
                                     <div class="text-danger">{{ form_errors(form_update_fournisseur.numtelFournisseur) }}</div>
 
-                                    {#                                                <input type="text" class="form-control" />#}
+                                    {#<input type="text" class="form-control" />#}
                                 </div>
                             </div>
                         </div>

@@ -3,6 +3,7 @@
 namespace App\Controller;
 use App\Entity\Fournisseur;
 use App\Entity\Marchandise;
+use App\Form\FournisseurAjouterType;
 use App\Form\FournisseurType;
 use App\Form\MarchandiseType;
 use App\Repository\MarchandiseRepository;
@@ -83,6 +84,7 @@ class MarchandisesController extends AbstractController
 //              'Content-Disposition'   => 'inline; filename="'.'file.pdf"'
 //          )
 //      );
+
         return new PdfResponse(
             $this->knpSnappy->getOutputFromHtml([$html]),
             'file.pdf',[]);
@@ -156,7 +158,7 @@ class MarchandisesController extends AbstractController
      */
     public function ajouterfournisseur(Request $request,\Knp\Snappy\Pdf $knpSnappyPdf){
         $fournisseur =new Fournisseur();
-        $form=$this->createForm(FournisseurType::class,$fournisseur);
+        $form=$this->createForm(FournisseurAjouterType::class,$fournisseur);
         $form->handleRequest($request);
         if ($form->isSubmitted()&& $form->isValid()){
             /** @var UploadedFile $uploadedFile */
@@ -233,6 +235,7 @@ class MarchandisesController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+
             $fournisseur=$form->getData();
             $em=$this->getDoctrine()->getManager();
             $em->persist($fournisseur);

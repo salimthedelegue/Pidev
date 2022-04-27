@@ -87,6 +87,9 @@
     "fzaninotto/faker": {
         "version": "v1.9.2"
     },
+    "jms/metadata": {
+        "version": "2.6.1"
+    },
     "knplabs/knp-snappy": {
         "version": "v1.4.1"
     },
@@ -408,6 +411,9 @@
             "./tests/bootstrap.php"
         ]
     },
+    "symfony/polyfill-intl-grapheme": {
+        "version": "v1.25.0"
+    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.24.0"
     },
@@ -490,6 +496,9 @@
     },
     "symfony/stopwatch": {
         "version": "v4.4.37"
+    },
+    "symfony/string": {
+        "version": "v5.4.3"
     },
     "symfony/translation": {
         "version": "4.4",
@@ -580,6 +589,18 @@
     },
     "twig/twig": {
         "version": "v3.3.8"
+    },
+    "vich/uploader-bundle": {
+        "version": "1.19",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.7",
+            "ref": "c4f5755b37fb65b9c6a3cbdae91205c15a137ed4"
+        },
+        "files": [
+            "./config/packages/vich_uploader.yaml"
+        ]
     },
     "webmozart/assert": {
         "version": "1.10.0"
