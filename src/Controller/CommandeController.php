@@ -102,8 +102,6 @@ public function affichercommandes(CommandeRepository $cr)
 public function voirproduit(UserRepository $user,CommandeRepository $cr,$id): Response
 {
 $commande1=$cr->find($id);
-//dd($commande1->getIdClient());
-dd($user->find($commande1->getIdClient())->getEmail());
 $produits=$commande1->getproduits();
     return $this->render('commande/mescommandes.html.twig', [
 
@@ -112,10 +110,13 @@ $produits=$commande1->getproduits();
 }
 
 /**
- * @Route("/mescommandesaj/{id}/mesproduits", name="voirproduitcommandeaj", methods={"GET","POST"})
+ * @param Request $request
+ * @param CommmandeRepository $repository
+ * @Route("/mescommandesaj/mesproduits", name="voirproduitcommandeaj")
  */
-public function voirproduitc(CommandeRepository $cr,$id,Request $request): Response
+public function voirproduitc(CommandeRepository $cr,Request $request): Response
 {
+    $id=$request->get('q');
 
 $commande1=$cr->find($id);
 $produits=$commande1->getproduits();
@@ -128,13 +129,14 @@ $jsonData = array();
             'name' => $produit->getNomProduit(),
             'prix' => $produit->getPrixProduit(),
             'lien' => $produit->getLienProduit(),
-
+            'image'=>$produit->getImageProduit(),
          );
          $jsonData[$idx++] = $temp;
       }
 
-   
-      return new JsonResponse($jsonData); 
+      
+
+      return new Response(json_encode($jsonData)); 
 
 
 }

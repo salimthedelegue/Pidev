@@ -15,42 +15,52 @@ class CommandeUsersController extends AbstractController
     /**
      * @Route("/commandes/users", name="app_commande_users")
      */
-    public function index(CommandeRepository $com,UserRepository $user): Response
+    public function index( UserRepository $user): Response
     {
-        $commandes=$com->commande_valide();
-       // dd($commandes);
-        foreach($commandes as $command)
-            {
-                 $idu=$command->getIdClient();
-            }
+       // $commandes=$com->commande_valide();
+        //dd($commandes);
 
-            dd($idu);
+  
+$users=$user->findClient();
+           
 
-            foreach($idu as $id)
-            {
-                $usersoncomande=$user->find($id);
-            }
 
-            var_dump($idu);
 
-dd($usersoncomande);
         return $this->render('commande_users/index.html.twig', [
-            'controller_name' => 'CommandeUsersController',
+'users'=>$users
         ]);
     }
 
     /**
- * @Route("/mescommandes/{id}/mesproduits", name="voirproduitcommande", methods={"GET"})
+ * @Route("/commandesuser/{id}", name="usercommandes", methods={"GET"})
  */
-/*public function voirproduit(UserRepository $user,CommandeRepository $cr,$id): Response
+public function voirproduit(UserRepository $user,CommandeRepository $cr,$id): Response
+{
+    $user1=$user->find($id);
+$commande1=$cr->affichermescommandes($id);
+
+    return $this->render('commande_users/commandesusers.html.twig', [
+
+       'commande1'=>$commande1,'user1'=>$user1
+    ]);
+}
+
+
+
+
+/**
+ * @Route("/commandesuser/{id}/mesproduits", name="voirproduitcommandeuser", methods={"GET"})
+ */
+public function voirproduituser(UserRepository $user,CommandeRepository $cr,$id): Response
 {
 $commande1=$cr->find($id);
-//dd($commande1->getIdClient());
-dd($user->find($commande1->getIdClient())->getEmail());
 $produits=$commande1->getproduits();
-    return $this->render('commande/mescommandes.html.twig', [
+    return $this->render('commande_users/produitsuser.html.twig', [
 
-        'produits' =>$produits,'commande1'=>$commande1,'commandes' => $cr->affichermescommandes(1)
+        'produits' =>$produits,'commande1'=>$commande1
     ]);
-}*/
+}
+
+
+
 }

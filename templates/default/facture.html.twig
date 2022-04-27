@@ -12,6 +12,8 @@
         {% for produit in produits %}
          <tr><td>Nom   :    {{ produit.getNomProduit()}}</td></tr>
         <tr> <td>Prix  :  {{ produit.getPrixProduit() }}</td></tr>
+        <tr><td> lien : {{produit.getLienProduit()}}</td></tr>
+        	
 
          {% endfor %}
          </tr>

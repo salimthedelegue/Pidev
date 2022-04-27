@@ -57,7 +57,14 @@ public function getnameuserbycommande($id)
     ->getOneOrNullResult();
 }
 
-
+public function findClient()
+{
+    return $this->createQueryBuilder('u')
+    ->andWhere('u.role = :val')
+    ->setParameter('val','CLIENT')
+    ->getQuery()
+    ->getResult();
+}
 
 
 }

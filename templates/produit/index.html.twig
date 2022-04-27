@@ -21,7 +21,7 @@
             <tr>
                 <td>{{ produit.id_produit }}</td>
                 <td>{{ produit.nomProduit }}</td>
-                <td>{{ produit.imageProduit }}</td>
+                <td height="300"><img src=" {{ asset('/upload/images/'~produit.getImageProduit())}}" class="mx-auto d-block" style="width:30%;height:100%"> </td>
                 <td>{{ produit.prixProduit }}</td>
                 <td>{{ produit.categorieProduit }}</td>
                 <td>

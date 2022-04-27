@@ -6,13 +6,13 @@
 
 
 <main class="site-content checkout-page" id="wrapper">
-			<div class="row">
+			<div class="row" style="background-image: url({{asset('front_office/assets/img/comfirmer.jpg')}});">
 				<div class="col-lg-8">
 			{% if produits | length > 0 %}
         		{% for produit in produits %}
-            		<tr>
+            		<tr >
  
-                		<td>{{ produit.lienProduit }}</td>
+                		<td ><p style="color:white;">{{ produit.lienProduit }}<br></p></td>
 
 
             		</tr>

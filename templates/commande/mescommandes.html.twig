@@ -13,8 +13,8 @@
 						<thead>
 							<tr>
 								<th>num commande</th>
-								<th>adresse</th>
 								<th>date</th>
+								<th>adresse</th>
 								<th>prix totale</th>
 								<th>mes jeux</th>
 								<th>mes jeux 2</th>
@@ -45,8 +45,8 @@
                                         </button><br>
 
                                 </td>
-								<td><button id="add-to-cart" class="btn btn-primary btn-xs">
-                                        <a href ="" data-path="{{ path('voirproduitcommandeaj', {'id': commande.id_commande}) }}" class="envoyer">voir jeux</a>
+								<td><button id="addproduit" class="addproduit" value="{{ commande.id_commande }}">
+                                        <a href ="#" data-path="{{ path('voirproduitcommandeaj', {'id': commande.id_commande}) }}" class="envoyer">voir jeux</a>
                                         </button><br>
 
                                 </td>
@@ -139,44 +139,52 @@
                 
 			</div>
 		</main>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 	</style>
-	 <script language = "javascript" src = "https://code.jquery.com/jquery-2.2.4.min.js"></script> 
 		            <script type="text/javascript">
-                    $(document).ready(function(){
-                        $(document).on('click','.envoyer',function(){ // Sur tous les éléments ayant une class "envoyer"
-                            var path = $(this).attr("data-path");
-                            $.ajax({
-                                type : 'GET',
-                                url : path,
-       							 dataType: "json",
-				success: function (response) {
-					console.log(response);
-        			var response = JSON.parse(response);
+                       $(document).ready(function () {
+        $('.addproduit').on('click', function () {
+        var id = $(this).val();
+        $('#produits1').empty();
+        $('#produits1').append(`<tr><td value="0">Processing...</td></tr>`);
+        $.ajax({
+           type: "GET",
+                    url: "{{ path('voirproduitcommandeaj') }}",
+					data: {
+                            'q' : id
+                        },
+                        dataType: "text",
+                   
+        success: function (response) {
+        var i=1;
+        var response = JSON.parse(response);
+        console.log(response);
+        $('#produits1').empty();
+       
 
-     				var e = $('<tr><th>Name</th><th>Address</th></tr>');  
-                  	$('#produits1').append(e); 
-dump(response);
-					response.forEach(
+	 $.each(response, function(key, value) 
+	 			{
+	 				$('#produits1').append(
+						 '<tr><td>'+value['idp']+'</td>'+
+						'<td class="standings-table__team"><figure class="match-team" role="group"><figure class="match-team-logo match-team-logo--team-3" role="group">'+
+						'<img src="{{asset('front_office/assets/img/samples/logo-panthers-30.png')}}" srcset="{{asset('front_office/assets/img/samples/logo-panthers-30.png')}}" alt="">'+
+						'</figure><figcaption><div class="match-team__country ">'+value['name']+'</div></figcaption></figure></td>'+
+						'<td class="standings-table__wins">'+value['prix']+'</td>'+
+						'<td class="standings-table__losses">'+value['lien']+'</td>'+
+						'<td><img src="{{'upload/images/'}}" alt="" height="200px" widh="200px"></td></tr>'
 
-            				element => {
-    									var e = $('<tr><td id = "name"></td><td id = "idp"></td></tr>');
 
-                     					$('#name', e).html(element['name']);
-  
-                     					$('#idp', e).html(element['idp']);
+						 
+					);
 
-					                    $('#produits1').append(e);
-					
-            							 });
-                  							}
-  
-                           			 });
-                        });
+				});
 
-               
-            });
-                     
-
+    }
+});
+});
+					   });
                 </script>
 
 {% endblock %}

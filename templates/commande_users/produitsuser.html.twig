@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1> Commandes de {{commande1.id_commande()}} : </h1>
+
+    <table class="table">
+        <thead>
+           	<tr>
+									<th>num produit</th>
+								<th>nom produit</th>
+								<th>prix</th>
+								<th>lien</th>
+
+							</tr>
+        </thead>
+        <tbody>
+
+
+                          {% for produit in produits %}
+
+							<tr>
+								<td>{{ produit.id_produit }}</td>
+								<td class="standings-table__team">
+									<figure class="match-team" role="group">
+										<figure class="match-team-logo match-team-logo--team-3" role="group">
+											<img src="{{asset('front_office/assets/img/samples/logo-panthers-30.png')}}" srcset="{{asset('front_office/assets/img/samples/logo-panthers-30.png')}}" alt="">
+										</figure>
+										<figcaption>
+												<div class="match-team__country ">{{ produit.nomProduit}}</div>
+										</figcaption>
+									</figure>
+								</td>
+								<td class="standings-table__wins">{{produit.prixProduit}}</td>
+								<td class="standings-table__losses">{{ produit.lienProduit}}</td>
+								<td>
+                                    <img src="{{ asset('upload/images/'~produit.getImageProduit()~'') }}" height="200px" widh="200px">
+
+                                </td>
+								
+							</tr>
+
+                            {% endfor %}
+		
+        </tbody>
+    </table>
+
+    
+{% endblock %}
