@@ -101,6 +101,7 @@
                         </tbody>
                         <a class=" btn-primary " href="{{ path('listuser') }}">Creer pdf</a>
                     </table>
+                    {{knp_pagination_render(User)}}
                 {% else %}
                     <p>Aucun USER</p>
                 {% endif %}

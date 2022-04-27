@@ -6,7 +6,10 @@ namespace App\Controller;
 
 use App\Entity\Reclamation;
 use App\Entity\User;
+use App\Form\ChangementType;
+use App\Form\ChangePasswordType;
 use App\Form\LoginType;
+use App\Form\OublierType;
 use App\Form\ResetpassType;
 use App\Form\UserType;
 use Dompdf\Dompdf;
@@ -21,6 +24,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use function PHPUnit\Framework\matches;
 
 class GestionuserController extends AbstractController
@@ -131,7 +135,7 @@ class GestionuserController extends AbstractController
             $verifuser = $userRepository->findOneBy(array('email' => $useronline->getEmail()));
 
 
-            if ($verifuser == null || $verifuser->getMdp() != md5($useronline->getMdp())) {
+            if ($verifuser ==null || $verifuser->getMdp() != md5($useronline->getMdp())) {
                 return $this->render('gestionuser/message.html.twig', ['message' => 'Email ou mot de passe incorrect'
                 ]);
             } else {
@@ -299,23 +303,16 @@ class GestionuserController extends AbstractController
 
     }
 
-    public function resetpass(Request $request, $email, $oldmdp, $newmdp, UserRepository $UserRepository)
-    {
 
 
-        $userRepository = $this->getDoctrine()->getRepository(User::class);
-
-        $useronline = new User();
-        $connexion = $this->createForm(ResetpassType::class, $useronline);
-        $connexion->handleRequest($request);
-        if ($connexion->isSubmitted() && $connexion->isValid()) {
-            $verifuser = $userRepository->findOneBy(array('email' => $useronline->getEmail()));
 
 
-            if ($verifuser == null || $verifuser->getMdp() != md5($useronline->getMdp())) {
 
 
-            }
-        }
-    }
+
+
+
+
+
+
 }
