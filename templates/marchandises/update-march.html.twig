@@ -73,7 +73,7 @@
                                 <div class="col-sm-9">
                                     {{form_widget(form_update.quantite,{'attr': {'class':'form-control'}})  }}
                                     <div class="text-danger">{{ form_errors(form_update.quantite) }}</div>
-                                    {#                                                <input type="text" class="form-control" />#}
+                                    {#<input type="text" class="form-control" />#}
                                 </div>
                             </div>
                         </div>
@@ -96,15 +96,13 @@
                                 <div class="col-sm-9">
                                     {{form_widget(form_update.prixTotalMarchandise,{'attr': {'class':'form-control'}})  }}
                                     <div class="text-danger">{{ form_errors(form_update.prixTotalMarchandise) }}</div>
-                                    {#<input type="text" class="form-control" />#}
+                                    {#<input type="text" class="form-control"/>#}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {#{{form_widget(form_update.save,{'attr': {'class':'btn btn-info btn-lg btn-block'}})  }}#}
-
+                    {#{{form_widget(form_update.save,{'attr': {'class':'btn btn-info btn-lg btn-block'}})}}#}
                     <button type="submit" class="btn btn-info btn-lg btn-block">Enregistrer</button>
-
                     {{ form_end(form_update) }}
                 </div>
             </div>

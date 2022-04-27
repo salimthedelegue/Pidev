@@ -18,6 +18,19 @@ class MarchandiseRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Marchandise::class);
     }
+   public function quantitybycategory(){
+         /*$entityManager=$this->getEntityManager();
+         $query=$entityManager->createQuery('SELECT SUM(quantite) AS "quantity",categorie AS "categorie_marchandise" FROM App\Entity\Marchandise GROUP BY categorie_marchandise');
+         return $query->getResult();
+*/
+
+     return $this->CreateQueryBuilder('m')
+         ->select('SUM(m.quantite) as sum,m.categorieMarchandise as categorie_marchandise')
+         ->groupBy('m.categorieMarchandise')
+         ->getQuery()
+         ->getResult();
+       }
+
 
     // /**
     //  * @return Marchandise[] Returns an array of Marchandise objects

@@ -23,7 +23,7 @@
                         <tbody>
                         {% for fournisseur in fournisseurs %}
                             <tr>
-                                <td><img class="img-xs rounded-circle" src="{{ asset('/photo_upload/'~ fournisseur.photo) }}" alt=""></td>
+                                <td class="preview-thumbnail"><img class="img-xs rounded-circle" src="{{ asset('/photo_upload/'~ fournisseur.photo) }}" alt=""></td>
                                 <td class="text-success">{{ fournisseur.idFournisseur }}</td>
                                 <td>{{ fournisseur.nomFournisseur }}</td>
                                 <td>{{ fournisseur.numtelFournisseur }}</td>

@@ -4,15 +4,11 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-
 /**
  * Article
  *
  * @ORM\Table(name="article", indexes={@ORM\Index(name="fk_magazine", columns={"ref_magazine"})})
  * @ORM\Entity
- */
-/**
- * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  */
 class Article
 {
@@ -61,6 +57,13 @@ class Article
     private $dateArticle;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="ref_magazine", type="integer", nullable=false)
+     */
+    private $refMagazine;
+
+    /**
      * @var int|null
      *
      * @ORM\Column(name="selected", type="integer", nullable=true)
@@ -73,16 +76,6 @@ class Article
      * @ORM\Column(name="vues", type="integer", nullable=false)
      */
     private $vues = '0';
-
-    /**
-     * @var \Magazine
-     *
-     * @ORM\ManyToOne(targetEntity="Magazine")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ref_magazine", referencedColumnName="ref_magazine")
-     * })
-     */
-    private $refMagazine;
 
     public function getRefArticle(): ?int
     {
@@ -149,6 +142,18 @@ class Article
         return $this;
     }
 
+    public function getRefMagazine(): ?int
+    {
+        return $this->refMagazine;
+    }
+
+    public function setRefMagazine(int $refMagazine): self
+    {
+        $this->refMagazine = $refMagazine;
+
+        return $this;
+    }
+
     public function getSelected(): ?int
     {
         return $this->selected;
@@ -169,18 +174,6 @@ class Article
     public function setVues(int $vues): self
     {
         $this->vues = $vues;
-
-        return $this;
-    }
-
-    public function getRefMagazine(): ?Magazine
-    {
-        return $this->refMagazine;
-    }
-
-    public function setRefMagazine(?Magazine $refMagazine): self
-    {
-        $this->refMagazine = $refMagazine;
 
         return $this;
     }

@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <div class="page-header">
-        <h3 class="page-title"> Chart-js </h3>
+        <h3 class="page-title"> Statistiques </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Charts</a></li>
@@ -10,60 +10,25 @@
         </nav>
     </div>
     <div class="row">
-        <div class="col-lg-6 grid-margin stretch-card">
+        <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Line chart</h4>
-                    <canvas id="lineChart" style="height:250px"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Bar chart</h4>
+                    <h4 class="card-title">Quantite par Marchandise en Stock</h4>
                     <canvas id="barChart" style="height:230px"></canvas>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-6 grid-margin stretch-card">
+        <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Area chart</h4>
-                    <canvas id="areaChart" style="height:250px"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Doughnut chart</h4>
+                    <h4 class="card-title">Niveau de saturation Du Stock</h4>
                     <canvas id="doughnutChart" style="height:250px"></canvas>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-6 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Pie chart</h4>
-                    <canvas id="pieChart" style="height:250px"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Scatter chart</h4>
-                    <canvas id="scatterChart" style="height:250px"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- plugins:js -->
     <script src="{{ asset('back_office/assets/vendors/js/vendor.bundle.base.js')}}"></script>
     <!-- endinject -->
@@ -76,8 +41,186 @@
     <script src="{{ asset('back_office/assets/js/misc.js')}}"></script>
     <script src="{{ asset('back_office/assets/js/settings.js')}}"></script>
     <script src="{{ asset('back_office/assets/js/todolist.js') }}"></script>
+{#
+    {{(data|json_encode(constant('JSON_HEX_QUOT')))}}
+#}
     <!-- endinject -->
     <!-- Custom js for this page -->
-    <script src="{{ asset('back_office/assets/js/chart.js') }}"></script>
+{#    <script src="{{ asset('back_office/assets/js/chart.js') }}"></script>#}
     <!-- End custom js for this page -->
+    <div class="js-user-rating" data-is-authenticated="{{(data|json_encode(constant('JSON_HEX_QUOT')))}}">
+        <!-- ... -->
+    </div>
+    <div class="js-cat" data-is-got="{{(qunatity|json_encode(constant('JSON_HEX_QUOT')))}}">
+        <!-- ... -->
+    </div>
+  {#  <h1>{{(qunatity|json_encode(constant('JSON_HEX_QUOT')))}}</h1>#}
+    {% block javascript %}
+    <script type="text/javascript">
+
+    var user = document.querySelector('.js-cat');
+    var cate=user.dataset.isGot;
+        var catt  = JSON.parse(cate);
+        var samplecat =Object.values(catt);
+        var catedata = samplecat.map(function(x){
+        return x[Object.keys(x)[1]];
+    });
+        var quantitiesbycat = samplecat.map(function(x){
+        return x[Object.keys(x)[0]];
+    });
+        //alert(quantitiesbycat);
+        //alert(catedata);
+        var userRating = document.querySelector('.js-user-rating');
+    var marchj = userRating.dataset.isAuthenticated;
+        var datt  = JSON.parse(marchj);
+        var sample =Object.values(datt)
+        var marchdata = sample.map(function(x){
+        return x[Object.keys(x)[1]];
+    });
+
+        var quantitiesdata = sample.map(function(x){
+        return x[Object.keys(x)[4]];
+    });
+        var sum;
+        sum=quantitiesdata.reduce((result,number) => parseInt(result)+parseInt(number));
+        //alert(marchdata);
+        //alert(quantitiesdata);
+        //alert(sum);
+       var total=10000;
+    // or with jQuery
+    //var isAuthenticated = $('.js-user-rating').data('isAuthenticated');
+
+     $(function() {
+           /* ChartJS
+            * -------
+            * Data and config for chartjs
+            */
+           'use strict';
+           var data = {
+               labels: marchdata,
+               datasets: [{
+                   label: 'quantité',
+                   data : quantitiesdata,
+                   backgroundColor: [
+                       'rgba(255, 99, 132, 0.2)',
+                       'rgba(54, 162, 235, 0.2)',
+                       'rgba(255, 206, 86, 0.2)',
+                       'rgba(75, 192, 192, 0.2)',
+                       'rgba(153, 102, 255, 0.2)',
+                       'rgba(255, 159, 64, 0.2)',
+                       'rgba(75, 191, 78, 0.2)',
+                       'rgba(99, 255, 108, 0.2)',
+                        'rgba(78, 75, 191, 0.2)',
+                         'rgba(191, 75, 175, 0.2)'
+                   ],
+                   borderColor: [
+                       'rgba(255,99,132,1)',
+                       'rgba(54, 162, 235, 1)',
+                       'rgba(255, 206, 86, 1)',
+                       'rgba(75, 192, 192, 1)',
+                       'rgba(153, 102, 255, 1)',
+                       'rgba(255, 159, 64, 1)',
+        'rgba(75, 191, 78, 1)',
+        'rgba(99, 255, 108, 1)',
+        'rgba(78, 75, 191, 1)',
+        'rgba(191, 75, 175, 1)'
+                   ],
+                   borderWidth: 1,
+                   fill: false
+               }]
+           };
+           var options = {
+               scales: {
+                   yAxes: [{
+                       ticks: {
+                           beginAtZero: true
+                       },
+                       gridLines: {
+                           color: "rgba(204, 204, 204,0.1)"
+                       }
+                   }],
+                   xAxes: [{
+                       gridLines: {
+                           color: "rgba(204, 204, 204,0.1)"
+                       }
+                   }]
+               },
+               legend: {
+                   display: false
+               },
+               elements: {
+                   point: {
+                       radius: 0
+                   }
+               }
+           };
+
+
+           var doughnutPieData = {
+               datasets: [{
+                   data: quantitiesbycat,
+                   backgroundColor: [
+                       'rgba(255, 99, 132, 0.5)',
+                       'rgba(54, 162, 235, 0.5)',
+                       'rgba(255, 206, 86, 0.5)',
+                       'rgba(75, 192, 192, 0.5)',
+                       'rgba(153, 102, 255, 0.5)',
+                       'rgba(255, 159, 64, 0.5)'
+                   ],
+                   borderColor: [
+                       'rgba(255,99,132,1)',
+                       'rgba(54, 162, 235, 1)',
+                       'rgba(255, 206, 86, 1)',
+                       'rgba(75, 192, 192, 1)',
+                       'rgba(153, 102, 255, 1)',
+                       'rgba(255, 159, 64, 1)'
+                   ],
+               }],
+
+               // These labels appear in the legend and in the tooltips when hovering different arcs
+               labels: catedata
+           };
+           var doughnutPieOptions = {
+               responsive: true,
+               animation: {
+                   animateScale: true,
+                   animateRotate: true
+               }
+           };
+
+
+
+           // Get context with jQuery - using jQuery's .get() method.
+           if ($("#barChart").length) {
+               var barChartCanvas = $("#barChart").get(0).getContext("2d");
+               // This will get the first returned node in the jQuery collection.
+               var barChart = new Chart(barChartCanvas, {
+                   type: 'bar',
+                   data: data,
+                   options: options
+               });
+           }
+           if ($("#doughnutChart").length) {
+               var doughnutChartCanvas = $("#doughnutChart").get(0).getContext("2d");
+               var doughnutChart = new Chart(doughnutChartCanvas, {
+                   type: 'doughnut',
+                   data: doughnutPieData,
+                   options: doughnutPieOptions
+               });
+           }
+
+
+
+
+           if ($("#browserTrafficChart").length) {
+               var doughnutChartCanvas = $("#browserTrafficChart").get(0).getContext("2d");
+               var doughnutChart = new Chart(doughnutChartCanvas, {
+                   type: 'doughnut',
+                   data: browserTrafficData,
+                   options: doughnutPieOptions
+               });
+           }
+       });
+       </script>
+       {% endblock %}
 {% endblock %}

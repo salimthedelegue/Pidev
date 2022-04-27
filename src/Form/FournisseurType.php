@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class FournisseurType extends AbstractType
 {
@@ -18,8 +20,7 @@ class FournisseurType extends AbstractType
             ->add('numfixeFournisseur')
             ->add('email')
             ->add('matriculeFiscale')
-            ->add('photo',FileType::class)
-        ;
+            ->add('imageFile',VichImageType::class,['data_class' => null,'required' => false,'allow_delete'=>false,'download_label'=>false]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
