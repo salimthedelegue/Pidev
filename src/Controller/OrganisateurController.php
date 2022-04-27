@@ -5,11 +5,16 @@ use App\Entity\Organisateur;
 use App\Form\OrganisateurType;
 use App\Repository\OrganisateurRepository;
 use Symfony\Component\HttpFoundation\Request;
+
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 class OrganisateurController extends AbstractController
 {
@@ -26,9 +31,16 @@ class OrganisateurController extends AbstractController
     /**
      * @Route("/organisateur/afficher", name="consulter_organisateur")
      */
-    public function afficherOrg(OrganisateurRepository $repository)
+    public function afficherOrg(OrganisateurRepository $repository, PaginatorInterface $paginator,Request $request)
     {
-        $organisateurs = $repository->findAll();
+        $donnees = $repository->findAll();
+        $organisateurs = $paginator->paginate(
+            $donnees, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            4 // Nombre de résultats par page,
+        # sliding pagination controls template
+
+        );
         return $this->render('organisateur/consulterOrganisateur.html.twig', [
             'organisateurs' => $organisateurs
         ]);;
@@ -74,7 +86,18 @@ class OrganisateurController extends AbstractController
             $message=( new \Swift_Message('You got Mail'))
                 ->setFrom('noursen.amamo@esprit.tn')
                 ->setTo($form->get('emailOrganisateur')->getData())
-                ->setBody('Bienvenu dans notre equipe '.$form->get('nom')->getData(),'text/plain');
+                ->setBody(
+                    $this->renderView(
+                    // templates/emails/registration.html.twig
+                        'organisateur/mail.html.twig',
+                        ['name' => $form->get('nom')->getData()]
+                    ),
+                    'text/html'
+                );
+
+
+
+
             $mailer->send($message);
 
             return $this->redirectToRoute('consulter_organisateur');

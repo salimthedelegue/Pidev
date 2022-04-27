@@ -19,6 +19,8 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\File;
 use App\Controller\EntityManagerInterface;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class EventController extends AbstractController
 {
@@ -291,5 +293,35 @@ class EventController extends AbstractController
 
         ]);
 
+    }
+    /**
+     * @Route("/event/ticket", name="ticket")
+     */
+    public function imprimerPDF()
+    {
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('event/ticket.html.twig', [
+            'title' => "Welcome to our PDF Test"
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (inline view)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => false
+        ]);
     }
 }
