@@ -1,0 +1,41 @@
+<div class="page">
+
+    <center><h1 data-splitting>{{ article.titreArticle }}</h1></center>
+    <center><h1 data-splitting>Genre : {{ article.genreArticle }}</h1></center>
+    <p>{{ article.contenuArticle }}</p>
+
+  </div>
+<style>
+    h1.splitting {
+        color: white;
+    .char {
+        transition: transform .3s cubic-bezier(.3, 0, .3, 1), opacity .3s linear;
+        transition-delay: calc( 20ms * var(--char-index) );
+
+    }
+
+    &[data-scroll="out"] .char {
+         opacity: 0.1;
+         transform: translateY( .25em );
+     }
+    }
+
+    /* ---------------------------------- */
+
+      html, body {
+          background: rgb(2,0,36);
+         }
+    body { color: white; }
+
+    .page {
+        max-width: 30em;
+        margin: auto;
+        overflow: hidden;
+    }
+</style>
+<script>
+    Splitting();
+    ScrollOut({
+        targets: '[data-splitting]'
+    });
+</script>

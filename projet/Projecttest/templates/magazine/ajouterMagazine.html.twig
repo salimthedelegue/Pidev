@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="page-header">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('consulter_mag')}}">Magazines</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Ajouter Magazine</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Ajouter un magazine</h4>
+                    {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+                    <form class="form-sample" method="post">
+                        <p class="card-description">  </p>
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Titre</label>
+                                    <div class="col-sm-9">
+
+                                        {{ form_widget(form.titreMagazine, { 'attr': {'class': 'form-control',
+                                            'placeholder' : 'titre...'} }) }}
+                                        {{ form_errors(form.titreMagazine, { 'attr': {'class': 'mdi mdi-layers text-danger'
+                                            } }) }}
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Image</label>
+                                    <div class="col-sm-9">
+                                        {{ form_widget(form.imageMagazine, { 'attr': {'class': 'form-control',
+                                            'placeholder' : 'Image...'} }) }}
+                                        {{ form_errors(form.imageMagazine)}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Description</label>
+                                    <div class="col-sm-9">
+                                        {{ form_widget(form.descriptionMagazine, { 'attr': {'class': 'form-control',
+                                        'placeholder' : 'Description...'} }) }}
+                                        {{ form_errors(form.descriptionMagazine)}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Genre</label>
+                                    <div class="col-sm-9">
+                                        {{ form_widget(form.genreMagazine, { 'attr': {'class': 'form-control',
+                                            'placeholder' : 'Genre...'} }) }}
+                                        {{ form_errors(form.genreMagazine)}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                          <div class="row">
+                      
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label"></label>
+                                    <div class="col-sm-9">
+                                        {{ form_widget(form.Save, { 'attr': {'class': 'nav-link btn btn-success create-new-button'} }) }}
+                                        {{ form_row(form._token) }}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+
+                      
+                      
+                       
+
+                        
+                    </form>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- content-wrapper ends -->
+    <!-- partial:../../partials/_footer.html -->
+
+    <!-- partial -->
+
+{% endblock %}
