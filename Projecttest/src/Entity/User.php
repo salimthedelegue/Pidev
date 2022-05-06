@@ -104,6 +104,10 @@ class User implements UserInterface
     {
         return $this->id_user;
     }
+    public function getiduser(): ?int
+    {
+        return $this->id_user;
+    }
 
     public function getMdp(): ?string
     {

@@ -2,7 +2,12 @@
 
 namespace App\Controller;
 
-
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 use App\Entity\Reclamation;
 use App\Entity\User;
@@ -29,6 +34,7 @@ use function PHPUnit\Framework\matches;
 
 class GestionuserController extends AbstractController
 {
+    const  ATTRIBUTES_TO_SERIALIZE = ['id_user','mdp','nom','prenom','email','role','numtel_user','adresse_user','connected'	];
     /**
      * @Route("/gestionuser", name="gestionuser")
      */
@@ -305,14 +311,142 @@ class GestionuserController extends AbstractController
 
 
 
+    /**
+     * @Route("/ajouter/utilisateur" , name="utilisateur_ajouter" ,  methods={"GET", "POST"}, requirements={"id":"\d+"})
+     */
+    public function ajouteruser(Request $request,SerializerInterface $serializer)
+    {
+
+        $user = new User();
+        $nom=$request->query->get('nom');
+        $prenom=$request->query->get('prenom');
+        $mdp=$request->query->get('mdp');
+
+        $email=$request->query->get('email');
+        $numtel=$request->query->get('numtel_user');
+        $adresseuser=$request->query->get('adresse_user');
+
+
+        $em=$this->getDoctrine()->getManager();
+        $user->setRole("CLIENT");
+        $user->setPrenom($prenom);
+        $user->setNom($nom);
+
+        $user->setEmail($email);
+        $user->setadresse_user($adresseuser);
+        $user->setnumtel_user($numtel);
+
+        $user->setMdp($mdp);
+
+        $em->persist($user);
+        $em->flush();
+        $serializer=new Serializer([new ObjectNormalizer()]);
+        $formatted=$serializer->normalize($user);
+        return new JsonResponse($formatted);
+    }
+
+    /**
+     * @Route("/user/list")
+     */
+    public function getList(UserRepository $user, SerializerInterface $serializer): Response
+    {
+
+        $User = $user->findAll();
+        $json = $serializer->serialize($User, 'json', ['groups' => ['User']]);
+
+
+        return $this->json(['User' => $User], Response::HTTP_OK, [], [
+            'attributes' => self::ATTRIBUTES_TO_SERIALIZE
+        ]);
+    }
+
+    /**
+     * @Route("/delete/utilisateur/json", name="supprimer_utilisateur")
+     */
+    public function supprimerUtilisateur(Request $request, UserRepository $repo): Response
+    {
+
+        $id =$request->get("id_user");
+        $em=$this->getDoctrine()->getManager();
+
+        $d=$repo->find($id);
+
+        if($d != null){
+            $em->remove($d);
+            $em->flush();
+            $serializer=new Serializer([new ObjectNormalizer()]);
+            $formatted=$serializer->normalize("utilisateur a eté supprimeé");
+            return new JsonResponse($formatted);
+        }
+
+        return  new JsonResponse("Id Invalide");
+    }
 
 
 
 
 
 
+    /**
+     * @Route("/modifier/user" , name="user_modifier" ,  methods={"GET", "POST"}, requirements={"id":"\d+"})
+     */
+    public function modifier(Request $request, SerializerInterface $serializer, UserRepository $repo)
+    {
+
+        $user = new User();
+        $id = $request->query->get('id_user');
+        $user = $repo->find($id);
+        $nom = $request->query->get('nom');
+        $prenom = $request->query->get('prenom');
+        $email = $request->query->get('email');
+        $mdp = $request->query->get('mdp');
+        $numtel=$request->query->get('numtel_user');
+        $adresseuser=$request->query->get('adresse_user');
+
+        $em = $this->getDoctrine()->getManager();
+
+        $user->setPrenom($prenom);
+        $user->setNom($nom);
+
+        $user->setEmail($email);
+        $user->setadresse_user($adresseuser);
+        $user->setnumtel_user($numtel);
+
+        $user->setMdp($mdp);
+
+        $em->persist($user);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($user);
+        return new JsonResponse($formatted);
+    }
 
 
+    /**
+     * @Route("/user/signin", name="login_")
+     */
+    public function LoginMobile(Request $request,UserRepository $repo) {
+
+
+        $verifuser = $repo ->findOneBy(['email'=>$request->get("email")]);
+
+        $mdp=$request->get("Password");
+
+        if($verifuser)
+        {
+
+            if($verifuser ==null ||  $mdp != ($verifuser->getMdp()))
+            {
+                $serializer = new Serializer([new ObjectNormalizer()]);
+                $formatted = $serializer->normalize($verifuser);
+                return new JsonResponse($formatted);
+            }
+            else
+            {
+                return new Response("password incorect");
+            }
+        }
+    }
 
 
 }
