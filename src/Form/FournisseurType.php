@@ -20,7 +20,7 @@ class FournisseurType extends AbstractType
             ->add('numfixeFournisseur')
             ->add('email')
             ->add('matriculeFiscale')
-            ->add('imageFile',VichImageType::class,['data_class' => null,'required' => false,'allow_delete'=>false,'download_label'=>false]);
+            ->add('imageFile',VichImageType::class,['empty_data' => '','data_class' => null,'required' => false,'allow_delete'=>false,'download_label'=>false]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
