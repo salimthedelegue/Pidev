@@ -89,7 +89,12 @@ class Fournisseur
     public function setImageFile(?File $imageFile = null): void    {
         $this->imageFile = $imageFile;
     }
+    public function setIdFournisseur(int $IdFournisseur): self
+    {
+        $this->IdFournisseur = $IdFournisseur;
 
+        return $this;
+    }
     public function getIdFournisseur(): ?int
     {
         return $this->idFournisseur;

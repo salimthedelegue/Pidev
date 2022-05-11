@@ -7,21 +7,26 @@ use App\Form\FournisseurAjouterType;
 use App\Form\FournisseurType;
 use App\Form\MarchandiseType;
 use App\Repository\MarchandiseRepository;
+use App\Serializer\MarchandisesNormalizer;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormBuilderInterface;
 use Gedmo\Sluggable\Util\Urlizer;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Knp\Snappy\Pdf;
-
-
-
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 
 class MarchandisesController extends AbstractController
@@ -49,6 +54,7 @@ class MarchandisesController extends AbstractController
             $em->persist($marchandise);
             $em->flush();
             return $this->redirectToRoute('consulter_marchandises');
+
         }
         return $this->render('marchandises/ajouter-march.html.twig',[
             'form_marchandise' => $form->createView()
@@ -256,7 +262,6 @@ class MarchandisesController extends AbstractController
         $fournisseur=$em->getRepository(Fournisseur::class)->find($idFournisseur);
         $em->remove($fournisseur);
         $em->flush();
-        $this->addFlash('info','Fournisseur deleted Sucessfully');
         return $this->redirectToRoute('consulter_fournisseurs');
     }
     /**
@@ -285,6 +290,160 @@ class MarchandisesController extends AbstractController
         return $this->render('Front-template/browsing-front.html.twig',[
             'controller_name' => 'MarchandisesController',
         ]);;
+    }
+
+    /**
+     * @Route("/ajoutermarchandisescall" ,name="ajouter_app")
+     * @Method("POST")
+     */
+    public function ajoutermarchandisescall(Request $request): Response
+    {
+        $marchandises=new Marchandise();
+        $nomMarchandise=$request->query->get("nomMarchandise");
+        $categorieMarchandise=$request->query->get("categorieMarchandise");
+        $dateArrive=$request->query->get("dateArrive");
+        $quantite=$request->query->get("quantite");
+        $prixUnitaireMarchandise=$request->query->get("prixUnitaireMarchandise");
+        $prixTotalMarchandise=$request->query->get("prixTotalMarchandise");
+        $idFournisseur=$request->query->get("idFournisseur");
+        $em=$this->getDoctrine()->getManager();
+        $marchandises->setNomMarchandise($nomMarchandise);
+        $marchandises->setCategorieMarchandise($categorieMarchandise);
+        $marchandises->setDateArrive($dateArrive);
+        $marchandises->setQuantite($quantite);
+        $marchandises->setPrixUnitaireMarchandise($prixUnitaireMarchandise);
+        $marchandises->setPrixTotalMarchandise($prixTotalMarchandise);
+        $marchandises->setIdFournisseur($idFournisseur);
+        $em->persist($marchandises);
+        $em->flush();
+        $Serializer=new Serializer([new ObjectNormalizer()]);
+        $jsonFormat=$Serializer->normalize($marchandises);
+        $em=$this->getdoctrine()->getManager();
+        return new JsonResponse($jsonFormat);
+    }
+
+    /**
+     * @param Request $request
+     * @param MarchandisesNormalizer $serializer
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
+     * @Route("/add",name="add_march")
+     */
+     public function Addmarch(Request $request,MarchandisesNormalizer $serializer,EntityManagerInterface $entityManager){
+        //$marchandise = $serializer->denormalize($request->getContent(), Marchandise::class, 'json');
+         var_dump($request->getContent());
+         $json_data=json_decode($request->getContent(),true);
+         $fournisseurdata = $this->getDoctrine()->getRepository(Fournisseur::class)->findOneBy(array('idFournisseur' => $json_data["idFournisseur"]));
+
+         $marchandise = new Marchandise();
+         $marchandise->setIdFournisseur($fournisseurdata);
+         $marchandise->setPrixTotalMarchandise($json_data["prixTotalMarchandise"]);
+         $marchandise->setPrixUnitaireMarchandise($json_data["prixUnitaireMarchandise"]);
+         $marchandise->setQuantite($json_data["quantite"]);
+         $marchandise->setDateArrive($json_data["dateArrive"]);
+         $marchandise->setCategorieMarchandise($json_data["categorieMarchandise"]);
+         $marchandise->setNomMarchandise($json_data["nomMarchandise"]);
+        // Do with your book whatever you like, usually persist it.
+           // var_dump($marchandise);
+         $entityManager->persist($marchandise);
+         $entityManager->flush();
+
+        // Refresh the shelf
+         //$entityManager->refresh($marchandise->getIdFournisseur());
+
+        // Dump book
+        //dump($marchandise);
+
+        // Dump shelf and show it's books
+        //dump($marchandise->getIdFournisseur());
+        //dump($marchandise->getIdFournisseur()->getNomFournisseur());
+
+        return new Response("Success",Response::HTTP_OK);
+     }
+
+    /**
+     * @Route("/effacermarch",name="supprimer_app")
+     * @Method("DELETE")
+     */
+    public function deleteMarchandiseAction(Request $request)
+    {
+        $idMarchandise=$request->get("idMarchandise");
+        $em=$this->getDoctrine()->getManager();
+        $marchandise=$em->getRepository(Marchandise::class)->find($idMarchandise);
+        if ($marchandise!=null){
+            $em->remove($marchandise);
+            $em->flush();
+            $Serializer=new Serializer([new ObjectNormalizer()]);
+            $jsonFormat=$Serializer->normalize("DELETED SUCCESSFULLY");
+            return new JsonResponse($jsonFormat);
+        }
+       return new JsonResponse("CANNOT FIND MARCHANDISE");
+    }
+
+    /******************Modifier Marchandise*****************************************/
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
+     * @Route ("/modifiermarch")
+     */
+
+    public function modifierMarchandisesAction(Request $request)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $marchandise=$em->getRepository(Marchandise::class)->find($request->get("idMarchandise"));
+        $marchandise->setNomMarchandise($request->get("nomMarchandise"));
+        $marchandise->setCategorieMarchandise($request->get("categorieMarchandise"));
+        $marchandise->setDateArrive($request->get("dateArrive"));
+        $marchandise->setQuantite($request->get("quantite"));
+        $marchandise->setPrixTotalMarchandise($request->get("prixTotalMarchandise"));
+        $marchandise->setPrixUnitaireMarchandise($request->get("prixUnitaireMarchandise"));
+        $marchandise->setIdFournisseur($request->get("idFournisseur"));
+        $em->persist($marchandise);
+        $em->flush();
+        $Serializer=new Serializer([new ObjectNormalizer()]);
+        $jsonFormat=$Serializer->normalize($marchandise);
+        return new JsonResponse("UPDATED SUCCESSFULLY");
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
+     * @Route("/affichermachandise")
+     */
+    public function affichermarchandisescall(Request $request)
+    {
+        $marchandises= $this->getDoctrine()->getRepository(Marchandise::class)->findAll();
+        $Serializer=new Serializer([new ObjectNormalizer()]);
+        $jsonFormat=$Serializer->normalize($marchandises);
+        return new JsonResponse($jsonFormat);
+    }
+    /******************Detail *****************************************/
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
+     * @Route("/detailMarchandise", name="detail_marchandise")
+     */
+
+    public function detailMarchandiseAction(Request $request)
+    {
+        $idMarchandise = $request->get("idMarchandise");
+
+        $em = $this->getDoctrine()->getManager();
+        $marchandise = $this->getDoctrine()->getManager()->getRepository(Marchandise::class)->find(idMarchandise);
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getDescription();
+        });
+        $serializer = new Serializer([$normalizer], [$encoder]);
+        $formatted = $serializer->normalize($marchandise);
+        return new JsonResponse($formatted);
     }
 
 
